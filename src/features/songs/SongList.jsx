@@ -16,14 +16,22 @@ function SongList() {
       </div>
     );
 
-  if (songs.length === 0)
+  if (true)
     return (
-      <div>
-        <p>You didn't add any song, try uploading one</p>
-        <Button className="mt-5" asChild>
-          <Link to={"/songs/upload"}>Upload song</Link>
-        </Button>
-      </div>
+      <>
+        <div>
+          <p>You didn't add any song, try uploading one</p>
+          <Button className="mt-2" asChild>
+            <Link to={"/songs/upload"}>Upload song</Link>
+          </Button>
+        </div>
+        <div className="mt-7">
+          <p>You can use our telegram bot to upload your song</p>
+          <Button className="mt-2" asChild>
+            <Link to="https://t.me/Myplaylists_ir_Bot">Open Bot</Link>
+          </Button>
+        </div>
+      </>
     );
 
   return (
