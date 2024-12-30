@@ -16,7 +16,7 @@ function SongList() {
       </div>
     );
 
-  if (true)
+  if (songs.length === 0)
     return (
       <>
         <div>
