@@ -6,7 +6,7 @@ const ProgressContext = createContext(0);
 
 function ProgressContextProvider({ children }) {
   const [progress, setProgress] = useState(0);
-  const { audio } = usePlayer();
+  const { audio, currentSong } = usePlayer();
   const { isPlaying } = usePlayerController();
   useEffect(() => {
     if (!audio) return;
@@ -14,7 +14,7 @@ function ProgressContextProvider({ children }) {
     const handleTimeUpdate = () => {
       if (!isPlaying) return;
 
-      const percentage = (audio.currentTime / audio.duration) * 100;
+      const percentage = (audio.currentTime / currentSong.duration) * 100;
       setProgress(percentage);
     };
 
@@ -23,7 +23,7 @@ function ProgressContextProvider({ children }) {
     return () => {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
     };
-  }, [audio, isPlaying]);
+  }, [audio, isPlaying, currentSong]);
 
   return (
     <ProgressContext.Provider value={progress}>

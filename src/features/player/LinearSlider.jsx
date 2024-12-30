@@ -8,7 +8,7 @@ function LinearSlider({song}) {
   const { audio } = usePlayer();
 
   function handleTimeChange(value) {
-    audio.currentTime = (value[0] * audio.duration) / 100;
+    audio.currentTime = (value[0] * song.duration) / 100;
   }
 
   return (
