@@ -1,4 +1,4 @@
-import { MdCloudUpload } from "react-icons/md";
+import { UploadSVG } from "./Icons";
 
 function UploadInput({
   label,
@@ -14,8 +14,8 @@ function UploadInput({
       ></div>
       <div className="relative z-10 p-[2px]">
         <div className="flex h-36 w-36 items-center justify-center rounded-lg bg-dark-900">
-          <label className="flex flex-col items-center gap-2">
-            <MdCloudUpload size={60} />
+          <label className="flex flex-col items-center gap-2 cursor-pointer">
+            <UploadSVG size={60} />
             {label && <span>{label}</span>}
             <input
               disabled={disabled}

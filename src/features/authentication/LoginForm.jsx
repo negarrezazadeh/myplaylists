@@ -22,7 +22,7 @@ function LoginForm() {
   return (
     <div className="mt-6 px-3">
       <img
-        className="mx-auto mb-3 h-28 w-full rounded-lg object-cover"
+        className="mx-auto mb-3 h-28 w-full rounded-lg"
         src={logo}
         alt="myplaylists logo "
       />

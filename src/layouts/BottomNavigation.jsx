@@ -1,10 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { AiOutlineFire } from "react-icons/ai";
 import { PiMusicNoteThin } from "react-icons/pi";
-import { MdHome, MdOutlineShield, MdQueueMusic, MdStarOutline } from "react-icons/md";
+import {
+  MdHome,
+  MdOutlineShield,
+  MdQueueMusic,
+  MdStarOutline,
+} from "react-icons/md";
 import { useNetworkStatus } from "@/context/NetworkStatusContext";
 import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
+import {HomeSVG, FavoritesSVG, PlaylistsSVG, TopListsSVG, TopSongsSVG, UploadSVG}  from "@/ui/Icons";
+
 
 function BottomNavigation() {
   const { user } = useAuth();
@@ -20,15 +27,15 @@ function BottomNavigation() {
   }
 
   return (
-    <nav className="flex w-full justify-between px-5">
+    <nav className="flex w-full justify-between px-5 items-center">
       <NavLink to="/" className="flex flex-col items-center py-3">
-        <MdHome size={30} />
-        <span className="mx-auto text-[10px]">Home</span>
+        <HomeSVG  />
+        <span className="mx-auto text-[10px] mt-1">Home</span>
       </NavLink>
 
       <NavLink to="/playlists" className="flex flex-col items-center py-3">
-        <MdQueueMusic size={30} />
-        <span className="mx-auto text-[10px]">Playlists</span>
+        <PlaylistsSVG  />
+        <span className="mx-auto text-[10px] mt-1">Playlists</span>
       </NavLink>
 
       <NavLink
@@ -36,8 +43,8 @@ function BottomNavigation() {
         to="/favorites"
         className={`flex flex-col items-center py-3 ${offlineDisableClass}`}
       >
-        <MdStarOutline size={30} />
-        <span className="mx-auto text-[10px]">Favorites</span>
+        <FavoritesSVG  />
+        <span className="mx-auto text-[10px] mt-1">Favorites</span>
       </NavLink>
 
       <NavLink
@@ -45,8 +52,8 @@ function BottomNavigation() {
         to="/top-playlists"
         className={`flex flex-col items-center py-3 ${offlineDisableClass}`}
       >
-        <AiOutlineFire size={30} />
-        <span className="mx-auto text-[10px]">Top lists</span>
+        <TopListsSVG  />
+        <span className="mx-auto text-[10px] mt-1">Top Lists</span>
       </NavLink>
 
       <NavLink
@@ -54,14 +61,17 @@ function BottomNavigation() {
         to="/top-songs"
         className={`flex flex-col items-center py-3 ${offlineDisableClass}`}
       >
-        <PiMusicNoteThin size={30} />
-        <span className="mx-auto text-[10px]">Top Songs</span>
+        <TopSongsSVG />
+        <span className="mx-auto text-[10px] mt-1">Top Songs</span>
       </NavLink>
 
       {user?.isAdmin && (
-        <NavLink to="/admin/dashboard" className="flex flex-col items-center py-3 ">
-          <MdOutlineShield size={30} />
-          <span className="mx-auto text-[10px]">Admin Panel</span>
+        <NavLink
+          to="/admin/dashboard"
+          className="flex flex-col items-center py-3"
+        >
+          <MdOutlineShield size={25} />
+          <span className="mx-auto text-[10px] mt-1">Admin Panel</span>
         </NavLink>
       )}
     </nav>

@@ -1,4 +1,4 @@
-import headphone from "@/assets/img/headphone.webp";
+import noCoverLogo from "@/assets/img/no-cover-logo.png";
 import OneLineText from "@/ui/OneLineText";
 import { Link } from "react-router-dom";
 import PlaylistFollowButton from "./PlaylistFollowButton";
@@ -7,7 +7,7 @@ function PlaylistItem({ playlist }) {
     <div className="relative col-span-6 cursor-pointer">
       <Link to={`/playlists/${playlist.id}/${playlist.name}`} className="block">
         <img
-          src={playlist.cover || headphone}
+          src={playlist.cover || noCoverLogo}
           alt={playlist.name}
           className="mx-auto h-40 w-full rounded-lg object-cover sm:h-44"
         />

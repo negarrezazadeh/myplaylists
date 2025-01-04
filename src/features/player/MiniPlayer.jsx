@@ -4,7 +4,7 @@ import {
   MdSkipNext,
   MdSkipPrevious,
 } from "react-icons/md";
-import headphoneImg from "./../../assets/img/headphone.webp";
+import noCoverLogo from "./../../assets/img/no-cover-logo.png";
 import { usePlayer } from "../../context/PlayerContext";
 import { useNavigate } from "react-router-dom";
 import CircleProgress from "./CircleProgress";
@@ -39,7 +39,7 @@ function MiniPlayer() {
       >
         <img
           className="h-10 w-10 object-cover"
-          src={currentSong.cover || headphoneImg}
+          src={currentSong.cover || noCoverLogo}
           alt=""
         />
       </div>

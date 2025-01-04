@@ -6,7 +6,7 @@ import RightMotion from "@/layouts/RightMotion";
 function UploadSong() {
   return (
     <RightMotion>
-      <AppHeaderTitle>Upload song</AppHeaderTitle>
+      <AppHeaderTitle>Upload Song</AppHeaderTitle>
       <AppContentBox>
         <UploadSongForm />
       </AppContentBox>

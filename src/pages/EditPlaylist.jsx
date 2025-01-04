@@ -5,7 +5,7 @@ import EditPlaylistForm from "@/features/playlist/EditPlaylistForm";
 function EditPlaylist() {
   return (
     <RightMotion>
-      <AppHeaderTitle>Playlist info</AppHeaderTitle>
+      <AppHeaderTitle>Playlist Info</AppHeaderTitle>
       <AppContentBox>
         <EditPlaylistForm />
       </AppContentBox>

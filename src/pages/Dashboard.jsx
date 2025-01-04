@@ -21,7 +21,7 @@ function Dashboard() {
   if (mode !== "online") {
     return (
       <div>
-        <AppHeaderFull>Offline mode</AppHeaderFull>
+        <AppHeaderFull>Offline Mode</AppHeaderFull>
         <AppContentBox>
           <SongListOffline />
         </AppContentBox>

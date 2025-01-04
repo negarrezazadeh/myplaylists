@@ -5,7 +5,7 @@ import RightMotion from "@/layouts/RightMotion";
 function EditSong() {
   return (
     <RightMotion>
-      <AppHeaderTitle>Song info</AppHeaderTitle>
+      <AppHeaderTitle>Song Info</AppHeaderTitle>
       <AppContentBox>
         <EditSongForm />
       </AppContentBox>

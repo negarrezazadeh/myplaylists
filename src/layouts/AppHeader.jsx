@@ -1,6 +1,8 @@
-import { MdArrowBack, MdCloudUpload } from "react-icons/md";
+import { MdArrowBack } from "react-icons/md";
+import { UploadSVG } from "@/ui/Icons";
 import { Input } from "@/ui/input";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+
 function AppHeader() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ function AppHeader() {
     <header className="mb-5 flex items-center gap-x-4 px-5 pt-5 h-[70px]">
       {isHomePage ? (
         <NavLink to="/songs/upload">
-          <MdCloudUpload color="white" size={30} />
+          <UploadSVG color="white"  />
         </NavLink>
       ) : (
         <NavLink onClick={() => navigate(-1)}>

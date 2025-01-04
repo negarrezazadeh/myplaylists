@@ -7,7 +7,7 @@ import {
   MdSkipPrevious,
 } from "react-icons/md";
 
-import headphoneImg from "./../../assets/img/headphone.webp";
+import noCoverLogo from "./../../assets/img/no-cover-logo.png";
 import FavoriteButton from "../favorites/FavoriteButton";
 import LinearSlider from "./LinearSlider";
 import PlayerMode from "./PlayerMode";
@@ -33,7 +33,7 @@ function Player({ song, tab }) {
         >
           <img
             className="h-64 w-64 rounded-2xl object-cover"
-            src={songToPlay.cover || headphoneImg}
+            src={songToPlay.cover || noCoverLogo}
             alt={songToPlay.name}
           />
         </div>

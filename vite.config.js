@@ -55,7 +55,7 @@ export default defineConfig({
             options: {
               cacheName: "audio-cache",
               cacheableResponse: {
-                statuses: [0, 200],
+                statuses: [0, 206],
               },
             },
           },
