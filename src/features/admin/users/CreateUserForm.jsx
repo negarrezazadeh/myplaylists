@@ -19,16 +19,16 @@ function CreateUserForm({ user }) {
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-5">
-      <Input placeholder="name" {...register("name", { required: true })} />
-      <Input placeholder="email" {...register("email", { required: true })} />
+      <Input autocomplete="off" placeholder="name" {...register("name", { required: true })} />
+      <Input autocomplete="off" placeholder="email" {...register("email", { required: true })} />
       {!user && (
-        <Input
+        <Input autocomplete="off"
           placeholder="password"
           {...register("password", { required: true, minLength: 8 })}
         />
       )}
-      <Input placeholder="role" {...register("role")} />
-      <Input
+      <Input autocomplete="off" placeholder="role" {...register("role")} />
+      <Input autocomplete="off"
         placeholder="telegram username"
         {...register("telegram_username")}
       />
