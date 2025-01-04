@@ -1,11 +1,22 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { useUser } from "@/features/authentication/useUser";
+import { createContext, useContext, useMemo } from "react";
 
 const AuthContext = createContext({});
 
 function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const { user, isAuthenticated, isAdmin, isLoading, canUploadDownload } =
+    useUser();
 
-  const value = useMemo(() => ({ user, setUser }), [user]);
+  const value = useMemo(
+    () => ({
+      user,
+      isAuthenticated,
+      isAdmin,
+      isLoading,
+      canUploadDownload,
+    }),
+    [user, isAuthenticated, isAdmin, isLoading, canUploadDownload],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

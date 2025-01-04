@@ -10,7 +10,7 @@ function UploadSongForm() {
   const [progress, setProgress] = useState(0);
   const { upload, isPending, data } = useUploadSong();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { canUploadDownload } = useAuth();
 
   async function handleSelectFile(e) {
     const files = e.target.files;
@@ -32,14 +32,14 @@ function UploadSongForm() {
     }
   }
 
-  if (user?.canUpload === false) {
+  if (canUploadDownload === false) {
     return (
       <div className="flex flex-col gap-y-4">
         <h6 className="text-lg font-bold">
-          Sorry You don't have access to uploader 🫠.
+          Sorry You don't have access to upload or download songs 🫠.
         </h6>
         <p className="text-lg">
-          For uploading your songs you need to upgrade your account.
+          For uploading and downloading songs you need to upgrade your account.
         </p>
         <p className="text-lg">
           But don't worry 🤗 for upgrading your account and get full access

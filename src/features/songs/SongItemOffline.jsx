@@ -15,7 +15,7 @@ function SongItemOffline({ song }) {
   function handlePlayer() {
     // prevent resets song if song is already playing
     if (song.id !== currentSong?.id) {
-      play(song);
+      play(song, true);
     } else {
       toast.warning("Song detail is'nt not available in offline mode");
     }

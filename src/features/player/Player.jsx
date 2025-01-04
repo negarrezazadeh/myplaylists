@@ -12,6 +12,7 @@ import FavoriteButton from "../favorites/FavoriteButton";
 import LinearSlider from "./LinearSlider";
 import PlayerMode from "./PlayerMode";
 import { usePlayerController } from "@/context/PlayerControllerContext";
+import DownloadButton from "./DownloadButton";
 
 function Player({ song, tab }) {
   const { currentSong, dispatch } = usePlayer();
@@ -28,14 +29,15 @@ function Player({ song, tab }) {
   if (tab === "song") {
     return (
       <div>
-        <div
-          className={`mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl`}
-        >
+        <div className="relative mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl">
           <img
             className="h-64 w-64 rounded-2xl object-cover"
             src={songToPlay.cover || noCoverLogo}
             alt={songToPlay.name}
           />
+            <div className="absolute bottom-6 right-6 rounded-xl bg-dark/50 p-3">
+            <DownloadButton song={songToPlay} />
+            </div>
         </div>
         <h6 className="max-w-72 overflow-hidden overflow-ellipsis text-nowrap font-bold">
           {songToPlay.name}

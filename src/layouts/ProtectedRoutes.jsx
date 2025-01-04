@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../features/authentication/useUser";
 import { useEffect } from "react";
 import FullPageSpinner from "@/ui/FullPageSpinner";
 import { useNetworkStatus } from "@/context/NetworkStatusContext";
@@ -9,25 +8,18 @@ function ProtectedRoutes({ children }) {
   const navigate = useNavigate();
 
   const isOffline = useNetworkStatus();
-  const { isLoading, isAuthenticated, user } = useUser();
-  const { setUser } = useAuth();
+  const { isLoading, isAuthenticated, user } = useAuth();
 
   useEffect(() => {
-    if (!isLoading) {      
-      setUser({
-        isAdmin: user.role === "admin",
-        canUpload: user.role === "admin" || user.role === "artist",
-      });
-    }
     if (!isAuthenticated && !isLoading && !isOffline) {
       navigate("/login");
     }
-  }, [setUser, user, isAuthenticated, isLoading, isOffline, navigate]);
+  }, [user, isAuthenticated, isLoading, isOffline, navigate]);
 
   if (isLoading) return <FullPageSpinner />;
    
     
-  if ((isAuthenticated && user) || isOffline) return children;
+  if (isAuthenticated  || isOffline) return children;
 
   return null;
 }

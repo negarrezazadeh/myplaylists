@@ -50,12 +50,12 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/api.myplaylists.ir\/api\/songs\/\d+\/stream/,
+            urlPattern: /^https:\/\/api.myplaylists.ir\/api\/songs\/\d+\/download/,
             handler: "CacheFirst",
             options: {
               cacheName: "audio-cache",
               cacheableResponse: {
-                statuses: [0, 206],
+                statuses: [0, 200],
               },
             },
           },

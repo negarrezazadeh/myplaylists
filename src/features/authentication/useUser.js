@@ -12,5 +12,11 @@ export function useUser() {
     },
   });
 
-  return { user, isLoading, isAuthenticated: !!user, isAdmin: user?.role === 'admin' };
+  return {
+    user,
+    isLoading,
+    isAuthenticated: !!user,
+    isAdmin: user?.role === "admin",
+    canUploadDownload: user?.role === "admin" || user?.role === "artist",
+  };
 }

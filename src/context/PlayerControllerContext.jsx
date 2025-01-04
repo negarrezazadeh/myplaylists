@@ -17,12 +17,12 @@ function PlayerControllerContextProvider({ children }) {
   const navigate = useNavigate();
 
   const { currentSong, songs, audio, dispatch, currentIndex } = usePlayer();
-  const {mode} = usePlayerMode();
+  const { mode } = usePlayerMode();
 
   const [isPlaying, setIsPlaying] = useState(false);
 
   const play = useCallback(
-    async (song = null) => {
+    async (song = null, download = false) => {
       try {
         const songToPlay = song || currentSong;
 
@@ -39,9 +39,13 @@ function PlayerControllerContextProvider({ children }) {
 
         dispatch({ type: "song/loading", payload: true });
 
-        const newAudio = new Audio(
+        let newAudio = new Audio(
           `${API_BASE_URL}/api/songs/${songToPlay.id}/stream`,
         );
+
+        if(download){
+          newAudio = new Audio(`${API_BASE_URL}/api/songs/${songToPlay.id}/download`)
+        }
 
         // Try to play the audio
         newAudio.play();
@@ -69,7 +73,7 @@ function PlayerControllerContextProvider({ children }) {
   const continues = useCallback(() => {
     if (audio) {
       audio.play();
-      setIsPlaying(true)
+      setIsPlaying(true);
     }
   }, [audio]);
 
@@ -84,7 +88,7 @@ function PlayerControllerContextProvider({ children }) {
   const stop = useCallback(() => {
     if (audio) {
       audio.pause();
-      setIsPlaying(false)
+      setIsPlaying(false);
     }
   }, [audio]);
 
@@ -155,7 +159,7 @@ function PlayerControllerContextProvider({ children }) {
 
         songToNavigate = songs[currentIndex];
       }
-      
+
       if (navigateToPrevSong) {
         navigate(songToNavigate);
       }
@@ -172,7 +176,7 @@ function PlayerControllerContextProvider({ children }) {
       prev,
       play,
       isPlaying,
-      setIsPlaying
+      setIsPlaying,
     }),
     [continues, playOrContinues, stop, next, prev, play, isPlaying],
   );

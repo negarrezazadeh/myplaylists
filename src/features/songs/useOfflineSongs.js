@@ -32,9 +32,9 @@ export function useOfflineSongs() {
         if (response) {
           const data = await response?.json();
 
-          // some songs are in api-cache but has not been downloaded as stream file
+          // some songs are in api-cache but has not been downloaded as download file
           const availableSongsInCache = data.filter((song) =>
-            cachedAudio.includes(`${API_BASE_URL}/api/songs/${song.id}/stream`),
+            cachedAudio.includes(`${API_BASE_URL}/api/songs/${song.id}/download`),
           );
 
           setSongs(availableSongsInCache);

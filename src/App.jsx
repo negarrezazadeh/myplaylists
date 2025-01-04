@@ -116,7 +116,10 @@ function App() {
                             />
                           </Route>
 
-                          <Route element={<AppLayout />}>
+                          <Route element={<>
+                            
+                            <AppLayout />
+                            </>}>
                             <Route path="/songs/:id" element={<Song />} />
                             <Route
                               path="/playlists/share/:id/:name"
