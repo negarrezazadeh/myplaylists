@@ -49,8 +49,6 @@ export const deleteSong = async (id) => {
 };
 
 export const deleteSongs = async (songsIds) => {
-  console.log(songsIds);
-
   if (!Array.isArray(songsIds) || songsIds.length === 0) return;
 
   const response = await http.post(`/api/songs/bulk-delete`, {
