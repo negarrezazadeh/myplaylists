@@ -13,9 +13,7 @@ function ProtectedRoutes({ children }) {
   const { setUser } = useAuth();
 
   useEffect(() => {
-    if (!isLoading) {
-      console.log(isAuthenticated);
-      
+    if (!isLoading) {      
       setUser({
         isAdmin: user.role === "admin",
         canUpload: user.role === "admin" || user.role === "artist",
