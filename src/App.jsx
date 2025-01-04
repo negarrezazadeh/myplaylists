@@ -32,6 +32,11 @@ import { ApplicationSettingsProvider } from "./context/ApplicationSettings";
 import { PlayerActionsContextProvider } from "./context/PlayerActionsCotext";
 import { PlayerControllerContextProvider } from "./context/PlayerControllerContext";
 import { PlayerModeContextProvider } from "./context/PlayerModeContext";
+import AdminRoutes from "./layouts/AdminRoutes";
+import AdminDashboard from './pages/admin/Dashboard';
+import Users from "./pages/admin/Users";
+import CreateUser from "./pages/admin/CreateUser";
+import UpdateUser from "./pages/admin/UpdateUser";
 /* const TopLists = lazy(() => import("./pages/TopLists"));
 const TopSongs = lazy(() => import("./pages/TopSongs"));
 const Search = lazy(() => import("./pages/Search"));
@@ -112,6 +117,19 @@ function App() {
                             path="/playlists/share/:id/:name"
                             element={<SharePlaylist />}
                           />
+                        </Route>
+
+                        <Route
+                          element={
+                            <AdminRoutes>
+                              <AppLayout />
+                            </AdminRoutes>
+                          }
+                        >
+                          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                          <Route path="/admin/users" element={<Users />} />
+                          <Route path="/admin/users/create" element={<CreateUser />} />
+                          <Route path="/admin/users/:id" element={<UpdateUser />} />
                         </Route>
 
                         <Route path="/login" element={<Login />} />

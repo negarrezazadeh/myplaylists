@@ -12,5 +12,5 @@ export function useUser() {
     },
   });
 
-  return { user, isLoading, isAuthenticated: !!user };
+  return { user, isLoading, isAuthenticated: !!user, isAdmin: user?.role === 'admin' };
 }
