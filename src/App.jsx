@@ -33,10 +33,11 @@ import { PlayerActionsContextProvider } from "./context/PlayerActionsCotext";
 import { PlayerControllerContextProvider } from "./context/PlayerControllerContext";
 import { PlayerModeContextProvider } from "./context/PlayerModeContext";
 import AdminRoutes from "./layouts/AdminRoutes";
-import AdminDashboard from './pages/admin/Dashboard';
+import AdminDashboard from "./pages/admin/Dashboard";
 import Users from "./pages/admin/Users";
 import CreateUser from "./pages/admin/CreateUser";
 import UpdateUser from "./pages/admin/UpdateUser";
+import { AuthContextProvider } from "./context/AuthContext";
 /* const TopLists = lazy(() => import("./pages/TopLists"));
 const TopSongs = lazy(() => import("./pages/TopSongs"));
 const Search = lazy(() => import("./pages/Search"));
@@ -68,80 +69,94 @@ function App() {
       <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
       <Sonner />
       <BrowserRouter>
-        <NetworkStatusContextProvider>
-          <ApplicationSettingsProvider>
-            <PlayerContextProvider>
-              <PlayerModeContextProvider>
-                <PlayerControllerContextProvider>
-                  <PlayerActionsContextProvider>
-                    <ProgressContextProvider>
-                      <Routes>
-                        <Route
-                          element={
-                            <ProtectedRoutes>
-                              <AppLayout />
-                            </ProtectedRoutes>
-                          }
-                        >
-                          <Route path="/" element={<Dashboard />} />
-                          <Route path="/top-playlists" element={<TopLists />} />
-                          <Route path="/top-songs" element={<TopSongs />} />
+        <AuthContextProvider>
+          <NetworkStatusContextProvider>
+            <ApplicationSettingsProvider>
+              <PlayerContextProvider>
+                <PlayerModeContextProvider>
+                  <PlayerControllerContextProvider>
+                    <PlayerActionsContextProvider>
+                      <ProgressContextProvider>
+                        <Routes>
                           <Route
-                            path="/songs/upload"
-                            element={<UploadSong />}
-                          />
-                          <Route
-                            path="/songs/edit/:id"
-                            element={<EditSong />}
-                          />
-                          <Route path="/favorites" element={<Favorites />} />
-                          <Route path="/playlists" element={<Playlists />} />
-                          <Route
-                            path="/playlists/:id/:name"
-                            element={<Playlist />}
-                          />
-                          <Route
-                            path="/playlists/edit/:id"
-                            element={<EditPlaylist />}
-                          />
-                          <Route path="/search" element={<Search />} />
-                          <Route
-                            path="songs-bulk-actions"
-                            element={<SongsBulkActions />}
-                          />
-                        </Route>
+                            element={
+                              <ProtectedRoutes>
+                                <AppLayout />
+                              </ProtectedRoutes>
+                            }
+                          >
+                            <Route path="/" element={<Dashboard />} />
+                            <Route
+                              path="/top-playlists"
+                              element={<TopLists />}
+                            />
+                            <Route path="/top-songs" element={<TopSongs />} />
+                            <Route
+                              path="/songs/upload"
+                              element={<UploadSong />}
+                            />
+                            <Route
+                              path="/songs/edit/:id"
+                              element={<EditSong />}
+                            />
+                            <Route path="/favorites" element={<Favorites />} />
+                            <Route path="/playlists" element={<Playlists />} />
+                            <Route
+                              path="/playlists/:id/:name"
+                              element={<Playlist />}
+                            />
+                            <Route
+                              path="/playlists/edit/:id"
+                              element={<EditPlaylist />}
+                            />
+                            <Route path="/search" element={<Search />} />
+                            <Route
+                              path="songs-bulk-actions"
+                              element={<SongsBulkActions />}
+                            />
+                          </Route>
 
-                        <Route element={<AppLayout />}>
-                          <Route path="/songs/:id" element={<Song />} />
+                          <Route element={<AppLayout />}>
+                            <Route path="/songs/:id" element={<Song />} />
+                            <Route
+                              path="/playlists/share/:id/:name"
+                              element={<SharePlaylist />}
+                            />
+                          </Route>
+
                           <Route
-                            path="/playlists/share/:id/:name"
-                            element={<SharePlaylist />}
-                          />
-                        </Route>
+                            element={
+                              <AdminRoutes>
+                                <AppLayout />
+                              </AdminRoutes>
+                            }
+                          >
+                            <Route
+                              path="/admin/dashboard"
+                              element={<AdminDashboard />}
+                            />
+                            <Route path="/admin/users" element={<Users />} />
+                            <Route
+                              path="/admin/users/create"
+                              element={<CreateUser />}
+                            />
+                            <Route
+                              path="/admin/users/:id"
+                              element={<UpdateUser />}
+                            />
+                          </Route>
 
-                        <Route
-                          element={
-                            <AdminRoutes>
-                              <AppLayout />
-                            </AdminRoutes>
-                          }
-                        >
-                          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                          <Route path="/admin/users" element={<Users />} />
-                          <Route path="/admin/users/create" element={<CreateUser />} />
-                          <Route path="/admin/users/:id" element={<UpdateUser />} />
-                        </Route>
-
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                      </Routes>
-                    </ProgressContextProvider>
-                  </PlayerActionsContextProvider>
-                </PlayerControllerContextProvider>
-              </PlayerModeContextProvider>
-            </PlayerContextProvider>
-          </ApplicationSettingsProvider>
-        </NetworkStatusContextProvider>
+                          <Route path="/login" element={<Login />} />
+                          <Route path="/register" element={<Register />} />
+                        </Routes>
+                      </ProgressContextProvider>
+                    </PlayerActionsContextProvider>
+                  </PlayerControllerContextProvider>
+                </PlayerModeContextProvider>
+              </PlayerContextProvider>
+            </ApplicationSettingsProvider>
+          </NetworkStatusContextProvider>
+        </AuthContextProvider>
       </BrowserRouter>
     </QueryClientProvider>
   );

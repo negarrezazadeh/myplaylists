@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { AiOutlineFire } from "react-icons/ai";
 import { PiMusicNoteThin } from "react-icons/pi";
-import { MdHome, MdQueueMusic, MdStarOutline } from "react-icons/md";
+import { MdHome, MdOutlineShield, MdQueueMusic, MdStarOutline } from "react-icons/md";
 import { useNetworkStatus } from "@/context/NetworkStatusContext";
 import { toast } from "sonner";
+import { useAuth } from "@/context/AuthContext";
 
 function BottomNavigation() {
+  const { user } = useAuth();
   const isOffline = useNetworkStatus();
 
   const offlineDisableClass = isOffline ? "opacity-20" : "";
@@ -55,6 +57,13 @@ function BottomNavigation() {
         <PiMusicNoteThin size={30} />
         <span className="mx-auto text-[10px]">Top Songs</span>
       </NavLink>
+
+      {user?.isAdmin && (
+        <NavLink to="/admin/dashboard" className="flex flex-col items-center py-3 ">
+          <MdOutlineShield size={30} />
+          <span className="mx-auto text-[10px]">Admin Panel</span>
+        </NavLink>
+      )}
     </nav>
   );
 }
