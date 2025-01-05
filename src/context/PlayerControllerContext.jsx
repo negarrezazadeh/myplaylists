@@ -45,6 +45,9 @@ function PlayerControllerContextProvider({ children }) {
 
         if(download){
           newAudio = new Audio(`${API_BASE_URL}/api/songs/${songToPlay.id}/download`)
+          newAudio.addEventListener('canplaythrough', () => {
+            toast.success('Downloaded successfully')
+          })
         }
 
         // Try to play the audio

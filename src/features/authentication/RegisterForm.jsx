@@ -4,7 +4,7 @@ import { Input } from "@/ui/input";
 import { useRegister } from "./useRegister";
 import { Button } from "@/ui/button";
 
-import logo from "./../../assets/img/myplaylists-banner.svg";
+import logo from "./../../assets/img/myplaylist-intro.svg";
 import { Link } from "react-router-dom";
 function RegisterForm() {
   const {
@@ -22,7 +22,7 @@ function RegisterForm() {
   return (
     <div className="mt-6 px-3">
       <img
-        className="mx-auto mb-3 h-28 w-full rounded-lg object-cover"
+        className="mx-auto mt-14 mb-10 h-56 w-full rounded-lg"
         src={logo}
         alt="myplaylists logo "
       />

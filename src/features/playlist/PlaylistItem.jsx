@@ -11,7 +11,7 @@ function PlaylistItem({ playlist }) {
           alt={playlist.name}
           className="mx-auto h-40 w-full rounded-lg object-cover sm:h-44"
         />
-        <OneLineText className="mt-1 max-w-40 font-bold">
+        <OneLineText className="mt-1 max-w-40 font-bold capitalize">
           <h6>{playlist.name}</h6>
         </OneLineText>
         {playlist.total_songs ? (

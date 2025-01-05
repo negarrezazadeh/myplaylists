@@ -60,7 +60,7 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: /^https:\/\/api.myplaylists.ir\/api\//,
+            urlPattern: /^https:\/\/api.myplaylists.ir\/api\/(?!songs\/\d+\/stream)/, // negative lookahead : if address contains "stream" don't cache
             handler: "NetworkFirst",
             options: {
               cacheName: "api-cache",
@@ -84,6 +84,7 @@ export default defineConfig({
       },
     }),
   ],
+  assetsInclude: ['**/*.lottie'], 
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

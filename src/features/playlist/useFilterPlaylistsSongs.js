@@ -26,10 +26,10 @@ export function useFilterPlaylistsSongs({
         const audioCache = await caches.open("audio-cache");
         const audioCacheKeys = await audioCache.keys();
 
-        // get cached audio stream
+        // get cached audio download
         const cachedAudio = audioCacheKeys.map((request) => request.url);
         const availableSongsInCache = songsOnCloud.filter((song) =>
-          cachedAudio.includes(`${API_BASE_URL}/api/songs/${song.id}/stream`),
+          cachedAudio.includes(`${API_BASE_URL}/api/songs/${song.id}/download`),
         );
 
         setSongs(availableSongsInCache);

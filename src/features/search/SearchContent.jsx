@@ -53,9 +53,9 @@ function SearchContent() {
     );
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-full w-full flex-col gap-y-4 bg-dark px-3 pb-3 pt-5">
+    <div className="fixed max-w-[450px] mx-auto right-0 left-0 top-0 z-50 flex h-full w-full flex-col gap-y-4 bg-dark px-3 pb-3 pt-7">
       <div className="flex gap-x-4">
-        <MdArrowBack onClick={() => navigate("/")} color="white" size={30} />
+        <MdArrowBack className="cursor-pointer" onClick={() => navigate("/")} color="white" size={30} />
 
         <Input
           ref={searchInput}

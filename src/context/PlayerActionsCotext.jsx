@@ -53,7 +53,7 @@ function PlayerActionsContextProvider({ children }) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: currentSong.name,
         artist: currentSong.artist || 'unknown',
-        album: currentSong.album || 'unknown',
+        album: currentSong.album || ' | unknown',
         artwork: [
           {
             src: currentSong.cover,
