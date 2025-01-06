@@ -9,6 +9,7 @@ import {
 import { usePlaylists } from "./usePlaylists";
 import useAddSongToPlaylist from "./useAddSongToPlaylist";
 import useAddSongsToPlaylist from "./useAddSongsToPlaylists";
+import { Skeleton } from "@/ui/skeleton";
 
 function AddSongToPlaylist({ song, songs, trigger }) {
   const { playlists, isLoading } = usePlaylists();
@@ -41,11 +42,13 @@ function AddSongToPlaylist({ song, songs, trigger }) {
 
       <DialogContent className="">
         <DialogHeader>
-          <DialogTitle>Add to playlist</DialogTitle>
+          <DialogTitle>Add To Playlist</DialogTitle>
         </DialogHeader>
 
         {isLoading ? (
-          <p>Loading...</p>
+          Array.from({ length: 8 }).map((_, index) => (
+            <Skeleton key={index} className="h-6"></Skeleton>
+          ))
         ) : (
           <ul className="max-h-96 overflow-y-scroll">
             {playlists.map((playlist) => (

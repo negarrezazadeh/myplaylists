@@ -1,17 +1,16 @@
 import { Link, useParams } from "react-router-dom";
 import AppContentBox from "@/layouts/AppContentBox";
 import { usePlayer } from "@/context/PlayerContext";
-import { useEffect, } from "react";
+import { useEffect } from "react";
 import { usePlaylistSongs } from "@/features/playlist/usePlaylistSongs";
 import PlaylistSong from "@/features/playlist/PlaylistSong";
 
 import SongSkeleton from "@/ui/SongSkeleton";
 
-
-
 import AppHeaderFull from "@/layouts/AppHeaderFull";
 import PlaylistFollowButton from "@/features/playlist/PlaylistFollowButton";
 import { MdQueueMusic } from "react-icons/md";
+import OneLineText from "@/ui/OneLineText";
 
 function SharePlaylist() {
   const { id, name } = useParams();
@@ -24,7 +23,18 @@ function SharePlaylist() {
 
   return (
     <div>
-      <AppHeaderFull startEl={<Link to={`/playlists`}><MdQueueMusic size={30} /></Link>} endEl={<PlaylistFollowButton playlistId={id} />}>{name}</AppHeaderFull>
+      <AppHeaderFull
+        startEl={
+          <Link to={`/playlists`}>
+            <MdQueueMusic size={30} />
+          </Link>
+        }
+        endEl={<PlaylistFollowButton playlistId={id} />}
+      >
+        <OneLineText className="block max-w-60">
+          <span>{name}</span>
+        </OneLineText>
+      </AppHeaderFull>
       <AppContentBox>
         <div className="space-y-4" role="list">
           {isLoading ? (
@@ -37,6 +47,5 @@ function SharePlaylist() {
     </div>
   );
 }
-
 
 export default SharePlaylist;

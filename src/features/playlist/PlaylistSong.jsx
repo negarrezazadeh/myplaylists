@@ -1,24 +1,13 @@
-import {
-  MdDeleteOutline,
-  MdMoreVert,
-  MdOutlineModeEditOutline,
-} from "react-icons/md";
+import { MdMoreVert } from "react-icons/md";
 import { usePlayer } from "../../context/PlayerContext";
 import noCoverLogo from "@/assets/img/no-cover-logo.png";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/ui/dropdown-menu";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import useRemoveFromPlaylist from "./useRemoveFromPlaylist";
+import { useNavigate, useParams } from "react-router-dom";
 import { usePlayerController } from "@/context/PlayerControllerContext";
+import SongActions from "../songs/SongActions";
 
 function PlaylistSong({ song }) {
   const { id: playlistId } = useParams();
   const navigate = useNavigate();
-  const { removeFromPlaylist, isPending } = useRemoveFromPlaylist();
   const { currentSong } = usePlayer();
   const { play } = usePlayerController();
 
@@ -31,9 +20,7 @@ function PlaylistSong({ song }) {
     }
   }
 
-  function handleRemove(songId) {
-    removeFromPlaylist({ playlistId, songId });
-  }
+
   return (
     <div className="flex cursor-pointer items-center gap-x-3" role="listitem">
       <img
@@ -57,29 +44,16 @@ function PlaylistSong({ song }) {
         </div>
       </div>
       <div className="mr-3 ms-auto">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
+        <SongActions
+          song={song}
+          playlist={{ id: playlistId }}
+          trigger={
             <MdMoreVert
               size={20}
               className="cursor-pointer text-gray-400 hover:text-gray-500"
             />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>
-              <MdOutlineModeEditOutline className="mr-1" size={20} />
-              <Link to={`/songs/edit/${song.id}`}>Edit</Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem
-              disabled={isPending}
-              onClick={() => handleRemove(song.id)}
-              className="cursor-pointer"
-            >
-              <MdDeleteOutline className="mr-1" size={20} />
-              <span>Remove from playlist</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          }
+        />
       </div>
     </div>
   );

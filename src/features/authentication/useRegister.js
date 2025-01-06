@@ -10,7 +10,7 @@ export function useRegister() {
   const { mutate: register, isPending } = useMutation({
     mutationFn: ({ email, password, name }) => registerApi({ email, password, name }),
     onSuccess: (user) => {
-      queryClient.setQueryData(['user'], user.user);
+      queryClient.invalidateQueries(['user']);
       navigate('/', { replace: true });
     },
     onError: (err) => {
