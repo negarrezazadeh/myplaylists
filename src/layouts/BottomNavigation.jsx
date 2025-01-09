@@ -5,10 +5,10 @@ import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
 import {
   HomeSVG,
-  FavoritesSVG,
   PlaylistsSVG,
   TopListsSVG,
   TopSongsSVG,
+  FavoritesOutlineSVG,
 } from "@/ui/Icons";
 
 function BottomNavigation() {
@@ -41,7 +41,7 @@ function BottomNavigation() {
         to="/favorites"
         className={`flex flex-col items-center py-3 ${offlineDisableClass}`}
       >
-        <FavoritesSVG />
+        <FavoritesOutlineSVG />
         <span className="mx-auto mt-1 text-[10px]">Favorites</span>
       </NavLink>
 

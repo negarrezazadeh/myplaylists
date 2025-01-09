@@ -13,8 +13,11 @@ function ProgressContextProvider({ children }) {
 
     const handleTimeUpdate = () => {
       if (!isPlaying) return;
+      
+      const duration = Math.max(currentSong?.duration, audio?.duration) || 0 ;
+      if(!duration) return ;
 
-      const percentage = (audio.currentTime / currentSong.duration) * 100;
+      const percentage = (audio.currentTime / duration) * 100;
       setProgress(percentage);
     };
 

@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/ui/dialog";
 import { useState } from "react";
-import { MdAddCircleOutline } from "react-icons/md";
+import { CirclePlusSVG } from "@/ui/Icons";
 
 function CreatePlayListForm() {
   const {
@@ -36,7 +36,7 @@ function CreatePlayListForm() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger >
-        <MdAddCircleOutline  size={30} />
+        <CirclePlusSVG  size={30} />
       </DialogTrigger>
 
       <DialogContent className="">

@@ -36,6 +36,10 @@ body {
   z-index: 1;
 }
 
+.bg-glass-loader.overlay-loader  > *{
+  z-index: -1 !important;
+}
+
 * {
   user-select: none;
 }

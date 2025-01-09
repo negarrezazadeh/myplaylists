@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { MdStarBorder, MdStar } from "react-icons/md";
 import { useToggleFavorite } from "./useToggleFavorite";
 import { useNetworkStatus } from "@/context/NetworkStatusContext";
 import { toast } from "sonner";
+import { FavoritesOutlineSVG, FavoritesSVG } from "@/ui/Icons";
 
 function FavoriteButton({ song }) {
   const { toggleFavorite, isPending } = useToggleFavorite();
@@ -15,7 +15,7 @@ function FavoriteButton({ song }) {
       toast.warning("Not available in offline mode");
       return;
     }
-    
+
     if (isPending) return;
 
     toggleFavorite(song.id);
@@ -23,13 +23,13 @@ function FavoriteButton({ song }) {
   };
 
   return isFavorite ? (
-    <MdStar
+    <FavoritesSVG
       size={30}
-      className="cursor-pointer text-yellow-500"
+      className="cursor-pointer text-purple-500"
       onClick={handleToggleFavorite}
     />
   ) : (
-    <MdStarBorder
+    <FavoritesOutlineSVG
       size={30}
       className="cursor-pointer text-white"
       onClick={handleToggleFavorite}

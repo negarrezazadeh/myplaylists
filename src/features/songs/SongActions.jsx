@@ -1,11 +1,4 @@
 import { DialogHeader, Dialog, DialogContent, DialogFooter } from "@/ui/dialog";
-
-import {
-  MdDeleteOutline,
-  MdOutlineModeEditOutline,
-  MdPlaylistRemove,
-  MdShare,
-} from "react-icons/md";
 import { usePlaylists } from "../playlist/usePlaylists";
 import useAddSongToPlaylist from "../playlist/useAddSongToPlaylist";
 import OneLineText from "@/ui/OneLineText";
@@ -20,12 +13,15 @@ import CreatePlayListForm from "../playlist/CreatePlayListForm";
 import { Skeleton } from "@/ui/skeleton";
 import useRemoveFromPlaylist from "../playlist/useRemoveFromPlaylist";
 import { toast } from "sonner";
+import { DeleteSVG, EditSVG, RemoveListSVG, ShareSVG } from "@/ui/Icons";
+import FavoriteButton from "../favorites/FavoriteButton";
 
 function SongActions({ song, trigger, playlist }) {
   const { playlists, isLoading } = usePlaylists();
   const { addSongToPlaylist, isPending } = useAddSongToPlaylist();
   const { deleteSong } = useDeleteSong();
-  const { removeFromPlaylist, isPendingPlaylistRemove } = useRemoveFromPlaylist();
+  const { removeFromPlaylist, isPendingPlaylistRemove } =
+    useRemoveFromPlaylist();
 
   const [deleteSongAlertOpen, setDeleteSongAlertOpen] = useState(false);
   const [actionsAlertOpen, setActionsAlertOpen] = useState(false);
@@ -43,15 +39,15 @@ function SongActions({ song, trigger, playlist }) {
     setActionsAlertOpen(false);
   }
   function handleDelete(id) {
-    deleteSong({id, playlist});
-    setDeleteSongAlertOpen(false)
-    setActionsAlertOpen(false)
+    deleteSong({ id, playlist });
+    setDeleteSongAlertOpen(false);
+    setActionsAlertOpen(false);
   }
   function handleRemoveFromPlaylist(songId) {
     if (isPendingPlaylistRemove) return;
-    removeFromPlaylist({ playlistId:playlist.id, songId });
-    setActionsAlertOpen(false)
-    toast.success("Removed from playlist")
+    removeFromPlaylist({ playlistId: playlist.id, songId });
+    setActionsAlertOpen(false);
+    toast.success("Removed from playlist");
   }
 
   return (
@@ -89,36 +85,44 @@ function SongActions({ song, trigger, playlist }) {
                     setActionsAlertOpen(false);
                   }}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-[1px] border-white p-1">
-                    <MdShare size={25} />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
+                    <ShareSVG size={25} />
                   </div>
                   <span className="mt-2 text-xs font-bold">Share</span>
                 </div>
 
                 <Link to={editLink} className="flex flex-col items-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-[1px] border-white p-1">
-                    <MdOutlineModeEditOutline size={25} />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
+                    <EditSVG size={25} />
                   </div>
                   <span className="mt-2 text-xs font-bold">Edit</span>
                 </Link>
 
+                <div className="flex cursor-pointer flex-col items-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
+                    <FavoriteButton song={song} />
+                  </div>
+                  <span className="mt-2 text-xs font-bold">Favorite</span>
+                </div>
+                
                 <div
                   className="flex cursor-pointer flex-col items-center"
                   onClick={() => setDeleteSongAlertOpen(true)}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-[1px] border-white p-1">
-                    <MdDeleteOutline size={25} />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
+                    <DeleteSVG size={25} />
                   </div>
                   <span className="mt-2 text-xs font-bold">Delete</span>
                 </div>
+
 
                 {playlist && (
                   <div
                     className="flex cursor-pointer flex-col items-center"
                     onClick={() => handleRemoveFromPlaylist(song.id)}
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full border-[1px] border-white p-1">
-                      <MdPlaylistRemove size={25} />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
+                      <RemoveListSVG size={25} />
                     </div>
                     <span className="mt-2 text-xs font-bold">Remove</span>
                   </div>
@@ -139,7 +143,7 @@ function SongActions({ song, trigger, playlist }) {
             ))
           ) : (
             <ul className="max-h-[30vh] overflow-y-scroll">
-              {playlists.map((playlist) => (
+              {playlists?.map((playlist) => (
                 <li
                   disabled={isPending}
                   className="cursor-pointer py-2"

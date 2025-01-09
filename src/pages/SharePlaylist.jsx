@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AppContentBox from "@/layouts/AppContentBox";
 import { usePlayer } from "@/context/PlayerContext";
 import { useEffect } from "react";
@@ -9,28 +9,23 @@ import SongSkeleton from "@/ui/SongSkeleton";
 
 import AppHeaderFull from "@/layouts/AppHeaderFull";
 import PlaylistFollowButton from "@/features/playlist/PlaylistFollowButton";
-import { MdQueueMusic } from "react-icons/md";
 import OneLineText from "@/ui/OneLineText";
+import Error from "@/ui/Error";
 
 function SharePlaylist() {
   const { id, name } = useParams();
-  const { songs, isLoading } = usePlaylistSongs(id);
+  const { songs, isLoading, error } = usePlaylistSongs(id);
 
   const { dispatch } = usePlayer();
   useEffect(() => {
     dispatch({ type: "song/list", payload: id });
   }, [dispatch, id]);
 
+  if (error) return <Error error={error} />;
+
   return (
     <div>
-      <AppHeaderFull
-        startEl={
-          <Link to={`/playlists`}>
-            <MdQueueMusic size={30} />
-          </Link>
-        }
-        endEl={<PlaylistFollowButton playlistId={id} />}
-      >
+      <AppHeaderFull endEl={<PlaylistFollowButton playlistId={id} />}>
         <OneLineText className="block max-w-60">
           <span>{name}</span>
         </OneLineText>

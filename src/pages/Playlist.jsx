@@ -14,10 +14,11 @@ import { useFilterPlaylistsSongs } from "@/features/playlist/useFilterPlaylistsS
 import SongItemOffline from "@/features/songs/SongItemOffline";
 import OneLineText from "@/ui/OneLineText";
 import PlaylistActions from "@/features/playlist/PlaylistActions";
+import Error from "@/ui/Error";
 
 function Playlist() {
   const { id, name } = useParams();
-  const { songs: songsOnCloud, isLoading, refetch } = usePlaylistSongs(id);
+  const { songs: songsOnCloud, isLoading, error } = usePlaylistSongs(id);
 
   const isOffline = useNetworkStatus();
 
@@ -31,6 +32,8 @@ function Playlist() {
   useEffect(() => {
     dispatch({ type: "song/list", payload: id });
   }, [dispatch, id]);
+
+  if (error) return <Error error={error} />;
 
   return (
     <RightMotion>
@@ -58,7 +61,7 @@ function Playlist() {
           ) : (
             songs.map((song) =>
               !isOffline ? (
-                <PlaylistSong key={song.id} song={song} refetch={refetch} />
+                <PlaylistSong key={song.id} song={song} />
               ) : (
                 <SongItemOffline key={song.id} song={song} />
               ),

@@ -38,6 +38,7 @@ import Users from "./pages/admin/Users";
 import CreateUser from "./pages/admin/CreateUser";
 import UpdateUser from "./pages/admin/UpdateUser";
 import { AuthContextProvider } from "./context/AuthContext";
+import Error from "./ui/Error";
 /* const TopLists = lazy(() => import("./pages/TopLists"));
 const TopSongs = lazy(() => import("./pages/TopSongs"));
 const Search = lazy(() => import("./pages/Search"));
@@ -116,10 +117,13 @@ function App() {
                             />
                           </Route>
 
-                          <Route element={<>
-                            
-                            <AppLayout />
-                            </>}>
+                          <Route
+                            element={
+                              <>
+                                <AppLayout />
+                              </>
+                            }
+                          >
                             <Route path="/songs/:id" element={<Song />} />
                             <Route
                               path="/playlists/share/:id/:name"
@@ -151,6 +155,11 @@ function App() {
 
                           <Route path="/login" element={<Login />} />
                           <Route path="/register" element={<Register />} />
+
+                          <Route
+                            path="*"
+                            element={<Error error={{ status: 404 }} />}
+                          />
                         </Routes>
                       </ProgressContextProvider>
                     </PlayerActionsContextProvider>

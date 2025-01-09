@@ -40,7 +40,7 @@ function AddSongToPlaylist({ song, songs, trigger }) {
         {trigger}
       </DialogTrigger>
 
-      <DialogContent className="">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Add To Playlist</DialogTitle>
         </DialogHeader>

@@ -2,7 +2,7 @@ import UsersList from "@/features/admin/users/UsersList";
 import AppContentBox from "@/layouts/AppContentBox";
 import AppHeaderTitle from "@/layouts/AppHeaderTitle";
 import RightMotion from "@/layouts/RightMotion";
-import { MdAddCircleOutline } from "react-icons/md";
+import { CirclePlusSVG } from "@/ui/Icons";
 import { Link } from "react-router-dom";
 
 function Users() {
@@ -11,7 +11,7 @@ function Users() {
       <AppHeaderTitle
         endEl={
           <Link to="create">
-            <MdAddCircleOutline size={30} />
+            <CirclePlusSVG size={30} />
           </Link>
         }
       >

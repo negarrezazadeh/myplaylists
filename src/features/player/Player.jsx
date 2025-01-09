@@ -1,11 +1,5 @@
 import { usePlayer } from "@/context/PlayerContext";
 import { useEffect } from "react";
-import {
-  MdPause,
-  MdPlayArrow,
-  MdSkipNext,
-  MdSkipPrevious,
-} from "react-icons/md";
 
 import noCoverLogo from "./../../assets/img/no-cover-logo.png";
 import FavoriteButton from "../favorites/FavoriteButton";
@@ -13,14 +7,16 @@ import LinearSlider from "./LinearSlider";
 import PlayerMode from "./PlayerMode";
 import { usePlayerController } from "@/context/PlayerControllerContext";
 import DownloadButton from "./DownloadButton";
+import { NextSVG, PauseSVG, PlaySVG, PrevSVG } from "@/ui/Icons";
 
 function Player({ song, tab }) {
-  const { currentSong, dispatch } = usePlayer();
+  const { currentSong, dispatch, isLoading } = usePlayer();
 
   const { next, prev, playOrContinues, stop, isPlaying } =
     usePlayerController();
 
   const songToPlay = currentSong || song;
+  console.log(currentSong);
 
   useEffect(() => {
     if (!currentSong) dispatch({ type: "song/current", payload: song });
@@ -30,14 +26,19 @@ function Player({ song, tab }) {
     return (
       <div>
         <div className="relative mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl">
-          <img
-            className="h-64 w-64 rounded-2xl object-cover"
-            src={songToPlay.cover || noCoverLogo}
-            alt={songToPlay.name}
-          />
-            <div className="absolute bottom-6 right-6 rounded-xl bg-dark/50 p-3">
+          <div
+            className={`w-max overflow-hidden rounded-2xl ${isLoading ? "bg-glass-loader overlay-loader" : ""}`}
+          >
+            <img
+              className="h-64 w-64 object-cover"
+              src={songToPlay.cover || noCoverLogo}
+              alt={songToPlay.name}
+            />
+          </div>
+
+          <div className="absolute bottom-6 right-6 rounded-xl bg-dark/50 p-2">
             <DownloadButton song={songToPlay} />
-            </div>
+          </div>
         </div>
         <h6 className="max-w-72 overflow-hidden overflow-ellipsis text-nowrap font-bold">
           {songToPlay.name}
@@ -52,27 +53,27 @@ function Player({ song, tab }) {
           <PlayerMode />
 
           <div className="flex items-center justify-center gap-4">
-            <MdSkipPrevious
+            <PrevSVG
               onClick={() => prev(true)}
-              size={40}
+              size={30}
               className="cursor-pointer text-white"
             />
             {isPlaying ? (
-              <MdPause
+              <PauseSVG
                 onClick={() => stop()}
-                size={40}
+                size={35}
                 className="cursor-pointer text-white"
               />
             ) : (
-              <MdPlayArrow
+              <PlaySVG
                 onClick={() => playOrContinues()}
-                size={40}
+                size={35}
                 className="cursor-pointer text-white"
               />
             )}
-            <MdSkipNext
+            <NextSVG
               onClick={() => next(true)}
-              size={40}
+              size={30}
               className="cursor-pointer text-white"
             />
           </div>

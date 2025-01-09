@@ -2,8 +2,8 @@ import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-import { MdOutlineCloudDownload } from "react-icons/md";
 import { usePlayerController } from "@/context/PlayerControllerContext";
+import { DownloadSvg } from "@/ui/Icons";
 
 function DownloadButton({ song }) {
   const { user, canUploadDownload } = useAuth();
@@ -21,15 +21,14 @@ function DownloadButton({ song }) {
       return;
     }
 
+    if (!song.is_owner) {
+      toast.warning("You can download only your songs");
+      return;
+    }
+
     play(song, true);
   }
-  return (
-    <MdOutlineCloudDownload
-      onClick={handleDownload}
-      className="cursor-pointer"
-      size={30}
-    />
-  );
+  return <DownloadSvg onClick={handleDownload} className="cursor-pointer" />;
 }
 
 export default DownloadButton;

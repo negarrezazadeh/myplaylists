@@ -13,6 +13,7 @@ import { useState } from "react";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { Button } from "@/ui/button";
 import useDeletePlaylist from "./useDeletePlaylist";
+import PlaylistFollowButton from "./PlaylistFollowButton";
 
 function PlaylistActions({ playlist, trigger }) {
   const { deletePlaylist } = useDeletePlaylist();
@@ -52,14 +53,21 @@ function PlaylistActions({ playlist, trigger }) {
                     setActionsAlertOpen(false);
                   }}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-[1px] border-white p-1">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
                     <MdShare size={25} />
                   </div>
                   <span className="mt-2 text-xs font-bold">Share</span>
                 </div>
 
+                <div className="flex flex-col items-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
+                    <PlaylistFollowButton playlistId={playlist.id} />
+                  </div>
+                  <span className="mt-2 text-xs font-bold">Follow</span>
+                </div>
+
                 <Link to={editLink} className="flex flex-col items-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-[1px] border-white p-1">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
                     <MdOutlineModeEditOutline size={25} />
                   </div>
                   <span className="mt-2 text-xs font-bold">Edit</span>
@@ -69,7 +77,7 @@ function PlaylistActions({ playlist, trigger }) {
                   className="flex cursor-pointer flex-col items-center"
                   onClick={() => setDeleteAlertOpen(true)}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-[1px] border-white p-1">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
                     <MdDeleteOutline size={25} />
                   </div>
                   <span className="mt-2 text-xs font-bold">Delete</span>

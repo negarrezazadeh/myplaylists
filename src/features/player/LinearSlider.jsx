@@ -3,12 +3,13 @@ import { useProgress } from "@/context/ProgressContext";
 import { Slider } from "@/ui/slider";
 import { formatTime } from "@/utils/utli";
 
-function LinearSlider({song}) {
+function LinearSlider({ song }) {
   const progress = useProgress();
   const { audio } = usePlayer();
-
+  const duration = Math.max(song?.duration, audio?.duration) || 0 ;
+  
   function handleTimeChange(value) {
-    audio.currentTime = (value[0] * song.duration) / 100;
+    audio.currentTime = (value[0] * audio.duration) / 100;
   }
 
   return (
@@ -22,7 +23,7 @@ function LinearSlider({song}) {
       />
       <div className="mt-3 flex items-center justify-between">
         <span>{formatTime(audio?.currentTime || 0)}</span>
-        <span>{formatTime(song.duration)}</span>
+        <span>{formatTime(duration)}</span>
       </div>
     </div>
   );

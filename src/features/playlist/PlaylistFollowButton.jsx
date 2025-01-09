@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { MdBookmark, MdBookmarkBorder } from "react-icons/md";
 import { usePlaylistFollowToggle } from "./usePlaylistFollowToggle";
 import { useIsFollowing } from "./useIsFollowing";
+import { BookmarkOutlineSVG, BookmarkSVG } from "@/ui/Icons";
 
 
 function PlaylistFollowButton({ playlistId }) {
@@ -25,14 +25,14 @@ function PlaylistFollowButton({ playlistId }) {
   return (
     <div className="flex justify-end">
       {!follow && (
-        <MdBookmarkBorder
+        <BookmarkOutlineSVG
           size={30}
           className="cursor-pointer"
           onClick={handleToggle}
         />
       )}
       {follow && (
-        <MdBookmark
+        <BookmarkSVG
           size={30}
           className="cursor-pointer"
           onClick={handleToggle}

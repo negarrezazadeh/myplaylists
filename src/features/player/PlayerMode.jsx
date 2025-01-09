@@ -1,5 +1,5 @@
 import { usePlayerMode } from "@/context/PlayerModeContext";
-import { MdRepeat, MdRepeatOne, MdShuffle } from "react-icons/md";
+import { RepeatOneSVG, RepeatSVG, ShuffleSVG } from "@/ui/Icons";
 
 function PlayerMode({ size = 30 }) {
   const { mode, setMode } = usePlayerMode();
@@ -11,21 +11,21 @@ function PlayerMode({ size = 30 }) {
   return (
     <div>
       {mode === 0 && (
-        <MdRepeat
+        <RepeatSVG
           onClick={() => handleModeChange(1)}
           size={size}
           className="cursor-pointer text-white"
         />
       )}
       {mode === 1 && (
-        <MdRepeatOne
+        <RepeatOneSVG
           onClick={() => handleModeChange(2)}
           size={size}
           className="cursor-pointer text-white"
         />
       )}
       {mode === 2 && (
-        <MdShuffle
+        <ShuffleSVG
           onClick={() => handleModeChange(0)}
           size={size}
           className="cursor-pointer text-white"

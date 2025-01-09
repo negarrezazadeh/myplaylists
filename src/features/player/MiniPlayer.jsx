@@ -31,7 +31,7 @@ function MiniPlayer() {
 
   return (
     <div
-      className={`flex w-full rounded-3xl bg-dark-50 py-1 pe-5 ps-1 ${isLoading ? "bg-glass-loader" : ""}`}
+      className={`flex w-full rounded-3xl bg-dark-50 py-1 pe-5 ps-1 overflow-hidden ${isLoading ? "bg-glass-loader" : ""}`}
     >
       <div
         onClick={handleClick}
@@ -40,7 +40,7 @@ function MiniPlayer() {
         <img
           className="h-10 w-10 object-cover"
           src={currentSong.cover || noCoverLogo}
-          alt=""
+          alt={currentSong.name}
         />
       </div>
       <div onClick={handleClick} className="flex cursor-pointer flex-col ps-4">
