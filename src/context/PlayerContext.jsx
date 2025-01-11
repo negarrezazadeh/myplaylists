@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getSongs } from "@/services/apiSongs";
 import { getFavorites } from "@/services/apiFavorites";
 import { getPlaylistSongsById } from "@/services/apiPlaylists";
+import { getArtistSongs } from "@/services/apiArtist";
 
 const PlayerContext = createContext(null);
 
@@ -86,8 +87,13 @@ function PlayerContextProvider({ children }) {
         return getSongs();
       }
 
-      if (typeof Number(list) === "number") {
+      // if it's artist name it become NaN
+      if (!isNaN(list)) {
         return getPlaylistSongsById(list);
+      }
+
+      if (list !== "favorites" && list !== "songs" && isNaN(list)) {        
+        return getArtistSongs(list);
       }
     },
     refetchOnMount: true,

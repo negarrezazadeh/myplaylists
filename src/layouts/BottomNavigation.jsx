@@ -1,18 +1,15 @@
 import { NavLink } from "react-router-dom";
-import { MdOutlineShield } from "react-icons/md";
 import { useNetworkStatus } from "@/context/NetworkStatusContext";
 import { toast } from "sonner";
-import { useAuth } from "@/context/AuthContext";
 import {
   HomeSVG,
   PlaylistsSVG,
-  TopListsSVG,
-  TopSongsSVG,
   FavoritesOutlineSVG,
+  SearchSVG,
 } from "@/ui/Icons";
 
 function BottomNavigation() {
-  const { isAdmin } = useAuth();
+
   const isOffline = useNetworkStatus();
 
   const offlineDisableClass = isOffline ? "opacity-20" : "";
@@ -38,6 +35,15 @@ function BottomNavigation() {
 
       <NavLink
         onClick={handleClick}
+        to="/explore"
+        className={`flex flex-col items-center py-3 ${offlineDisableClass}`}
+      >
+        <SearchSVG size={35} />
+        <span className="mx-auto mt-1 text-[10px]">Explore</span>
+      </NavLink>
+
+      <NavLink
+        onClick={handleClick}
         to="/favorites"
         className={`flex flex-col items-center py-3 ${offlineDisableClass}`}
       >
@@ -45,7 +51,7 @@ function BottomNavigation() {
         <span className="mx-auto mt-1 text-[10px]">Favorites</span>
       </NavLink>
 
-      <NavLink
+      {/* <NavLink
         onClick={handleClick}
         to="/top-playlists"
         className={`flex flex-col items-center py-3 ${offlineDisableClass}`}
@@ -61,17 +67,7 @@ function BottomNavigation() {
       >
         <TopSongsSVG />
         <span className="mx-auto mt-1 text-[10px]">Top Songs</span>
-      </NavLink>
-
-      {isAdmin && (
-        <NavLink
-          to="/admin/dashboard"
-          className="flex flex-col items-center py-3"
-        >
-          <MdOutlineShield size={25} />
-          <span className="mx-auto mt-1 text-[10px]">Admin Panel</span>
-        </NavLink>
-      )}
+      </NavLink> */}
     </nav>
   );
 }

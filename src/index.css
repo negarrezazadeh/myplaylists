@@ -131,7 +131,7 @@ nav a.active {
   }
 }
 
-@media only screen and (min-width: 1280px) {
+@media only screen and (min-width:1280px) {
   /* width */
   ::-webkit-scrollbar {
     width: 5px;
@@ -150,5 +150,14 @@ nav a.active {
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
+  }
+
+
+  .mp-carousel {
+    overflow: hidden;
+  }
+
+  .mp-carousel:hover {
+    overflow-x: scroll;
   }
 }

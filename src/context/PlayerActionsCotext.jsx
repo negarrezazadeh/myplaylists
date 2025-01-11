@@ -18,7 +18,7 @@ function PlayerActionsContextProvider({ children }) {
   // Automatically play next song
   useEffect(() => {
     // prevent navigation on index page
-    const goToNextSong = () => next(location.pathname !== "/" && !isOffline);
+    const goToNextSong = () => next(location.pathname !== "/" && location.pathname !== "/explore"  && !isOffline);
 
     if (audio) {
       audio.addEventListener("ended", goToNextSong);
