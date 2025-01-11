@@ -16,7 +16,6 @@ function Player({ song, tab }) {
     usePlayerController();
 
   const songToPlay = currentSong || song;
-  console.log(currentSong);
 
   useEffect(() => {
     if (!currentSong) dispatch({ type: "song/current", payload: song });

@@ -105,6 +105,9 @@ function PlayerControllerContextProvider({ children }) {
         // repeat
         if (mode === 0) {
           nextIndex = currentIndex + 1;
+          
+          // pre-fetching next song
+          new Audio(`${API_BASE_URL}/api/songs/${songs[nextIndex + 1]?.id}/stream`)
         }
 
         // repeatOne

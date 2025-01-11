@@ -7,7 +7,6 @@ import Error from "@/ui/Error";
 function Playlists() {
   const { playlists, isLoading, error } = usePlaylists();
   const { followedPlaylists, isLoading: followedIsLoading } = useFollowed();
-  console.log(error);
   
   if (error) return <Error error={error} />;
 
