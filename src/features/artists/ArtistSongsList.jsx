@@ -5,7 +5,6 @@ import Error from "@/ui/Error";
 import { usePlayerController } from "@/context/PlayerControllerContext";
 import { usePlayer } from "@/context/PlayerContext";
 import { useEffect } from "react";
-import { list } from "postcss";
 
 function ArtistSongsList({ artistName }) {
   const { songs, isLoading, error } = useArtistSongs(artistName);

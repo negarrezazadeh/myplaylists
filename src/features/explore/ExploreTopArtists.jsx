@@ -3,8 +3,11 @@ import noCoverLogo from "@/assets/img/no-cover-logo.png";
 import OneLineText from "@/ui/OneLineText";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@/ui/skeleton";
+import Error from "@/ui/Error";
 function ExploreTopArtists() {
   const { isLoading, error, artists } = useArtist();
+
+  if (error) <Error error={error} />;
 
   if (isLoading)
     return (
@@ -19,7 +22,7 @@ function ExploreTopArtists() {
     );
 
   return (
-    <div className="mp-carousel -me-5 flex gap-x-3 overflow-auto pb-1">
+    <div className="mp-carousel -me-5 flex gap-x-3 overflow-auto pb-1 pe-5">
       {artists.map((artist) => {
         return (
           <Link
