@@ -45,6 +45,7 @@ import CreateUser from "./pages/admin/CreateUser";
 import UpdateUser from "./pages/admin/UpdateUser";
 import AdminArtist from "./pages/admin/artist/Artists";
 import UpdateArtist from "./pages/admin/artist/UpdateArtist";
+import LocalSongs from "./pages/LocalSongs";
 /* const TopLists = lazy(() => import("./pages/TopLists"));
 const TopSongs = lazy(() => import("./pages/TopSongs"));
 const Search = lazy(() => import("./pages/Search"));

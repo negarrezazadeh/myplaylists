@@ -31,6 +31,12 @@ function reducer(state, action) {
         audio: action.payload.audio,
       };
 
+    case "song/playInline":
+      return {
+        ...state,
+        audio: action.payload.audio,
+      };
+
     case "song/continue":
       return {
         ...state,
@@ -92,7 +98,7 @@ function PlayerContextProvider({ children }) {
         return getPlaylistSongsById(list);
       }
 
-      if (list !== "favorites" && list !== "songs" && isNaN(list)) {        
+      if (list !== "favorites" && list !== "songs" && isNaN(list)) {
         return getArtistSongs(list);
       }
     },

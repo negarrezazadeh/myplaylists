@@ -21,6 +21,35 @@ function PlayerControllerContextProvider({ children }) {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const playInline = useCallback(
+    (song) => {
+      if (!song.path) {
+        console.error("No song available to play.");
+        return;
+      }
+
+      let newAudio = new Audio(`${API_BASE_URL}/api/songs/${song.id}/stream`);
+
+      if (song.path.startsWith("blob:")) {
+        newAudio = new Audio(song.path);
+      }
+
+      // Try to play the audio
+      newAudio.play();
+
+      // Update the state
+      dispatch({
+        type: "song/playInline",
+        payload: {
+          audio: newAudio,
+        },
+      });
+
+      setIsPlaying(true);
+    },
+    [dispatch],
+  );
+
   const play = useCallback(
     async (song = null, download = false) => {
       try {
@@ -43,11 +72,17 @@ function PlayerControllerContextProvider({ children }) {
           `${API_BASE_URL}/api/songs/${songToPlay.id}/stream`,
         );
 
-        if(download){
-          newAudio = new Audio(`${API_BASE_URL}/api/songs/${songToPlay.id}/download`)
-          newAudio.addEventListener('canplaythrough', () => {
-            toast.success('Downloaded successfully')
-          })
+        if (download) {
+          newAudio = new Audio(
+            `${API_BASE_URL}/api/songs/${songToPlay.id}/download`,
+          );
+          newAudio.addEventListener("canplaythrough", () => {
+            toast.success("Downloaded successfully");
+          });
+        }
+
+        if (song.path.startsWith("blob:")) {
+          newAudio = new Audio(song.path);
         }
 
         // Try to play the audio
@@ -80,11 +115,11 @@ function PlayerControllerContextProvider({ children }) {
     }
   }, [audio]);
 
-  const playOrContinues = useCallback(() => {
+  const playOrContinues = useCallback((songToPlay) => {
     if (audio) {
       continues();
     } else {
-      play();
+      play(songToPlay);
     }
   }, [play, continues, audio]);
 
@@ -105,9 +140,11 @@ function PlayerControllerContextProvider({ children }) {
         // repeat
         if (mode === 0) {
           nextIndex = currentIndex + 1;
-          
+
           // pre-fetching next song
-          new Audio(`${API_BASE_URL}/api/songs/${songs[nextIndex + 1]?.id}/stream`)
+          new Audio(
+            `${API_BASE_URL}/api/songs/${songs[nextIndex + 1]?.id}/stream`,
+          );
         }
 
         // repeatOne
@@ -181,10 +218,11 @@ function PlayerControllerContextProvider({ children }) {
       next,
       prev,
       play,
+      playInline,
       isPlaying,
       setIsPlaying,
     }),
-    [continues, playOrContinues, stop, next, prev, play, isPlaying],
+    [continues, playOrContinues, playInline, stop, next, prev, play, isPlaying],
   );
 
   return (

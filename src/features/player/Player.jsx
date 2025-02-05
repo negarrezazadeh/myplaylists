@@ -8,6 +8,7 @@ import PlayerMode from "./PlayerMode";
 import { usePlayerController } from "@/context/PlayerControllerContext";
 import DownloadButton from "./DownloadButton";
 import { NextSVG, PauseSVG, PlaySVG, PrevSVG } from "@/ui/Icons";
+import PlayPauseButton from "./PlayPauseButton";
 
 function Player({ song, tab }) {
   const { currentSong, dispatch, isLoading } = usePlayer();
@@ -57,7 +58,7 @@ function Player({ song, tab }) {
               size={30}
               className="cursor-pointer text-white"
             />
-            {isPlaying ? (
+            {/* isPlaying ? (
               <PauseSVG
                 onClick={() => stop()}
                 size={35}
@@ -65,11 +66,13 @@ function Player({ song, tab }) {
               />
             ) : (
               <PlaySVG
-                onClick={() => playOrContinues()}
+                onClick={() => playOrContinues(songToPlay)}
                 size={35}
                 className="cursor-pointer text-white"
               />
-            )}
+
+            ) */}
+            <PlayPauseButton song={songToPlay} />
             <NextSVG
               onClick={() => next(true)}
               size={30}

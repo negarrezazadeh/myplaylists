@@ -12,26 +12,36 @@ import { useNetworkStatus } from "@/context/NetworkStatusContext";
 import { toast } from "sonner";
 import PlayerMode from "./PlayerMode";
 import { usePlayerController } from "@/context/PlayerControllerContext";
+import { NextSVG, PauseSVG, PlaySVG, PrevSVG } from "@/ui/Icons";
 function MiniPlayer() {
-  const { currentSong, isLoading } = usePlayer();
-
-  const { continues, stop, next, prev, isPlaying } = usePlayerController();
-
-  const isOffline = useNetworkStatus();
-
   const navigate = useNavigate();
 
-  function handleClick() {
-    if (!isOffline) navigate(`/songs/${currentSong.id}`);
+  const { currentSong, isLoading } = usePlayer();
+  const { continues, stop, next, prev, isPlaying } = usePlayerController();
+  const isOffline = useNetworkStatus();
 
-    if (isOffline) toast.warning("Song detail is'nt available in offline mode");
+  const isSongFromCloud = true //!!currentSong?.id;
+
+  function handleClick() {
+    // only local songs doesn't have id
+    if (!currentSong.id) {
+      toast.warning("Songs detail isn't available for local songs");
+      return;
+    }
+
+    if (isOffline) {
+      toast.warning("Song detail isn't available in offline mode");
+      return;
+    }
+
+    navigate(`/songs/${currentSong.id}`);
   }
 
   if (!currentSong) return null;
 
   return (
     <div
-      className={`flex w-full rounded-3xl bg-dark-50 py-1 pe-5 ps-1 overflow-hidden ${isLoading ? "bg-glass-loader" : ""}`}
+      className={`flex w-full overflow-hidden rounded-3xl bg-dark-50 py-1 pe-5 ps-1 ${isLoading ? "bg-glass-loader" : ""}`}
     >
       <div
         onClick={handleClick}
@@ -53,34 +63,40 @@ function MiniPlayer() {
       </div>
 
       <div className="ms-auto flex items-center gap-4">
-        <PlayerMode size={25} />
+        {isSongFromCloud && <PlayerMode size={25} />}
 
-        <MdSkipPrevious
-          onClick={() => prev()}
-          size={20}
-          className="cursor-pointer text-white"
-        />
+        {isSongFromCloud && (
+          <PrevSVG
+            onClick={() => prev()}
+            size={15}
+            className="cursor-pointer text-white"
+          />
+        )}
+
         <div className="flex items-center justify-center">
           <CircleProgress />
           {isPlaying ? (
-            <MdPause
+            <PauseSVG
               onClick={() => stop()}
-              size={20}
-              className="relative z-10 cursor-pointer text-white"
+              size={15}
+              className="relative z-10 cursor-pointer text-white "
             />
           ) : (
-            <MdPlayArrow
+            <PlaySVG
               onClick={() => continues()}
-              size={20}
-              className="relative z-10 cursor-pointer text-white"
+              size={15}
+              className="relative z-10 cursor-pointer text-white translate-x-[1px]"
             />
           )}
         </div>
-        <MdSkipNext
-          onClick={() => next()}
-          size={20}
-          className="cursor-pointer text-white"
-        />
+
+        {isSongFromCloud && (
+          <NextSVG
+            onClick={() => next()}
+            size={15}
+            className="cursor-pointer text-white"
+          />
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import { MdShare } from "react-icons/md";
 import { usePlayer } from "../../context/PlayerContext";
-import noCoverLogo from "@/assets/img/no-cover-logo.png";
 
 import { copyToClipboard } from "@/utils/utli";
 import { toast } from "sonner";

@@ -27,7 +27,7 @@ function CircleProgress() {
         cx="25"
         cy="25"
         stroke="#673ab7"
-        strokeWidth="3"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeDashoffset={Math.max(94.2 - progress, 0) + "px"}
         fill="transparent"
