@@ -27,7 +27,7 @@ function SongActions({ song, trigger, playlist }) {
   const [actionsAlertOpen, setActionsAlertOpen] = useState(false);
 
   const editLink = `/songs/edit/${song.id}`;
-  const shareLink = `${window.location.origin}/songs/${song.id}`;
+  const shareLink = `🎵 Song:\n${song.name}\n\n🎧 Listen:\n${window.location.origin}/songs/${song.id}\n\n🟣 Join Channel:\n t.me/myplaylists_ir`;
 
   function handleAddSong(playlistId) {
     if (song)

@@ -79,24 +79,22 @@ function UploadSongForm() {
         >
           File
         </span>
-        <span
-          onClick={() => setTab("storage")}
-          className={`cursor-pointer ${tab === "storage" ? "text-lg font-bold text-purple-500" : "text-sm"}`}
-        >
-          Storage
-        </span>
+
         <span
           onClick={() => setTab("telegram")}
           className={`cursor-pointer ${tab === "telegram" ? "text-lg font-bold text-purple-500" : "text-sm"}`}
         >
           Telegram
         </span>
+
+        <span
+          onClick={() => setTab("storage")}
+          className={`cursor-pointer ${tab === "storage" ? "text-lg font-bold text-purple-500" : "text-sm"}`}
+        >
+          Storage
+        </span>
       </div>
-      {tab === "storage" && (
-        <div className="pt-6">
-          <SongListLocal />
-        </div>
-      )}
+
       {tab === "file" && (
         <div className="flex flex-col items-center justify-center gap-y-5 pt-20">
           <UploadInput
@@ -127,6 +125,12 @@ function UploadSongForm() {
           <Button asChild>
             <Link to="https://t.me/Myplaylists_ir_Bot">Open Bot</Link>
           </Button>
+        </div>
+      )}
+
+      {tab === "storage" && (
+        <div className="pt-6">
+          <SongListLocal />
         </div>
       )}
     </>

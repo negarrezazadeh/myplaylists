@@ -16,6 +16,7 @@ function SongListLocal() {
   if (songs.length === 0)
     return (
       <div>
+        <p className="mb-3">This feature depends on the current browser and the device you are using. If it doesn't work as expected, try other ways.</p>
         <Button asChild>
           <label className="relative">
             <input
