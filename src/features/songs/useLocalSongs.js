@@ -1,61 +1,51 @@
 import { useState } from "react";
-
 import { parseBlob } from "music-metadata";
-
 import noCoverLogo from "@/assets/img/no-cover-logo.png";
 
 export function useLocalSongs() {
   const [songs, setSongs] = useState([]);
-  const [isPending, setIsPending] = useState(null);
+  const [isPending, setIsPending] = useState(false);
 
-  async function pickSongsFolder() {
-    try {
-      setIsPending(true);
+  function handleFiles(event) {
+    const files = Array.from(event.target.files).filter(file =>
+      file.name.match(/\.(mp3|wav|ogg)$/i)
+    );
 
-      const dirHandle = await window.showDirectoryPicker();
-      const songsFromFiles = await getSongs(dirHandle);
-      console.log(songsFromFiles);
-      
-      setSongs(songsFromFiles);
-    } catch (error) {
-      console.error("Error accessing files:", error);
-    } finally {
-      setIsPending(false);
-    }
+    if (files.length === 0) return;
+
+    setIsPending(true);
+    processSongs(files);
   }
 
-  async function getSongs(dirHandle) {
-    const files = [];
-
-    for await (const entry of dirHandle.values()) {
-      if (entry.kind === "file" && entry.name.match(/\.(mp3|wav|ogg)$/i)) {
-        const file = await entry.getFile();
+  async function processSongs(files) {
+    const processedSongs = await Promise.all(
+      files.map(async file => {
         const url = URL.createObjectURL(file);
-
-        const metadata = await parseBlob(file);
+        const metadata = await parseBlob(file).catch(() => ({}));
 
         let coverUrl = noCoverLogo;
-        if (metadata.common.picture && metadata.common.picture.length > 0) {
+        if (metadata.common?.picture?.length) {
           const coverBlob = new Blob([metadata.common.picture[0].data], {
             type: metadata.common.picture[0].format,
           });
           coverUrl = URL.createObjectURL(coverBlob);
         }
 
-        files.push({
+        return {
           path: url,
-          name: metadata.common.title || entry.name,
-          artist: metadata.common.artist,
-          album: metadata.common.album,
+          name: metadata.common?.title || file.name,
+          artist: metadata.common?.artist || "Unknown Artist",
+          album: metadata.common?.album || "Unknown Album",
           cover: coverUrl,
-          duration: metadata.format.duration,
+          duration: metadata.format?.duration || 0,
           file,
-        });
-      }
-    }
+        };
+      })
+    );
 
-    return files;
+    setSongs(processedSongs);
+    setIsPending(false);
   }
 
-  return { songs, pickSongsFolder, isPending };
+  return { songs, handleFiles, isPending };
 }

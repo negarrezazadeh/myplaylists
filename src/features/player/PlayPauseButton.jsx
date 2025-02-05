@@ -30,6 +30,7 @@ const PlayPauseButton = ({ song }) => {
         dotLottieRefCallback={dotLottieRefCallback}
         src={playAndPause}
         speed={3}
+        autoplay={isPlaying}
       />
     </div>
   );

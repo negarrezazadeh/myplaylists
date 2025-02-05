@@ -38,7 +38,6 @@ function SongItemLocal({ song }) {
     }
   }
 
-  console.log(progress);
   return (
     <div className="flex cursor-pointer items-center gap-x-3" role="listitem">
       <img

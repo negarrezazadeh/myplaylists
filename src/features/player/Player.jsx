@@ -58,20 +58,6 @@ function Player({ song, tab }) {
               size={30}
               className="cursor-pointer text-white"
             />
-            {/* isPlaying ? (
-              <PauseSVG
-                onClick={() => stop()}
-                size={35}
-                className="cursor-pointer text-white"
-              />
-            ) : (
-              <PlaySVG
-                onClick={() => playOrContinues(songToPlay)}
-                size={35}
-                className="cursor-pointer text-white"
-              />
-
-            ) */}
             <PlayPauseButton song={songToPlay} />
             <NextSVG
               onClick={() => next(true)}

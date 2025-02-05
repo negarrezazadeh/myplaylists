@@ -14,7 +14,7 @@ function MiniPlayer() {
   const { continues, stop, next, prev, isPlaying } = usePlayerController();
   const isOffline = useNetworkStatus();
 
-  const isSongFromCloud = true //!!currentSong?.id;
+  const isSongFromCloud = !!currentSong?.id;
 
   function handleClick() {
     // only local songs doesn't have id

@@ -5,6 +5,7 @@ import { useNetworkStatus } from "@/context/NetworkStatusContext";
 import { useAuth } from "@/context/AuthContext";
 
 function ProtectedRoutes({ children }) {
+  return children ;
   const navigate = useNavigate();
 
   const isOffline = useNetworkStatus();

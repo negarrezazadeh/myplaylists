@@ -4,7 +4,7 @@ import SongSkeleton from "@/ui/SongSkeleton";
 import SongItemLocal from "./SongItemLocal";
 
 function SongListLocal() {
-    const { songs, isPending, pickSongsFolder } = useLocalSongs();
+  const { songs, handleFiles, isPending } = useLocalSongs();
 
   if (isPending === true)
     return (
@@ -16,15 +16,25 @@ function SongListLocal() {
   if (songs.length === 0)
     return (
       <div>
-        <Button onClick={pickSongsFolder}>Chose Your Song Folder</Button>
+        <Button asChild>
+          <label className="relative">
+            <input
+              className="opacity-0 absolute h-full w-full top-0 right-0"
+              type="file"
+              multiple
+              webkitdirectory="true"
+              onChange={handleFiles}
+            />
+            Chose Your Song Folder
+          </label>
+        </Button>
       </div>
     );
 
   return (
     <div className="space-y-4" role="list">
-      {songs.length > 0 && songs.map((song) => (
-        <SongItemLocal key={song.name} song={song} />
-      ))}
+      {songs.length > 0 &&
+        songs.map((song) => <SongItemLocal key={song.name} song={song} />)}
     </div>
   );
 }
