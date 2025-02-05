@@ -11,7 +11,7 @@ function ExploreTopArtists() {
 
   if (isLoading)
     return (
-      <div className="-me-5 flex gap-x-3 overflow-auto pb-1">
+      <div className="mp-carousel -me-5 flex gap-x-3 overflow-auto pb-1">
         {Array.from({ length: 3 }).map((_, index) => (
           <div key={index} className="flex-shrink-0">
             <Skeleton className="size-40 flex-shrink-0 rounded-full" />

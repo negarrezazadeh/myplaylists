@@ -62,3 +62,8 @@ export const getTopPlaylists = async () => {
   const response = await http.get(`/api/playlists/top-playlists`);
   return response.data;
 };
+
+export const getLatestPlaylists = async () => {
+  const response = await http.get(`/api/playlists/latest-playlists`);
+  return response.data;
+};

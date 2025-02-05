@@ -7,13 +7,13 @@ import LinearSlider from "./LinearSlider";
 import PlayerMode from "./PlayerMode";
 import { usePlayerController } from "@/context/PlayerControllerContext";
 import DownloadButton from "./DownloadButton";
-import { NextSVG, PauseSVG, PlaySVG, PrevSVG } from "@/ui/Icons";
+import { NextSVG, PrevSVG } from "@/ui/Icons";
 import PlayPauseButton from "./PlayPauseButton";
 
 function Player({ song, tab }) {
   const { currentSong, dispatch, isLoading } = usePlayer();
 
-  const { next, prev, playOrContinues, stop, isPlaying } =
+  const { next, prev } =
     usePlayerController();
 
   const songToPlay = currentSong || song;

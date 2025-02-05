@@ -1,9 +1,3 @@
-import {
-  MdPlayArrow,
-  MdPause,
-  MdSkipNext,
-  MdSkipPrevious,
-} from "react-icons/md";
 import noCoverLogo from "./../../assets/img/no-cover-logo.png";
 import { usePlayer } from "../../context/PlayerContext";
 import { useNavigate } from "react-router-dom";

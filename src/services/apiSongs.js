@@ -70,3 +70,11 @@ export const getTopSongs = async (id) => {
   const response = await http.get(`${API_BASE_URL}/api/songs/top-songs`);
   return response.data;
 };
+
+export const getLatestSongs = async (id) => {
+  if (!id) return;
+
+  const response = await http.get(`${API_BASE_URL}/api/songs/latest-songs`);
+  return response.data;
+};
+

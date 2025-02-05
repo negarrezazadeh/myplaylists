@@ -6,6 +6,8 @@ import AppContentBox from "@/layouts/AppContentBox";
 import ExploreTopArtists from "@/features/explore/ExploreTopArtists";
 import { Link } from "react-router-dom";
 import { Button } from "@/ui/button";
+import ExploreLatestSongs from "@/features/explore/ExploreLatestSongs";
+import ExploreLatestPlaylists from "@/features/explore/ExploreLatestPlaylists";
 
 function Explore() {
   return (
@@ -15,6 +17,20 @@ function Explore() {
         <div>
           <h3 className="mb-3 text-2xl font-bold">Top Artists</h3>
           <ExploreTopArtists />
+        </div>
+
+        <div className="mt-10">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-2xl font-bold">New Releases</span>
+          </div>
+          <ExploreLatestSongs />
+        </div>
+
+        <div className="mt-10">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-2xl font-bold">New Playlists</span>
+          </div>
+          <ExploreLatestPlaylists />
         </div>
 
         <div className="mt-10">
@@ -30,8 +46,8 @@ function Explore() {
         </div>
 
         <div className="mt-10">
-        <div className="mb-3 flex items-center justify-between">
-            <span className="text-2xl font-bold">Top Lists</span>
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-2xl font-bold">Top Playlists</span>
             <Button size="sm" asChild>
               <Link className="text-blue-500" to="/top-playlists">
                 More
