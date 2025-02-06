@@ -24,8 +24,8 @@ function Player({ song, tab }) {
 
   if (tab === "song") {
     return (
-      <div>
-        <div className="relative mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl">
+      <div className=" xl:max-w-[1000px] xl:mx-auto xl:bg-dark-900 xl:p-9 rounded-lg">
+        <div className="relative mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl ">
           <div
             className={`w-max overflow-hidden rounded-2xl ${isLoading ? "bg-glass-loader overlay-loader" : ""}`}
           >

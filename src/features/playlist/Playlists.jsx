@@ -12,13 +12,13 @@ function Playlists() {
 
   if (isLoading || followedIsLoading)
     return (
-      <div className="justify-content-between grid w-full grid-cols-12 gap-x-6 gap-y-6">
+      <div className="justify-content-between  w-full grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-6">
         <PlaylistSkeleton count={6} />
       </div>
     );
 
   return (
-    <div className="justify-content-between grid w-full grid-cols-12 gap-x-6 gap-y-6">
+    <div className="justify-content-between grid w-full grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-6">
       {playlists.map((list) => (
         <PlaylistItem key={list.id} playlist={list} />
       ))}

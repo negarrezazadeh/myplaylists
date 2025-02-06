@@ -31,6 +31,7 @@ const PlayPauseButton = ({ song }) => {
         src={playAndPause}
         speed={3}
         autoplay={isPlaying}
+        
       />
     </div>
   );
