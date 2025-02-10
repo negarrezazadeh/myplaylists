@@ -4,7 +4,7 @@ import About from "./About";
 
 function Register() {
   return (
-    <AppContainer>
+    <AppContainer classes="xl:!ps-0 xl:!max-w-[600px]">
       <RegisterForm />
       <div className="mt-6 max-h-[calc(100vh-600px)] overflow-auto px-3 pb-4">
         <About />

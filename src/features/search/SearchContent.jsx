@@ -38,7 +38,11 @@ function SearchContent() {
     return (
       <div className="fixed left-0 top-0 z-50 flex h-full w-full flex-col gap-y-4 bg-dark px-3 pb-3 pt-4">
         <div className="flex gap-x-4">
-          <CircleLeftSVG onClick={() => navigate("/")} color="white" size={30} />
+          <CircleLeftSVG
+            onClick={() => navigate("/")}
+            color="white"
+            size={30}
+          />
 
           <Input
             ref={searchInput}
@@ -53,9 +57,14 @@ function SearchContent() {
     );
 
   return (
-    <div className="fixed max-w-[450px] mx-auto right-0 left-0 top-0 z-50 flex h-full w-full flex-col gap-y-4 bg-dark px-3 pb-3 pt-7">
+    <div className="fixed right-0 top-0 z-50 mx-auto flex h-full w-full max-w-[450px] flex-col gap-y-4 rounded-lg bg-dark px-3 pb-3 pt-7 xl:right-3 xl:top-3 xl:h-[calc(100%-112px)] xl:max-w-[calc(100%-264px)]">
       <div className="flex gap-x-4">
-        <CircleLeftSVG className="cursor-pointer" onClick={() => navigate("/")} color="white" size={30} />
+        <CircleLeftSVG
+          className="cursor-pointer"
+          onClick={() => navigate("/")}
+          color="white"
+          size={30}
+        />
 
         <Input
           ref={searchInput}

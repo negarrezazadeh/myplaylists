@@ -7,14 +7,14 @@ function TopPlaylists() {
   if (isLoading)
     return (
       <div className="justify-content-between grid w-full grid-cols-12 gap-x-6 gap-y-6">
-        <PlaylistSkeleton count={6} />
+        <PlaylistSkeleton className="col-span-6 xl:col-span-3" count={6} />
       </div>
     );
 
   return (
     <div className="justify-content-between grid w-full grid-cols-12 gap-x-6 gap-y-6">
       {topPlaylists.map((playlist) => (
-        <PlaylistItem key={playlist.id} playlist={playlist} />
+        <PlaylistItem  className="col-span-6 xl:col-span-3" key={playlist.id} playlist={playlist} />
       ))}
     </div>
   );

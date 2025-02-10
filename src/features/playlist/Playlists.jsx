@@ -7,18 +7,18 @@ import Error from "@/ui/Error";
 function Playlists() {
   const { playlists, isLoading, error } = usePlaylists();
   const { followedPlaylists, isLoading: followedIsLoading } = useFollowed();
-  
+
   if (error) return <Error error={error} />;
 
   if (isLoading || followedIsLoading)
     return (
-      <div className="justify-content-between  w-full grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-6">
+      <div className="justify-content-between grid w-full grid-cols-2 gap-x-6 gap-y-6 xl:grid-cols-4">
         <PlaylistSkeleton count={6} />
       </div>
     );
 
   return (
-    <div className="justify-content-between grid w-full grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-6">
+    <div className="justify-content-between grid w-full grid-cols-2 gap-x-6 gap-y-6 xl:grid-cols-4">
       {playlists.map((list) => (
         <PlaylistItem key={list.id} playlist={list} />
       ))}
