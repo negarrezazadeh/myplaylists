@@ -8,11 +8,12 @@ import { Link } from "react-router-dom";
 import { Button } from "@/ui/button";
 import ExploreLatestSongs from "@/features/explore/ExploreLatestSongs";
 import ExploreLatestPlaylists from "@/features/explore/ExploreLatestPlaylists";
+import SearchLink from "@/features/search/SearchLink";
 
 function Explore() {
   return (
     <RightMotion>
-      <AppHeaderTitle>Explore</AppHeaderTitle>
+      <AppHeaderTitle endEl={<SearchLink />}>Explore</AppHeaderTitle>
       <AppContentBox>
         <div>
           <h3 className="mb-3 text-2xl font-bold">Top Artists</h3>
