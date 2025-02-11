@@ -107,15 +107,23 @@ function PlayerActionsContextProvider({ children }) {
     document.title = currentSong.name;
   }, [currentSong]);
 
-  // Play, pause, next, and previous song with keyboard controls on desktop
   useEffect(() => {
-     // Only active on desktop devices
+    // Only active on desktop devices
     if (!window.matchMedia("(min-width:1280px)").matches) return;
-
+  
     const handleKeydown = (e) => {
       // Ignore if the key is held down (repeat)
       if (e.repeat) return;
-
+  
+      // Check if an input, textarea, or contenteditable element is focused
+      const isInputFocused =
+        document.activeElement &&
+        (document.activeElement.tagName === "INPUT" ||
+          document.activeElement.tagName === "TEXTAREA" ||
+          document.activeElement.isContentEditable);
+  
+      if (isInputFocused) return; // Don't handle shortcuts when typing
+  
       switch (e.code) {
         case "Space":
           e.preventDefault(); // Prevent default scrolling behavior
@@ -127,29 +135,29 @@ function PlayerActionsContextProvider({ children }) {
             }
           }
           break;
-
+  
         case "ArrowRight":
           e.preventDefault();
           next(false); // Go to the next song
           break;
-
+  
         case "ArrowLeft":
           e.preventDefault();
           prev(); // Go to the previous song
           break;
-
+  
         default:
           break;
       }
     };
-
+  
     window.addEventListener("keydown", handleKeydown);
-
-    // Cleanup event listener on component unmount or dependency change
+  
     return () => {
       window.removeEventListener("keydown", handleKeydown);
     };
   }, [audio, continues, stop, next, prev]);
+  
 
   return (
     <PlayerActionsContext.Provider value={true}>
