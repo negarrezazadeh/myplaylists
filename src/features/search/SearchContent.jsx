@@ -1,5 +1,5 @@
 import { Input } from "@/ui/input";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SearchList from "./SearchList";
 import { useSearch } from "./useSearch";
 import { useEffect, useRef, useState } from "react";
@@ -7,8 +7,6 @@ import { CircleLeftSVG } from "@/ui/Icons";
 
 function SearchContent() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
 
   const [keyword, setKeyword] = useState("");
 
@@ -41,13 +39,7 @@ function SearchContent() {
       <div className="fixed left-0 top-0 z-50 flex h-full w-full flex-col gap-y-4 bg-dark px-3 pb-3 pt-4">
         <div className="flex gap-x-4">
           <CircleLeftSVG
-            onClick={() => {
-              if (isHomePage) {
-                navigate("/");
-              } else {
-                navigate(-1);
-              }
-            }}
+             onClick={() => navigate(-1)}
             color="white"
             size={30}
           />
@@ -65,17 +57,11 @@ function SearchContent() {
     );
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-50 mx-auto flex h-full w-full max-w-[450px] flex-col gap-y-4 bg-dark px-3 pb-3 pt-7">
-      <div className="flex gap-x-4">
-        <CircleLeftSVG
-          className="cursor-pointer"
-          onClick={() => {
-            if (isHomePage) {
-              navigate("/");
-            } else {
-              navigate(-1);
-            }
-          }}
+    <div className="fixed right-0 top-0 z-50 mx-auto flex h-full w-full max-w-[450px] flex-col gap-y-4 rounded-lg bg-dark px-3 pb-3 pt-7 xl:right-3 xl:top-3 xl:h-[calc(100%-112px)] xl:max-w-[calc(100%-264px)]">
+    <div className="flex gap-x-4">
+      <CircleLeftSVG
+        className="cursor-pointer"
+        onClick={() => navigate(-1)}
           color="white"
           size={30}
         />
