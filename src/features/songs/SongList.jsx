@@ -16,7 +16,7 @@ function SongList() {
       </div>
     );
 
-  if (songs.length === 0)
+  if (songs?.length === 0)
     return (
       <>
         <div>
@@ -36,7 +36,7 @@ function SongList() {
 
   return (
     <div className="space-y-4" role="list">
-      {songs.map((song) => (
+      {songs?.map((song) => (
         <SongItem key={song.id} song={song} play={play} stop={stop} />
       ))}
     </div>

@@ -23,7 +23,7 @@ function PlaylistActions({ playlist, trigger }) {
 
   const editLink = `/playlists/edit/${playlist.id}`;
   const encodedName = encodeURIComponent(playlist.name);
-  const shareLink = `${window.location.origin}/playlists/share/${playlist.id}/${encodedName}`;
+  const shareLink = `🎶 Playlist: ${playlist.name}\n\n📌 Follow Playlist:\n ${window.location.origin}/playlists/share/${playlist.id}/${encodedName}\n\n🟣 Join Channel t.me/myplaylists_ir`;
 
   function handleDelete(id) {
     deletePlaylist(id);

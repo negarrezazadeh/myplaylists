@@ -13,7 +13,7 @@ function LinearSlider({ song }) {
   }
 
   return (
-    <div className="">
+    <div>
       <Slider
         className="cursor-pointer"
         value={[progress]}

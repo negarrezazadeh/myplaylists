@@ -9,9 +9,15 @@ function Dashboard() {
     <RightMotion>
       <AppHeaderTitle>Dashboard</AppHeaderTitle>
       <AppContentBox>
+        <div className="flex flex-col gap-y-4">
         <Button asChild>
           <Link to="/admin/users">Users</Link>
         </Button>
+
+        <Button asChild>
+          <Link to="/admin/artists">Artist</Link>
+        </Button>
+        </div>
       </AppContentBox>
     </RightMotion>
   );

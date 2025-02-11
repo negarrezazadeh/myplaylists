@@ -1,6 +1,5 @@
 import { MdShare } from "react-icons/md";
 import { usePlayer } from "../../context/PlayerContext";
-import noCoverLogo from "@/assets/img/no-cover-logo.png";
 
 import { copyToClipboard } from "@/utils/utli";
 import { toast } from "sonner";
@@ -23,14 +22,6 @@ function SongItemOffline({ song }) {
 
   return (
     <div className="flex cursor-pointer items-center gap-x-3" role="listitem">
-      <img
-        onClick={handlePlayer}
-        className="h-16 w-16 rounded-lg object-cover"
-        width={64}
-        height={64}
-        src={song.cover || noCoverLogo}
-        alt={song.name}
-      />
       <div onClick={handlePlayer} className="flex w-full flex-col gap-y-1">
         <span
           className={`max-w-52 overflow-hidden overflow-ellipsis text-nowrap ${currentSong?.id === song.id ? "text-purple-500" : "text-white"}`}

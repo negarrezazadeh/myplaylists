@@ -7,16 +7,16 @@ import LinearSlider from "./LinearSlider";
 import PlayerMode from "./PlayerMode";
 import { usePlayerController } from "@/context/PlayerControllerContext";
 import DownloadButton from "./DownloadButton";
-import { NextSVG, PauseSVG, PlaySVG, PrevSVG } from "@/ui/Icons";
+import { NextSVG, PrevSVG } from "@/ui/Icons";
+import PlayPauseButton from "./PlayPauseButton";
 
 function Player({ song, tab }) {
   const { currentSong, dispatch, isLoading } = usePlayer();
 
-  const { next, prev, playOrContinues, stop, isPlaying } =
+  const { next, prev } =
     usePlayerController();
 
   const songToPlay = currentSong || song;
-  console.log(currentSong);
 
   useEffect(() => {
     if (!currentSong) dispatch({ type: "song/current", payload: song });
@@ -24,8 +24,8 @@ function Player({ song, tab }) {
 
   if (tab === "song") {
     return (
-      <div>
-        <div className="relative mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl">
+      <div className=" xl:max-w-[1000px] xl:mx-auto xl:bg-dark-900 xl:p-9 rounded-lg">
+        <div className="relative mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl ">
           <div
             className={`w-max overflow-hidden rounded-2xl ${isLoading ? "bg-glass-loader overlay-loader" : ""}`}
           >
@@ -58,19 +58,7 @@ function Player({ song, tab }) {
               size={30}
               className="cursor-pointer text-white"
             />
-            {isPlaying ? (
-              <PauseSVG
-                onClick={() => stop()}
-                size={35}
-                className="cursor-pointer text-white"
-              />
-            ) : (
-              <PlaySVG
-                onClick={() => playOrContinues()}
-                size={35}
-                className="cursor-pointer text-white"
-              />
-            )}
+            <PlayPauseButton song={songToPlay} />
             <NextSVG
               onClick={() => next(true)}
               size={30}

@@ -7,7 +7,7 @@ function AppHeaderTitle({ children, navLink = -1, endEl }) {
 
   return (
     <header className="mb-5 grid h-[70px] grid-cols-12 items-center gap-x-4 bg-dark-900 xl:bg-dark xl:rounded-t-lg px-5 pb-5 pt-5">
-      <NavLink className="col-span-3" onClick={() => navigate(navLink)}>
+      <NavLink className="col-span-2" onClick={() => navigate(navLink)}>
         <CircleLeftSVG color="white" size={30} />
       </NavLink>
 

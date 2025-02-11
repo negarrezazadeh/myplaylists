@@ -34,11 +34,17 @@ import { PlayerControllerContextProvider } from "./context/PlayerControllerConte
 import { PlayerModeContextProvider } from "./context/PlayerModeContext";
 import AdminRoutes from "./layouts/AdminRoutes";
 import AdminDashboard from "./pages/admin/Dashboard";
-import Users from "./pages/admin/Users";
-import CreateUser from "./pages/admin/CreateUser";
-import UpdateUser from "./pages/admin/UpdateUser";
 import { AuthContextProvider } from "./context/AuthContext";
 import Error from "./ui/Error";
+import Explore from "./pages/Explore";
+import ArtistSongs from "./pages/ArtistSongs";
+
+// Admin routes
+import AdminUsers from "./pages/admin/Users";
+import CreateUser from "./pages/admin/CreateUser";
+import UpdateUser from "./pages/admin/UpdateUser";
+import AdminArtist from "./pages/admin/artist/Artists";
+import UpdateArtist from "./pages/admin/artist/UpdateArtist";
 /* const TopLists = lazy(() => import("./pages/TopLists"));
 const TopSongs = lazy(() => import("./pages/TopSongs"));
 const Search = lazy(() => import("./pages/Search"));
@@ -53,7 +59,8 @@ const Playlists = lazy(() => import("./pages/Playlists"));
 const Playlist = lazy(() => import("./pages/Playlist"));
 const EditPlaylist = lazy(() => import("./pages/EditPlaylist"));
 const SharePlaylist = lazy(() => import("./pages/SharePlaylist"));
-const SongsBulkActions = lazy(() => import("./pages/SongsBulkActions")); */
+const SongsBulkActions = lazy(() => import("./pages/SongsBulkActions")); 
+const Explore = lazy(() => import("./pages/Explore")); */
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -101,6 +108,7 @@ function App() {
                               element={<EditSong />}
                             />
                             <Route path="/favorites" element={<Favorites />} />
+                            <Route path="/explore" element={<Explore />} />
                             <Route path="/playlists" element={<Playlists />} />
                             <Route
                               path="/playlists/:id/:name"
@@ -115,6 +123,7 @@ function App() {
                               path="songs-bulk-actions"
                               element={<SongsBulkActions />}
                             />
+                            <Route path="/artists/:artistName" element={<ArtistSongs />} />
                           </Route>
 
                           <Route
@@ -142,7 +151,7 @@ function App() {
                               path="/admin/dashboard"
                               element={<AdminDashboard />}
                             />
-                            <Route path="/admin/users" element={<Users />} />
+                            <Route path="/admin/users" element={<AdminUsers />} />
                             <Route
                               path="/admin/users/create"
                               element={<CreateUser />}
@@ -150,6 +159,14 @@ function App() {
                             <Route
                               path="/admin/users/:id"
                               element={<UpdateUser />}
+                            />
+                             <Route
+                              path="/admin/artists"
+                              element={<AdminArtist />}
+                            />
+                            <Route
+                              path="/admin/artists/:artistName"
+                              element={<UpdateArtist />}
                             />
                           </Route>
 

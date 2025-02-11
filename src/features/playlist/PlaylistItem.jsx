@@ -2,9 +2,9 @@ import noCoverLogo from "@/assets/img/no-cover-logo.png";
 import OneLineText from "@/ui/OneLineText";
 import { Link } from "react-router-dom";
 import PlaylistFollowButton from "./PlaylistFollowButton";
-function PlaylistItem({ playlist }) {
+function PlaylistItem({ playlist, className="" }) {
   return (
-    <div className="relative col-span-6 cursor-pointer">
+    <div className={`${className} relative cursor-pointer`}>
       <Link to={`/playlists/${playlist.id}/${playlist.name}`} className="block">
         <img
           src={playlist.cover || noCoverLogo}

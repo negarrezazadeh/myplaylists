@@ -90,18 +90,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
- /*  server: {
+/*   server: {
     https: {
-      key: "/home/pouria/SSL/localhost-key.pem",
-      cert: "/home/pouria/SSL/localhost.pem",
+      key: "/home/pouria/.ssl/localhost-key.pem",
+      cert: "/home/pouria/.ssl/localhost.pem",
     },
     port: 5137,
     strictPort: true,
   },
   preview: {
     https: {
-      key: "/home/pouria/SSL/localhost-key.pem",
-      cert: "/home/pouria/SSL/localhost.pem",
+      key: "/home/pouria/.ssl/localhost-key.pem",
+      cert: "/home/pouria/.ssl/localhost.pem",
     },
     port: 5137,
     strictPort: true,

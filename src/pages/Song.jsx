@@ -3,9 +3,8 @@ import { useSong } from "@/features/songs/useSong";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import FullPageSpinner from "@/ui/FullPageSpinner";
-import { copyToClipboard } from "@/utils/utli";
 import { useState } from "react";
-import { CircleDownSVG, ShareSVG } from "@/ui/Icons";
+import { CircleDownSVG } from "@/ui/Icons";
 import Error from "@/ui/Error";
 import SongActions from "@/features/songs/SongActions";
 import { MdMoreVert } from "react-icons/md";
@@ -15,7 +14,7 @@ function Song() {
   const { song, isLoading, error } = useSong(id);
   const [tab, setTab] = useState("song");
   const navigate = useNavigate();
-  console.log(error);
+  console.log(isLoading);
 
   if (error) return <Error error={error} />;
 
@@ -25,7 +24,7 @@ function Song() {
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="margin-auto fixed right-0 top-0 z-50 h-[calc(100%-68px)] w-full max-w-[450px] bg-dark p-5 sm:mx-[calc((100%-450px)/2)]"
+      className="margin-auto fixed right-0 top-0 z-50 h-[calc(100%-68px)] w-full max-w-[450px] bg-dark p-5 sm:mx-[calc((100%-450px)/2)] xl:mt-3 xl:me-3 xl:ms-0 xl:h-[calc(100%-114px)] xl:max-w-[calc(100%-264px)] xl:rounded-lg"
     >
       <div className="mb-5 flex justify-between">
         <CircleDownSVG
@@ -51,7 +50,6 @@ function Song() {
           song={isLoading ? {} : song}
           trigger={<MdMoreVert className="cursor-pointer" size={25} />}
         />
-        
       </div>
       {isLoading ? <FullPageSpinner /> : <Player tab={tab} song={song} />}
     </motion.div>

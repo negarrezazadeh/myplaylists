@@ -18,7 +18,12 @@ function PlayerActionsContextProvider({ children }) {
   // Automatically play next song
   useEffect(() => {
     // prevent navigation on index page
-    const goToNextSong = () => next(location.pathname !== "/" && !isOffline);
+    const goToNextSong = () =>
+      next(
+        location.pathname !== "/" &&
+          location.pathname !== "/explore" &&
+          !isOffline,
+      );
 
     if (audio) {
       audio.addEventListener("ended", goToNextSong);
@@ -52,8 +57,8 @@ function PlayerActionsContextProvider({ children }) {
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: currentSong.name,
-        artist: currentSong.artist || 'unknown',
-        album: currentSong.album || ' | unknown',
+        artist: currentSong.artist || "unknown",
+        album: currentSong.album || " | unknown",
         artwork: [
           {
             src: currentSong.cover,
@@ -101,6 +106,58 @@ function PlayerActionsContextProvider({ children }) {
     if (!currentSong) return;
     document.title = currentSong.name;
   }, [currentSong]);
+
+  useEffect(() => {
+    // Only active on desktop devices
+    if (!window.matchMedia("(min-width:1280px)").matches) return;
+  
+    const handleKeydown = (e) => {
+      // Ignore if the key is held down (repeat)
+      if (e.repeat) return;
+  
+      // Check if an input, textarea, or contenteditable element is focused
+      const isInputFocused =
+        document.activeElement &&
+        (document.activeElement.tagName === "INPUT" ||
+          document.activeElement.tagName === "TEXTAREA" ||
+          document.activeElement.isContentEditable);
+  
+      if (isInputFocused) return; // Don't handle shortcuts when typing
+  
+      switch (e.code) {
+        case "Space":
+          e.preventDefault(); // Prevent default scrolling behavior
+          if (audio) {
+            if (audio.paused) {
+              continues();
+            } else {
+              stop();
+            }
+          }
+          break;
+  
+        case "ArrowRight":
+          e.preventDefault();
+          next(false); // Go to the next song
+          break;
+  
+        case "ArrowLeft":
+          e.preventDefault();
+          prev(); // Go to the previous song
+          break;
+  
+        default:
+          break;
+      }
+    };
+  
+    window.addEventListener("keydown", handleKeydown);
+  
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
+  }, [audio, continues, stop, next, prev]);
+  
 
   return (
     <PlayerActionsContext.Provider value={true}>

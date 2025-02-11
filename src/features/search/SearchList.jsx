@@ -1,20 +1,27 @@
+import { usePlayerController } from "@/context/PlayerControllerContext";
 import OneLineText from "@/ui/OneLineText";
 import { MdMusicNote, MdOutlineArrowForwardIos } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SearchList({ songs }) {
+  const navigate = useNavigate();
+
+  const { play } = usePlayerController();
+
   if (songs.length === 0) return <p className="ps-1">No search result found</p>;
+
+  function handleNavigateToSong(song) {
+    play(song);
+    navigate(`/songs/${song.id}`);
+  }
 
   return (
     <div>
       <ul className="flex max-h-60 flex-col gap-y-4 overflow-auto ps-1">
         {songs &&
           songs.map((song) => (
-            <li key={song.id}>
-              <Link
-                className="ms-auto flex items-center gap-x-2"
-                to={`/songs/${song.id}`}
-              >
+            <li className="cursor-pointer" onClick={() => handleNavigateToSong(song)} key={song.id}>
+              <div className="ms-auto flex items-center gap-x-2">
                 <MdMusicNote size={30} />
                 <div className="flex flex-col">
                   <OneLineText>
@@ -36,7 +43,7 @@ function SearchList({ songs }) {
                   </div>
                 </div>
                 <MdOutlineArrowForwardIos className="ms-auto" size={20} />
-              </Link>
+              </div>
             </li>
           ))}
       </ul>
