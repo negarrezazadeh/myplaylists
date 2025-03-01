@@ -24,13 +24,13 @@ function Player({ song, tab }) {
 
   if (tab === "song") {
     return (
-      <div className=" xl:max-w-[1000px] xl:mx-auto xl:bg-dark-900 xl:p-9 rounded-lg">
+      <div className=" xl:max-w-[1000px] xl:mx-auto xl:bg-dark-900 xl:pt-4 xl:px-4 xl:pb-6 rounded-lg">
         <div className="relative mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl ">
           <div
-            className={`w-max overflow-hidden rounded-2xl ${isLoading ? "bg-glass-loader overlay-loader" : ""}`}
+            className={`w-max overflow-hidden rounded-2xl ${isLoading ? "bg-glass-loader overlay-loader  z-0 relative" : ""}`}
           >
             <img
-              className="h-64 w-64 object-cover"
+              className="h-64 w-64 object-cover z-10 "
               src={songToPlay.cover || noCoverLogo}
               alt={songToPlay.name}
             />
@@ -43,7 +43,7 @@ function Player({ song, tab }) {
         <h6 className="max-w-72 overflow-hidden overflow-ellipsis text-nowrap font-bold">
           {songToPlay.name}
         </h6>
-        <span className="mb-14 mt-1 block h-6 max-w-72 overflow-hidden overflow-ellipsis text-nowrap text-slate-200">
+        <span className="mb-14 xl:mb-5 mt-1 block h-6 max-w-72 overflow-hidden overflow-ellipsis text-nowrap text-slate-200">
           {songToPlay.artist}
         </span>
 
