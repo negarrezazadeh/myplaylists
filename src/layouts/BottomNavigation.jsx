@@ -8,8 +8,7 @@ import { useEffect, useState } from "react";
 
 function BottomNavigation() {
   const location = useLocation();
-  console.log(location.pathname);
-
+  
   const [activeIcon, setActiveIcon] = useState(null);
 
   const isOffline = useNetworkStatus();
@@ -78,7 +77,7 @@ function NavigationItem({
   activePath,
 }) {
   const { rive, RiveComponent } = useRive({
-    src: `/src/assets/${icon}.riv`,
+    src: `/${icon}.riv`,
     stateMachines: "click",
     autoplay: true,
     artboard: icon.charAt(0).toUpperCase() + icon.substring(1),
