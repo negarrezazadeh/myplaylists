@@ -69,10 +69,11 @@ function AppRoutes() {
         <Route path="/search" element={<Search />} />
         <Route path="songs-bulk-actions" element={<SongsBulkActions />} />
         <Route path="/artists/:artistName" element={<ArtistSongs />} />
+        <Route path="/songs/:id" element={<Song />} />
       </Route>
 
       <Route element={<AppLayout />}>
-        <Route path="/songs/:id" element={<Song />} />
+        <Route path="/songs/share/:id" element={<Song />} />
         <Route path="/playlists/share/:id/:name" element={<SharePlaylist />} />
       </Route>
 

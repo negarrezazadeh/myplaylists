@@ -14,7 +14,6 @@ function Song() {
   const { song, isLoading, error } = useSong(id);
   const [tab, setTab] = useState("song");
   const navigate = useNavigate();
-  console.log(isLoading);
 
   if (error) return <Error error={error} />;
 
