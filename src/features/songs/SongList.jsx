@@ -4,6 +4,8 @@ import { useSongs } from "./useSongs";
 import { Button } from "@/ui/button";
 import SongSkeleton from "@/ui/SongSkeleton";
 import { usePlayerController } from "@/context/PlayerControllerContext";
+import React from "react";
+import { Virtuoso } from "react-virtuoso";
 
 function SongList() {
   const { songs, isPending } = useSongs();
@@ -16,6 +18,8 @@ function SongList() {
       </div>
     );
 
+    console.log(songs.length);
+    
   if (songs?.length === 0)
     return (
       <>
@@ -34,13 +38,45 @@ function SongList() {
       </>
     );
 
+/*   return (
+   <Virtuoso
+    data={songs}
+    itemContent={(_, song) => <SongItem song={song} play={play} stop={stop} />}
+    components={{
+      List: React.forwardRef(({ style, children }, ref) => (
+        <div ref={ref} className="space-y-4 !h-[calc(100vh-200px)]" role="list">
+          {children}
+        </div>
+      )),
+      Scroller: React.forwardRef(({ style, children }, ref) => (
+        <div
+          ref={ref}
+          style={{ ...style, outline: "none", overflowY: "unset", position: "relative" }}
+          data-testid="virtuoso-scroller"
+          data-virtuoso-scroller="true"
+          tabIndex={0}
+        >
+          {children}
+        </div>
+      )) 
+    }}
+  />
+  ); */
+
+
   return (
+
+    <Virtuoso  data={songs} itemContent={(_, song)=><SongItem className="mb-4" song={song} play={play} stop={stop} />}  />
+
+  )
+
+/*   return (
     <div className="space-y-4" role="list">
       {songs?.map((song) => (
         <SongItem key={song.id} song={song} play={play} stop={stop} />
       ))}
     </div>
-  );
+  ) */;
 }
 
 export default SongList;

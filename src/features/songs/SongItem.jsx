@@ -7,7 +7,7 @@ import {  useLocation, useNavigate } from "react-router-dom";
 import { memo, useRef, useState } from "react";
 import SongActions from "./SongActions";
 
-function SongItem({ song, play, stop }) {
+function SongItem({ song, play, stop, className="" }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -66,7 +66,7 @@ function SongItem({ song, play, stop }) {
 
   return (
     <div
-      className="flex cursor-pointer items-center gap-x-3"
+      className={`${className} flex cursor-pointer items-center gap-x-3`}
       role="listitem"
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
