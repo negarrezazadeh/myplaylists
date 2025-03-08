@@ -1,6 +1,6 @@
 import http from "../utils/http";
 
-export const login = async ({email, password}) => {
+export const login = async ({ email, password }) => {
   if (!email || !password) return;
 
   await http.get("/sanctum/csrf-cookie");
@@ -10,18 +10,24 @@ export const login = async ({email, password}) => {
   return response;
 };
 
-export const register = async ({email, password, name}) => {
-  if (!email || !password) return;
+export const register = async ({ email, password, name, code }) => {
+  if (!email || !password || !code) return;
 
   await http.get("/sanctum/csrf-cookie");
 
-  const response = await http.post("/register", { email, password, name });
+  const response = await http.post("/register", { email, password, name, code });
 
   return response;
 };
 
-
 export const getCurrentUser = async () => {
   const response = await http.get("/api/user");
+  return response.data;
+};
+
+export const otp = async (email) => {
+  if (!email) return;
+
+  const response = await http.post("/otp", { email });
   return response.data;
 };
