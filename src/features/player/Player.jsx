@@ -9,12 +9,12 @@ import { usePlayerController } from "@/context/PlayerControllerContext";
 import DownloadButton from "./DownloadButton";
 import { NextSVG, PrevSVG } from "@/ui/Icons";
 import PlayPauseButton from "./PlayPauseButton";
+import OneLineText from "@/ui/OneLineText";
 
 function Player({ song, tab }) {
   const { currentSong, dispatch, isLoading } = usePlayer();
 
-  const { next, prev } =
-    usePlayerController();
+  const { next, prev } = usePlayerController();
 
   const songToPlay = currentSong || song;
 
@@ -24,49 +24,69 @@ function Player({ song, tab }) {
 
   if (tab === "song") {
     return (
-      <div className=" xl:max-w-[1000px] xl:mx-auto xl:bg-dark-900 xl:pt-4 xl:px-4 xl:pb-6 rounded-lg">
-        <div className="relative mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl ">
-          <div
-            className={`w-max overflow-hidden rounded-2xl ${isLoading ? "bg-glass-loader overlay-loader  z-0 relative" : ""}`}
-          >
-            <img
-              className="h-64 w-64 object-cover z-10 "
-              src={songToPlay.cover || noCoverLogo}
-              alt={songToPlay.name}
-            />
+      <div className="rounded-lg xl:mx-auto xl:max-w-[1000px] xl:bg-dark-900 xl:px-4 xl:pb-6 xl:pt-4">
+        <div className="xl:grid xl:grid-cols-12">
+          <div className="relative mx-auto mb-5 flex h-72 w-72 items-center justify-center rounded-2xl xl:col-span-4 xl:mx-0">
+            <div
+              className={`w-max overflow-hidden rounded-2xl ${isLoading ? "bg-glass-loader overlay-loader relative z-0" : ""}`}
+            >
+              <img
+                className="z-10 h-64 w-64 object-cover"
+                src={songToPlay.cover || noCoverLogo}
+                alt={songToPlay.name}
+              />
+            </div>
+
+            <div className="absolute bottom-6 right-6 rounded-xl bg-dark/50 p-2">
+              <DownloadButton song={songToPlay} />
+            </div>
+
+            <OneLineText className="max-w-28 absolute top-6 left-6 rounded-lg bg-dark/50 p-2 text-xs font-bold">
+              <span>{songToPlay.owner}</span>
+            </OneLineText>
           </div>
 
-          <div className="absolute bottom-6 right-6 rounded-xl bg-dark/50 p-2">
-            <DownloadButton song={songToPlay} />
-          </div>
-        </div>
-        <h6 className="max-w-72 overflow-hidden overflow-ellipsis text-nowrap font-bold">
-          {songToPlay.name}
-        </h6>
-        <span className="mb-14 xl:mb-5 mt-1 block h-6 max-w-72 overflow-hidden overflow-ellipsis text-nowrap text-slate-200">
-          {songToPlay.artist}
-        </span>
+          <div className="xl:col-span-8">
+            <h6 className="max-w-72 overflow-hidden overflow-ellipsis text-nowrap font-bold">
+              {songToPlay.name}
+            </h6>
+            <span className="mb-14 mt-1 block h-6 max-w-72 overflow-hidden overflow-ellipsis text-nowrap text-slate-200 xl:mb-5">
+              {songToPlay.artist}
+            </span>
 
-        <LinearSlider song={songToPlay} />
-
-        <div className="mt-9 flex items-center justify-between px-6">
-          <PlayerMode />
-
-          <div className="flex items-center justify-center gap-4">
-            <PrevSVG
-              onClick={() => prev(true)}
-              size={30}
-              className="cursor-pointer text-white"
-            />
-            <PlayPauseButton song={songToPlay} />
-            <NextSVG
-              onClick={() => next(true)}
-              size={30}
-              className="cursor-pointer text-white"
-            />
+            {songToPlay.lyrics && (
+              <div
+                dir="auto"
+                className="hidden max-h-[200px] overflow-auto leading-loose xl:block"
+              >
+                {songToPlay.lyrics}
+              </div>
+            )}
           </div>
 
-          <FavoriteButton key={songToPlay.id} song={songToPlay} />
+          <div className="xl:col-span-12">
+            <LinearSlider className="xl:mt-4" song={songToPlay} />
+
+            <div className="mt-9 flex items-center justify-between px-6">
+              <PlayerMode />
+
+              <div className="flex items-center justify-center gap-4">
+                <PrevSVG
+                  onClick={() => prev(true)}
+                  size={30}
+                  className="cursor-pointer text-white"
+                />
+                <PlayPauseButton song={songToPlay} />
+                <NextSVG
+                  onClick={() => next(true)}
+                  size={30}
+                  className="cursor-pointer text-white"
+                />
+              </div>
+
+              <FavoriteButton key={songToPlay.id} song={songToPlay} />
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -75,7 +95,7 @@ function Player({ song, tab }) {
   if (tab === "lyrics") {
     return (
       <div key={song.id} className="h-[calc(100%-48px)] overflow-auto">
-        <p className="whitespace-pre-line leading-loose">
+        <p dir="auto" className="whitespace-pre-line leading-loose">
           {song.lyrics || <p className="">No lyrics found for this song</p>}
         </p>
       </div>

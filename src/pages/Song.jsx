@@ -8,12 +8,18 @@ import { CircleDownSVG } from "@/ui/Icons";
 import Error from "@/ui/Error";
 import SongActions from "@/features/songs/SongActions";
 import { MdMoreVert } from "react-icons/md";
+import { usePlayer } from "@/context/PlayerContext";
 
 function Song() {
-  const { id } = useParams();
-  const { song, isLoading, error } = useSong(id);
-  const [tab, setTab] = useState("song");
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const { song, isLoading, error } = useSong(id);
+  const { currentSong} = usePlayer();
+
+  const [tab, setTab] = useState("song");
+
+  const songToPlay = currentSong || song;
 
   if (error) return <Error error={error} />;
 
@@ -46,11 +52,11 @@ function Song() {
         </div>
 
         <SongActions
-          song={isLoading ? {} : song}
+          song={isLoading ? {} : songToPlay}
           trigger={<MdMoreVert className="cursor-pointer" size={25} />}
         />
       </div>
-      {isLoading ? <FullPageSpinner /> : <Player tab={tab} song={song} />}
+      {isLoading ? <FullPageSpinner /> : <Player tab={tab} song={songToPlay} />}
     </motion.div>
   );
 }

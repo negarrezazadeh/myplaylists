@@ -15,7 +15,7 @@ function SongListOffline() {
   if (songs.length === 0)
     return (
       <div>
-        <p>You didn't add any song, try uploading one</p>
+        <p>You didn't add any song, add song to offline mode</p>
         <p>You are offline 😟</p>
       </div>
     );

@@ -17,8 +17,6 @@ function SongList() {
         <SongSkeleton count={8} />
       </div>
     );
-
-    console.log(songs.length);
     
   if (songs?.length === 0)
     return (

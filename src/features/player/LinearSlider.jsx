@@ -3,7 +3,7 @@ import { useProgress } from "@/context/ProgressContext";
 import { Slider } from "@/ui/slider";
 import { formatTime } from "@/utils/utli";
 
-function LinearSlider({ song }) {
+function LinearSlider({ song, className="" }) {
   const progress = useProgress();
   const { audio } = usePlayer();
   const duration = Math.max(song?.duration, audio?.duration) || 0 ;
@@ -13,7 +13,7 @@ function LinearSlider({ song }) {
   }
 
   return (
-    <div>
+    <div className={className}>
       <Slider
         className="cursor-pointer"
         value={[progress]}
