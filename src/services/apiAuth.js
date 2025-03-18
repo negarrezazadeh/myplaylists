@@ -15,7 +15,12 @@ export const register = async ({ email, password, name, code }) => {
 
   await http.get("/sanctum/csrf-cookie");
 
-  const response = await http.post("/register", { email, password, name, code });
+  const response = await http.post("/register", {
+    email,
+    password,
+    name,
+    code,
+  });
 
   return response;
 };
@@ -29,5 +34,10 @@ export const otp = async (email) => {
   if (!email) return;
 
   const response = await http.post("/otp", { email });
+  return response.data;
+};
+
+export const getToken = async () => {
+  const response = await http.get("api/token");
   return response.data;
 };

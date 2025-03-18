@@ -17,6 +17,6 @@ export function useUser() {
     isLoading,
     isAuthenticated: !!user,
     isAdmin: user?.role === "admin",
-    canUploadDownload: user?.role === "admin" || user?.role === "artist",
+    canUploadDownload: user?.role === "admin" || user?.role === "artist" || user?.role === "uploader",
   };
 }

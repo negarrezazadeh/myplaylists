@@ -6,6 +6,7 @@ import { Button } from "../../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import SongListLocal from "./SongListLocal";
+import OpenBot from "./AccessBot";
 
 function UploadSongForm() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function UploadSongForm() {
   const { canUploadDownload } = useAuth();
 
   const [progress, setProgress] = useState(0);
-  const [tab, setTab] = useState("file");
+  const [tab, setTab] = useState("telegram");
 
   async function handleSelectFile(e) {
     const files = e.target.files;
@@ -36,7 +37,7 @@ function UploadSongForm() {
     }
   }
 
-  if (canUploadDownload === false && false) {
+  if (canUploadDownload === false) {
     return (
       <div className="flex flex-col gap-y-4">
         <h6 className="text-lg font-bold">
@@ -74,17 +75,17 @@ function UploadSongForm() {
     <>
       <div className="flex items-center gap-x-4">
         <span
-          onClick={() => setTab("file")}
-          className={`cursor-pointer ${tab === "file" ? "text-xl font-bold text-purple-500" : "text-sm"}`}
-        >
-          File
-        </span>
-
-        <span
           onClick={() => setTab("telegram")}
           className={`cursor-pointer ${tab === "telegram" ? "text-lg font-bold text-purple-500" : "text-sm"}`}
         >
           Telegram
+        </span>
+
+        <span
+          onClick={() => setTab("file")}
+          className={`cursor-pointer ${tab === "file" ? "text-xl font-bold text-purple-500" : "text-sm"}`}
+        >
+          File
         </span>
 
         <span
@@ -122,9 +123,7 @@ function UploadSongForm() {
 
       {tab === "telegram" && (
         <div className="pt-6">
-          <Button asChild>
-            <Link to="https://t.me/Myplaylists_ir_Bot">Open Bot</Link>
-          </Button>
+          <OpenBot />
         </div>
       )}
 
