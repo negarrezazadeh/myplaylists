@@ -53,7 +53,7 @@ function MiniPlayer() {
           onClick={handleClick}
           className="flex cursor-pointer flex-col ps-4"
         >
-          <span className="max-w-[164px] xl:max-w-[400px] overflow-hidden overflow-ellipsis text-nowrap text-sm font-bold">
+          <span className="max-w-[164px] xl:max-w-[400px] overflow-hidden overflow-ellipsis text-nowrap text-sm font-bold capitalize">
             {currentSong?.name}
           </span>
           <span className="max-w-[164px] xl:max-w-[400px] overflow-hidden overflow-ellipsis text-nowrap text-xs">

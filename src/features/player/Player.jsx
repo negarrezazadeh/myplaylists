@@ -42,12 +42,12 @@ function Player({ song, tab }) {
             </div>
 
             <OneLineText className="max-w-28 absolute top-6 left-6 rounded-lg bg-dark/50 p-2 text-xs font-bold">
-              <span>{songToPlay.owner}</span>
+              <span className="capitalize">{songToPlay.owner}</span>
             </OneLineText>
           </div>
 
           <div className="xl:col-span-8">
-            <h6 className="max-w-72 overflow-hidden overflow-ellipsis text-nowrap font-bold">
+            <h6 className="max-w-72 overflow-hidden overflow-ellipsis text-nowrap font-bold capitalize">
               {songToPlay.name}
             </h6>
             <span className="mb-14 mt-1 block h-6 max-w-72 overflow-hidden overflow-ellipsis text-nowrap text-slate-200 xl:mb-5">

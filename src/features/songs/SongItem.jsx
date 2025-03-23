@@ -85,7 +85,7 @@ function SongItem({ song, play, stop, className="" }) {
       />
       <div onClick={handlePlayer} className="flex w-full flex-col gap-y-1">
         <span
-          className={`max-w-52 overflow-hidden overflow-ellipsis text-nowrap ${currentSong?.id === song.id ? "text-purple-500" : "text-white"}`}
+          className={`max-w-52 overflow-hidden overflow-ellipsis text-nowrap capitalize ${currentSong?.id === song.id ? "text-purple-500" : "text-white"}`}
         >
           {song.name}
         </span>

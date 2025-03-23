@@ -39,8 +39,10 @@ function DownloadButton({ song }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <DownloadSvg className="cursor-pointer" />
-      </DialogTrigger>
+        <span className="cursor-pointer">
+          <DownloadSvg />
+        </span>
+      </DialogTrigger>  
 
       <DialogContent>
         <DialogHeader>
@@ -56,26 +58,28 @@ function DownloadButton({ song }) {
               Telegram Bot &nbsp;
               <small>(recommended)</small>
             </p>
-            <p className="text-xs text-muted-foreground">Directly from telegram bot</p>
+            <p className="text-xs text-muted-foreground">
+              Directly from telegram bot
+            </p>
           </a>
         </div>
         <hr />
 
         <div className="cursor-pointer" onClick={handleDownload}>
-          <p className="text-sm font-bold">Add To Offline Mode
+          <p className="text-sm font-bold">Add To Offline Mode</p>
+          <p className="text-xs text-muted-foreground">
+            Save and listen when you are offline
           </p>
-          <p className="text-xs text-muted-foreground">Save and listen when you are offline</p>
         </div>
         <hr />
 
-        <div className="opacity-50 cursor-not-allowed">
-          <p className="text-sm">Download File &nbsp;
-          <small>(not available)</small>
+        <div className="cursor-not-allowed opacity-50">
+          <p className="text-sm">
+            Download File &nbsp;
+            <small>(not available)</small>
           </p>
           <DialogDescription>Directly download song</DialogDescription>
         </div>
-
-        
       </DialogContent>
     </Dialog>
   );

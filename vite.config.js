@@ -16,7 +16,7 @@ export default defineConfig({
         name: "My Playlists",
         short_name: "My Playlists",
         description: "Your music platform",
-        start_url: "/",
+        start_url: "/explore",
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#000000",
@@ -84,7 +84,7 @@ export default defineConfig({
       },
     }),
   ],
-  assetsInclude: ['**/*.lottie'], 
+  assetsInclude: ['**/*.lottie', '**/*.riv'], 
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -5,10 +5,14 @@ import { useRegister } from "./useRegister";
 import { Button } from "@/ui/button";
 
 import logo from "./../../assets/img/myplaylist-intro.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useOTP } from "./useOTP";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 function RegisterForm() {
+  const { isAuthenticated } = useAuth();
+
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -20,6 +24,10 @@ function RegisterForm() {
   const { otp, optIsPending } = useOTP();
 
   const [form, setForm] = useState("step_1");
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/explore");
+  }, [isAuthenticated, navigate]);
 
   function onSubmit(data) {
     if (form === "step_1") {

@@ -5,8 +5,14 @@ import { useLogin } from "./useLogin";
 import { Button } from "@/ui/button";
 
 import logo from "./../../assets/img/myplaylist-intro.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import TelegramAuth from "./TelegramAuth";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 function LoginForm() {
+  const { isAuthenticated } = useAuth();
+
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,14 +21,33 @@ function LoginForm() {
 
   const { login, isPending } = useLogin();
 
+  // check if user logged in via form redirect to latest page
+  const [isLoggedInFromForm, setIsLoggedInFromForm] = useState(false);
+
+  // redirect to home if already logged in and try to back to login page
+  useEffect(() => {
+    if (isAuthenticated && !isLoggedInFromForm) navigate("/explore");
+  }, [isAuthenticated, isLoggedInFromForm, navigate]);
+
   function onSubmit(data) {
-    login({ email: data.email, password: data.password });
+    setIsLoggedInFromForm(true);
+    login(
+      { email: data.email, password: data.password },
+      {
+        onSuccess: () => {
+          navigate(-1, { replace: true });
+        },
+        onError: (err) => {
+          setIsLoggedInFromForm(false);
+        },
+      },
+    );
   }
 
   return (
     <div className="mt-6 px-3">
       <img
-        className="mx-auto mt-14 mb-10 h-56  w-full rounded-lg"
+        className="mx-auto mb-10 mt-14 h-56 w-full rounded-lg"
         src={logo}
         alt="myplaylists logo "
       />
@@ -30,6 +55,8 @@ function LoginForm() {
         onSubmit={handleSubmit(onSubmit)}
         className="m-auto flex w-full flex-col gap-y-3 rounded-lg bg-dark px-4 py-10"
       >
+        <TelegramAuth />
+
         <Input
           {...register("email", { required: "Email is required" })}
           placeholder="Email"
@@ -48,7 +75,7 @@ function LoginForm() {
           {isPending ? "Loading..." : "Login"}
         </Button>
 
-        <Link to="/register" className="text-start mt-2 text-blue-500">
+        <Link to="/register" className="mt-2 text-start text-blue-500">
           Don't have an account? Register
         </Link>
       </form>
