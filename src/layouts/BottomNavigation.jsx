@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import Logo from "@/assets/icons/logo.svg";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
 import { useEffect, useMemo, useState } from "react";
+import Logout from "@/features/authentication/Logout";
 
 function BottomNavigation() {
   const location = useLocation();
@@ -75,6 +76,8 @@ function BottomNavigation() {
           isOffline={isOffline}
         />
       ))}
+      <hr className="hidden xl:block xl:w-full" />
+      <Logout className="hidden xl:block"/>
     </nav>
   );
 }

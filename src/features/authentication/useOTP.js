@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 
 export function useOTP() {
   const { mutate: otp, isPending } = useMutation({
+    mutationKey: ["otp"],
     mutationFn: (email) => otpApi(email),
     onSuccess: (data) => {        
       if(data.success){

@@ -6,8 +6,13 @@ export const login = async ({ email, password }) => {
   await http.get("/sanctum/csrf-cookie");
 
   const response = await http.post("/login", { email, password });
-
+  
   return response;
+};
+
+export const logout = async () => {
+  const response = await http.post("/logout");
+  return response.data;
 };
 
 export const register = async ({ email, password, name, code }) => {

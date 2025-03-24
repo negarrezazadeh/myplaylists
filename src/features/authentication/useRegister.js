@@ -8,6 +8,7 @@ export function useRegister() {
   const navigate = useNavigate();
 
   const { mutate: register, isPending } = useMutation({
+    mutationKey: ["register"],
     mutationFn: ({ email, password, name, code }) => registerApi({ email, password, name, code }),
     onSuccess: (user) => {
       queryClient.invalidateQueries(['user']);
