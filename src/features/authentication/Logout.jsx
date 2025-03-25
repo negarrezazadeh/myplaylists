@@ -12,27 +12,29 @@ import {
 import { LogoutSvg } from "@/ui/Icons";
 import { useLogout } from "./useLogout";
 
-function Logout({ className }) {
-    const { logout, isPending } = useLogout();
+function Logout({ className = "", icoSize = "35"}) {
+  const { logout, isPending } = useLogout();
 
-    const [logoutAlertOpen, setLogoutAlertOpen] = useState(false);
+  const [logoutAlertOpen, setLogoutAlertOpen] = useState(false);
 
   function handleLogout() {
-    logout({},{
-      onSuccess: () => {
-        setLogoutAlertOpen(false);
+    logout(
+      {},
+      {
+        onSuccess: () => {
+          setLogoutAlertOpen(false);
+        },
       },
-    });
+    );
   }
   return (
     <>
       <div
         onClick={() => setLogoutAlertOpen(true)}
-        className={`${className} w-full`}
+        className={`${className}`}
       >
-        <button className="flex flex-col items-center py-3 xl:mb-2 xl:w-full xl:flex-row xl:justify-start xl:gap-x-3">
-          <LogoutSvg size="35" />
-          <span className="">Logout</span>
+        <button >
+          <LogoutSvg size={icoSize} />
         </button>
       </div>
 
@@ -50,7 +52,11 @@ function Logout({ className }) {
             >
               Cancel
             </Button>
-            <Button disabled={isPending} variant="destructive" onClick={handleLogout}>
+            <Button
+              disabled={isPending}
+              variant="destructive"
+              onClick={handleLogout}
+            >
               Yes, Logout
             </Button>
           </DialogFooter>

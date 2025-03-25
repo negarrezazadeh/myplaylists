@@ -1,5 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
-import { CircleLeftSVG, UploadSVG } from "@/ui/Icons";
+import { AvatarSVG, CircleLeftSVG, UploadSVG } from "@/ui/Icons";
 import { Input } from "@/ui/input";
 import { MdOutlineShield } from "react-icons/md";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -30,6 +30,10 @@ function AppHeader() {
           <MdOutlineShield size={35} />
         </NavLink>
       )}
+
+      <NavLink to="/profile">
+        <AvatarSVG size={35} />
+      </NavLink>
 
       <Input
         onClick={() => navigate("/search")}

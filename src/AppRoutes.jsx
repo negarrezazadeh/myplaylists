@@ -18,6 +18,7 @@ import Playlist from "./pages/Playlist";
 import EditPlaylist from "./pages/EditPlaylist";
 import SharePlaylist from "./pages/SharePlaylist";
 import SongsBulkActions from "./pages/SongsBulkActions";
+import Profile from "./pages/Profile";
 
 import Error from "./ui/Error";
 import Explore from "./pages/Explore";
@@ -51,6 +52,7 @@ const SharePlaylist = lazy(() => import("./pages/SharePlaylist"));
 const SongsBulkActions = lazy(() => import("./pages/SongsBulkActions")); 
 const Explore = lazy(() => import("./pages/Explore")); 
 const TelegramAuth = lazy(() => import("./pages/TelegramAuth")); 
+const Profile = lazy(() => import("./pages/Profile")); 
 */
 
 function AppRoutes() {
@@ -64,6 +66,7 @@ function AppRoutes() {
         }
       >
         <Route path="/" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/top-playlists" element={<TopLists />} />
         <Route path="/top-songs" element={<TopSongs />} />
         <Route path="/songs/upload" element={<UploadSong />} />

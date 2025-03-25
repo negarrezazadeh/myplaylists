@@ -32,7 +32,7 @@ function CreateUserForm({ user }) {
       <Input
         autocomplete="off"
         placeholder="email"
-        {...register("email", { required: true })}
+        {...register("email")}
       />
       {!user && (
         <Input

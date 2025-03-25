@@ -1,15 +1,12 @@
 import { useAuth } from "@/context/AuthContext";
 
 import { telegramAuth } from "@/services/apiAuth";
-import { Button } from "@/ui/button";
 import FullPageSpinner from "@/ui/FullPageSpinner";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 
-import LoginForm from "../features/authentication/LoginForm";
 import AppContainer from "../layouts/AppContainer";
-import About from "./About";
 
 function TelegramAuth() {
   const [searchParams] = useSearchParams();
@@ -17,7 +14,6 @@ function TelegramAuth() {
   const { isAuthenticated } = useAuth();
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const queryObject = Object.fromEntries(searchParams.entries());
   useEffect(() => {
@@ -28,7 +24,6 @@ function TelegramAuth() {
         
       } catch (error) {
         toast.error(error.response.data.message);
-        setError(error.response.data.message);
       } finally {
         setLoading(false);
       }
