@@ -1,6 +1,6 @@
 import { TelegramSVG } from "@/ui/Icons";
 
-function TelegramAuth() {
+function TelegramAuthButton() {
   return (
     <div className="flex flex-col items-center gap-y-3 text-center">
       <a
@@ -17,4 +17,4 @@ function TelegramAuth() {
   );
 }
 
-export default TelegramAuth;
+export default TelegramAuthButton;

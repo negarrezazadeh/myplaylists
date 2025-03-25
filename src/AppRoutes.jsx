@@ -19,21 +19,22 @@ import EditPlaylist from "./pages/EditPlaylist";
 import SharePlaylist from "./pages/SharePlaylist";
 import SongsBulkActions from "./pages/SongsBulkActions";
 
-import AdminRoutes from "./layouts/AdminRoutes";
-import AdminDashboard from "./pages/admin/Dashboard";
-
 import Error from "./ui/Error";
 import Explore from "./pages/Explore";
 import ArtistSongs from "./pages/ArtistSongs";
 
 // Admin routes
+import AdminRoutes from "./layouts/AdminRoutes";
+import AdminDashboard from "./pages/admin/Dashboard";
 import AdminUsers from "./pages/admin/Users";
 import CreateUser from "./pages/admin/CreateUser";
 import UpdateUser from "./pages/admin/UpdateUser";
 import AdminArtist from "./pages/admin/artist/Artists";
 import UpdateArtist from "./pages/admin/artist/UpdateArtist";
+import TelegramAuth from "./pages/TelegramAuth";
 
-/* const TopLists = lazy(() => import("./pages/TopLists"));
+/* 
+const TopLists = lazy(() => import("./pages/TopLists"));
 const TopSongs = lazy(() => import("./pages/TopSongs"));
 const Search = lazy(() => import("./pages/Search"));
 const Register = lazy(() => import("./pages/Register"));
@@ -48,13 +49,19 @@ const Playlist = lazy(() => import("./pages/Playlist"));
 const EditPlaylist = lazy(() => import("./pages/EditPlaylist"));
 const SharePlaylist = lazy(() => import("./pages/SharePlaylist"));
 const SongsBulkActions = lazy(() => import("./pages/SongsBulkActions")); 
-const Explore = lazy(() => import("./pages/Explore")); */
+const Explore = lazy(() => import("./pages/Explore")); 
+const TelegramAuth = lazy(() => import("./pages/TelegramAuth")); 
+*/
 
 function AppRoutes() {
   return (
     <Routes>
       <Route
-        element={<ProtectedRoutes><AppLayout /></ProtectedRoutes>}
+        element={
+          <ProtectedRoutes>
+            <AppLayout />
+          </ProtectedRoutes>
+        }
       >
         <Route path="/" element={<Dashboard />} />
         <Route path="/top-playlists" element={<TopLists />} />
@@ -77,7 +84,13 @@ function AppRoutes() {
         <Route path="/playlists/share/:id/:name" element={<SharePlaylist />} />
       </Route>
 
-      <Route  element={<AdminRoutes><AppLayout /></AdminRoutes>}>
+      <Route
+        element={
+          <AdminRoutes>
+            <AppLayout />
+          </AdminRoutes>
+        }
+      >
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/users/create" element={<CreateUser />} />
@@ -88,6 +101,7 @@ function AppRoutes() {
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/telegramauth" element={<TelegramAuth />} />
 
       <Route path="*" element={<Error error={{ status: 404 }} />} />
     </Routes>

@@ -6,7 +6,7 @@ import { Button } from "@/ui/button";
 
 import logo from "./../../assets/img/myplaylist-intro.svg";
 import { Link, useNavigate } from "react-router-dom";
-import TelegramAuth from "./TelegramAuth";
+import TelegramAuthButton from "./TelegramAuthButton";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 function LoginForm() {
@@ -55,7 +55,7 @@ function LoginForm() {
         onSubmit={handleSubmit(onSubmit)}
         className="m-auto flex w-full flex-col gap-y-3 rounded-lg bg-dark px-4 py-10"
       >
-        <TelegramAuth />
+        <TelegramAuthButton />
 
         <Input
           {...register("email", { required: "Email is required" })}

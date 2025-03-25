@@ -30,6 +30,13 @@ export const register = async ({ email, password, name, code }) => {
   return response;
 };
 
+export const telegramAuth = async (data) => {
+  await http.get("/sanctum/csrf-cookie");
+  
+  const response = await http.post(`/telegram-auth`, data);
+  return response.data;
+};
+
 export const getCurrentUser = async () => {
   const response = await http.get("/api/user");
   return response.data;
