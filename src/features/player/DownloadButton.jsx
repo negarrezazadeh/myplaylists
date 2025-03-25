@@ -12,12 +12,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/ui/dialog";
+import { useState } from "react";
 
 function DownloadButton({ song }) {
   const { user, canUploadDownload } = useAuth();
   const { play } = usePlayerController();
   const navigate = useNavigate();
+
+  const [openDownloadDialog, setOpenDownloadDialog] = useState(false);
+
   async function handleDownload() {
+    setOpenDownloadDialog(false);
+    
     if (!user) {
       toast.warning("Please login to download song");
       navigate("/login");
@@ -37,7 +43,7 @@ function DownloadButton({ song }) {
     play(song, true);
   }
   return (
-    <Dialog>
+    <Dialog open={openDownloadDialog} onOpenChange={setOpenDownloadDialog}>
       <DialogTrigger asChild>
         <span className="cursor-pointer">
           <DownloadSvg />
@@ -46,7 +52,7 @@ function DownloadButton({ song }) {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Download</DialogTitle>
+          <DialogTitle>Download From</DialogTitle>
         </DialogHeader>
         <div>
           <a
