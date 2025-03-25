@@ -80,6 +80,20 @@ export default defineConfig({
               },
             },
           },
+          {
+            urlPattern: /\.(?:riv)$/, 
+            handler: "CacheFirst", 
+            options: {
+              cacheName: "riv-cache", 
+              expiration: {
+                maxEntries: 10, 
+                maxAgeSeconds: 7 * 24 * 60 * 60, 
+              },
+              cacheableResponse: {
+                statuses: [0, 200], 
+              },
+            },
+          }
         ],
       },
     }),
