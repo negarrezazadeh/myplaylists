@@ -17,7 +17,7 @@ function PlaylistItem({ playlist, className="" }) {
         {playlist.total_songs ? (
           <small>Total song is {playlist.total_songs}</small>
         ) : (
-          <small>No song </small>
+          <small>No song, Click to add </small>
         )}
       </Link>
       {playlist.isFollowed && (

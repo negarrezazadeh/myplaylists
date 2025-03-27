@@ -59,38 +59,11 @@ function PlayerActionsContextProvider({ children }) {
         title: currentSong.name,
         artist: currentSong.artist || "unknown",
         album: currentSong.album || " | unknown",
-        artwork: [
-          {
-            src: currentSong.cover,
-            sizes: "96x96",
-            type: "image/png",
-          },
-          {
-            src: currentSong.cover,
-            sizes: "128x128",
-            type: "image/png",
-          },
-          {
-            src: currentSong.cover,
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: currentSong.cover,
-            sizes: "256x256",
-            type: "image/png",
-          },
-          {
-            src: currentSong.cover,
-            sizes: "384x384",
-            type: "image/png",
-          },
-          {
-            src: currentSong.cover,
-            sizes: "512x512",
-            type: "image/png",
-          },
-        ],
+        artwork: [96, 128, 192, 256, 384, 512].map((size) => ({
+          src: currentSong?.cover,
+          sizes: `${size}x${size}`,
+          type: "image/png",
+        })),
       });
 
       // Define actions for play, pause, next, prev
@@ -99,6 +72,10 @@ function PlayerActionsContextProvider({ children }) {
       navigator.mediaSession.setActionHandler("nexttrack", () => next(false));
       navigator.mediaSession.setActionHandler("previoustrack", prev);
     }
+
+    return () => {
+      navigator.mediaSession.metadata = null; // Cleanup on song change
+    };
   }, [continues, next, prev, stop, currentSong]);
 
   // Update document title

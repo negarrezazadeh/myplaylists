@@ -81,6 +81,7 @@ function PlayerControllerContextProvider({ children }) {
           });
         }
 
+        // song is from user device | uploaded from folder
         if (song.path.startsWith("blob:")) {
           newAudio = new Audio(song.path);
         }
@@ -102,7 +103,9 @@ function PlayerControllerContextProvider({ children }) {
         });
         setIsPlaying(true);
       } catch (error) {
-        toast.error("Failed to play song.");
+        toast.error(error.message,{
+          duration: Infinity
+        });
       }
     },
     [currentSong, songs, audio, dispatch],

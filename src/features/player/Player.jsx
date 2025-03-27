@@ -57,7 +57,7 @@ function Player({ song, tab }) {
             {songToPlay.lyrics && (
               <div
                 dir="auto"
-                className="hidden max-h-[200px] overflow-auto leading-loose xl:block"
+                className="whitespace-pre-line hidden max-h-[200px] overflow-auto leading-loose xl:block"
               >
                 {songToPlay.lyrics}
               </div>

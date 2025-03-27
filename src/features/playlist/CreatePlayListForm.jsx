@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 import { CirclePlusSVG } from "@/ui/Icons";
 
-function CreatePlayListForm() {
+function CreatePlayListForm({trigger}) {
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ function CreatePlayListForm() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger >
-        <CirclePlusSVG  size={30} />
+        {trigger ? trigger : <CirclePlusSVG size={30} />}
       </DialogTrigger>
 
       <DialogContent className="">
@@ -50,7 +50,7 @@ function CreatePlayListForm() {
           <DialogDescription>
             <Input
               {...register("name", { required: true })}
-              placeholder="playlist name"
+              placeholder="Playlist name"
               autoComplete="off"
             />
           </DialogDescription>
