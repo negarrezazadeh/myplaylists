@@ -19,7 +19,7 @@ function TelegramAuth() {
   useEffect(() => {
     const forwardRequest = async () => {
       try {
-        const response = await telegramAuth(queryObject);
+        await telegramAuth(queryObject);
         window.location.reload();
         
       } catch (error) {
