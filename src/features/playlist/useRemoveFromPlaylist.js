@@ -10,6 +10,7 @@ const useRemoveFromPlaylist = () => {
         mutationFn: ({playlistId, songId}) => removeFromPlaylistApi(playlistId, songId),
         onSuccess: (data) => {          
           queryClient.invalidateQueries({ queryKey: ["playlist"] });
+          toast.success(data.message)
         },
         onError: (err) => {
           toast.error(err.response.data.message);

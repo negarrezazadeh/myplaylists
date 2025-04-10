@@ -47,7 +47,6 @@ function SongActions({ song, trigger, playlist }) {
     if (isPendingPlaylistRemove) return;
     removeFromPlaylist({ playlistId: playlist.id, songId });
     setActionsAlertOpen(false);
-    toast.success("Removed from playlist");
   }
 
   return (
