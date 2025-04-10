@@ -31,13 +31,13 @@ function PlaylistSong({ song }) {
         src={song.cover || noCoverLogo}
         alt={song.name}
       />
-      <div onClick={handlePlayer} className="flex flex-col gap-y-1">
+      <div onClick={handlePlayer} className="flex flex-col gap-y-1 overflow-hidden">
         <span
-          className={`max-w-52 overflow-hidden overflow-ellipsis text-nowrap ${currentSong?.id === song.id ? "text-purple-500" : "text-white"}`}
+          className={`truncate ${currentSong?.id === song.id ? "text-purple-500" : "text-white"}`}
         >
           {song.name}
         </span>
-        <div className="min-h-4 max-w-52 overflow-hidden overflow-ellipsis text-nowrap text-sm text-slate-200">
+        <div className="min-h-4 truncate text-sm text-slate-200">
           <span>{song.artist}</span>
           {song.artist && song.album && <span> | </span>}
           <span>{song.album}</span>

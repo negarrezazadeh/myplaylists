@@ -46,18 +46,18 @@ function Player({ song, tab }) {
             </OneLineText>
           </div>
 
-          <div className="xl:col-span-8">
-            <h6 className="max-w-72 overflow-hidden overflow-ellipsis text-nowrap font-bold capitalize">
+          <div className="xl:col-span-8 xl:mt-3 overflow-hidden">
+            <h6 className="font-bold capitalize truncate">
               {songToPlay.name}
             </h6>
-            <span className="mb-14 mt-1 block h-6 max-w-72 overflow-hidden overflow-ellipsis text-nowrap text-slate-200 xl:mb-5">
+            <span className="mb-14 mt-1 block h-6 text-slate-200 xl:mb-5 truncate">
               {songToPlay.artist}
             </span>
 
             {songToPlay.lyrics && (
               <div
                 dir="auto"
-                className="whitespace-pre-line hidden max-h-[200px] overflow-auto leading-loose xl:block"
+                className="whitespace-pre-line hidden max-h-[185px] overflow-auto leading-loose xl:block"
               >
                 {songToPlay.lyrics}
               </div>

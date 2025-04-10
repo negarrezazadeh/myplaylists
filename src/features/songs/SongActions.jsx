@@ -68,12 +68,12 @@ function SongActions({ song, trigger, playlist }) {
                 />
                 <div className="flex flex-col items-start gap-y-1">
                   <OneLineText>
-                    <span className="max-w-64 text-sm font-bold">
+                    <span className="max-w-64 md:max-w-80 text-sm font-bold">
                       {song.name}
                     </span>
                   </OneLineText>
                   <OneLineText>
-                    <span className="max-w-64 text-sm">{song.artist}</span>
+                    <span className="max-w-64 md:max-w-80 text-sm">{song.artist}</span>
                   </OneLineText>
                 </div>
               </div>
