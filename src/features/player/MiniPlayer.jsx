@@ -12,7 +12,8 @@ function MiniPlayer() {
   const navigate = useNavigate();
 
   const { currentSong, isLoading } = usePlayer();
-  const { playOrContinues, stop, next, prev, isPlaying } = usePlayerController();
+  const { playOrContinues, stop, next, prev, isPlaying } =
+    usePlayerController();
   const isOffline = useNetworkStatus();
 
   const isSongFromCloud = !!currentSong?.id;
@@ -36,11 +37,11 @@ function MiniPlayer() {
 
   return (
     <div
-      className={`fixed bottom-[78px] left-0 xl:left-auto right-0 z-10 mx-auto xl:mx-0 flex w-full max-w-[450px] items-center overflow-hidden rounded-3xl bg-dark-50 py-1 pe-5 ps-1 xl:bottom-3 xl:right-3 xl:h-[78px] xl:max-w-[calc(100%-265px)] xl:rounded-lg xl:pe-10 xl:ps-4`}
+      onClick={handleClick}
+      className={`fixed cursor-pointer bottom-[78px] left-0 right-0 z-10 mx-auto flex w-full max-w-[450px] items-center overflow-hidden rounded-3xl bg-dark-50 py-1 pe-5 ps-1 xl:bottom-3 xl:left-auto xl:right-3 xl:mx-0 xl:h-[78px] xl:max-w-[calc(100%-265px)] xl:rounded-lg xl:pe-10 xl:ps-4`}
     >
       <div className={`flex w-full ${isLoading ? "bg-glass-loader" : ""}`}>
         <div
-          onClick={handleClick}
           className={`${isPlaying ? "" : "stop"} animate-spin-slow cursor-pointer overflow-hidden rounded-full bg-dark-200 shadow-[0_0_0_2px_#131319,_0_0_0_4px_#676789,_0_0_0_6px_#131319]`}
         >
           <img
@@ -53,10 +54,10 @@ function MiniPlayer() {
           onClick={handleClick}
           className="flex cursor-pointer flex-col ps-4"
         >
-          <span className="max-w-[164px] xl:max-w-[400px] overflow-hidden overflow-ellipsis text-nowrap text-sm font-bold capitalize">
+          <span className="max-w-[164px] overflow-hidden overflow-ellipsis text-nowrap text-sm font-bold capitalize xl:max-w-[400px]">
             {currentSong?.name}
           </span>
-          <span className="max-w-[164px] xl:max-w-[400px] overflow-hidden overflow-ellipsis text-nowrap text-xs">
+          <span className="max-w-[164px] overflow-hidden overflow-ellipsis text-nowrap text-xs xl:max-w-[400px]">
             {currentSong?.artist}
           </span>
         </div>
