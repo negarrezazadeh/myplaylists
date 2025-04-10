@@ -19,7 +19,7 @@ function Playlists() {
       </div>
     );
 
-  if (!playlists.length) {
+  if (!playlists.length && !followedPlaylists.length) {
     return (
       <div>
         <p className="mb-2">You don't have any playlist</p>
