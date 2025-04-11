@@ -37,27 +37,27 @@ function MiniPlayer() {
 
   return (
     <div
-      onClick={handleClick}
-      className={`fixed cursor-pointer bottom-[78px] left-0 right-0 z-10 mx-auto flex w-full max-w-[450px] items-center overflow-hidden rounded-3xl bg-dark-50 py-1 pe-5 ps-1 xl:bottom-3 xl:left-auto xl:right-3 xl:mx-0 xl:h-[78px] xl:max-w-[calc(100%-265px)] xl:rounded-lg xl:pe-10 xl:ps-4`}
+    className={`fixed bottom-[78px] left-0 right-0 z-10 mx-auto flex w-full max-w-[450px] items-center overflow-hidden rounded-3xl bg-dark-50 py-1 pe-5 ps-1 xl:bottom-3 xl:left-auto xl:right-3 xl:mx-0 xl:h-[78px] xl:max-w-[calc(100%-265px)] xl:rounded-lg xl:pe-10 xl:ps-4`}
     >
-      <div className={`flex w-full ${isLoading ? "bg-glass-loader" : ""}`}>
+      <div className={`flex w-full h-full items-center justify-center ${isLoading ? "bg-glass-loader" : ""}`}>
         <div
-          className={`${isPlaying ? "" : "stop"} animate-spin-slow cursor-pointer overflow-hidden rounded-full bg-dark-200 shadow-[0_0_0_2px_#131319,_0_0_0_4px_#676789,_0_0_0_6px_#131319]`}
+          className={`w-12 h-12 ${isPlaying ? "" : "stop"} animate-spin-slow cursor-pointer overflow-hidden rounded-full bg-dark-200 shadow-[0_0_0_2px_#131319,_0_0_0_4px_#676789,_0_0_0_6px_#131319]`}
+          onClick={handleClick}
         >
           <img
-            className="h-10 w-10 object-cover"
+            className="h-full w-full object-cover"
             src={currentSong.cover || noCoverLogo}
             alt={currentSong.name}
           />
         </div>
         <div
           onClick={handleClick}
-          className="flex cursor-pointer flex-col ps-4"
+          className="flex cursor-pointer flex-1 flex-col px-5 h-full justify-center overflow-hidden"
         >
-          <span className="max-w-[164px] overflow-hidden overflow-ellipsis text-nowrap text-sm font-bold capitalize xl:max-w-[400px]">
+          <span className="truncate text-sm font-bold capitalize">
             {currentSong?.name}
           </span>
-          <span className="max-w-[164px] overflow-hidden overflow-ellipsis text-nowrap text-xs xl:max-w-[400px]">
+          <span className="truncate text-xs">
             {currentSong?.artist}
           </span>
         </div>
