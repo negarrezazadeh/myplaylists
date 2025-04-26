@@ -1,4 +1,10 @@
-import { createContext, useContext, useMemo, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+} from "react";
 
 import { useQuery } from "@tanstack/react-query";
 import { getSongs } from "@/services/apiSongs";
@@ -8,12 +14,26 @@ import { getArtistSongs } from "@/services/apiArtist";
 
 const PlayerContext = createContext(null);
 
-const initialState = {
-  currentSong: null,
-  currentIndex: 0,
-  list: "songs",
-  audio: null,
-  // mode: JSON.parse(localStorage.getItem("mode")) || 0,
+const getInitialState = () => {
+  if (typeof window !== "undefined") {
+    const savedSong = localStorage.getItem("current-song");
+    const savedIndex = localStorage.getItem("current-index");
+    if (savedSong && savedIndex) {
+      return {
+        currentSong: JSON.parse(savedSong),
+        currentIndex: Number(savedIndex),
+        list: "songs",
+        audio: null,
+      };
+    }
+  }
+
+  return {
+    currentSong: null,
+    currentIndex: 0,
+    list: "songs",
+    audio: null,
+  };
 };
 
 function reducer(state, action) {
@@ -80,7 +100,14 @@ function reducer(state, action) {
 
 function PlayerContextProvider({ children }) {
   const [{ currentSong, currentIndex, audio, list, isLoading }, dispatch] =
-    useReducer(reducer, initialState);
+    useReducer(reducer, undefined, getInitialState);
+
+  useEffect(() => {
+    if (currentSong) {
+      localStorage.setItem("current-song", JSON.stringify(currentSong));
+      localStorage.setItem("current-index", String(currentIndex));
+    }
+  }, [currentSong, currentIndex]);
 
   // This data has already been fetched and cached
   const { data: songs = [] } = useQuery({
