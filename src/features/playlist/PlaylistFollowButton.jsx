@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePlaylistFollowToggle } from "./usePlaylistFollowToggle";
-import { useIsFollowing } from "./useIsFollowing";
 import { BookmarkOutlineSVG, BookmarkSVG } from "@/ui/Icons";
 
-
-function PlaylistFollowButton({ playlistId }) {
+function PlaylistFollowButton({ playlistId, isFollowed = false }) {
   const { toggleFollow, isPending } = usePlaylistFollowToggle();
-  const { isFollowing, isLoading } = useIsFollowing(playlistId);
 
-  const [follow, setIsFollow] = useState(false);
-
-  useEffect(() => {
-    setIsFollow(isFollowing);
-  }, [isFollowing]);
+  const [follow, setFollow] = useState(isFollowed);
 
   function handleToggle() {
-    if (isPending || isLoading) return;
+    if (isPending) return;
 
     toggleFollow(playlistId, {
-      onSuccess: (data) => setIsFollow((prev) => !prev),
+      onSuccess: (data) => setFollow((prev) => !prev),
     });
   }
 

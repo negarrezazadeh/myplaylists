@@ -11,10 +11,13 @@ import AppHeaderFull from "@/layouts/AppHeaderFull";
 import PlaylistFollowButton from "@/features/playlist/PlaylistFollowButton";
 import OneLineText from "@/ui/OneLineText";
 import Error from "@/ui/Error";
+import { useIsFollowed } from "@/features/playlist/useIsFollowed";
 
 function SharePlaylist() {
   const { id, name } = useParams();
   const { songs, isLoading, error } = usePlaylistSongs(id);
+  const { isFollowed, isLoading: isFollowedLoading } =
+    useIsFollowed(id);
 
   const { dispatch } = usePlayer();
   useEffect(() => {
@@ -25,7 +28,13 @@ function SharePlaylist() {
 
   return (
     <div>
-      <AppHeaderFull endEl={<PlaylistFollowButton playlistId={id} />}>
+      <AppHeaderFull
+        endEl={
+          isFollowedLoading === false ? (
+            <PlaylistFollowButton isFollowed={isFollowed} playlistId={id} />
+          ) : null
+        }
+      >
         <OneLineText className="block max-w-60">
           <span>{name}</span>
         </OneLineText>

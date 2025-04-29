@@ -20,10 +20,10 @@ function PlaylistItem({ playlist, className="" }) {
           <small>No song, Click to add </small>
         )}
       </Link>
-      {playlist.isFollowed && (
+      {playlist.isOwner && (
         <>
           <div className="absolute left-2 top-2 flex h-[35px] w-[35px] items-center justify-center rounded-[4px] bg-[#00000054]">
-            <PlaylistFollowButton playlistId={playlist.id} />
+            <PlaylistFollowButton isFollowed={playlist.isFollowed} playlistId={playlist.id} />
           </div>
 
           <div className="absolute bottom-16 left-2 flex rounded-[4px] bg-[#00000054] px-2 py-1 text-sm font-bold">

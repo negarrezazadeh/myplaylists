@@ -14,9 +14,11 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import { Button } from "@/ui/button";
 import useDeletePlaylist from "./useDeletePlaylist";
 import PlaylistFollowButton from "./PlaylistFollowButton";
+import { useIsFollowed } from "./useIsFollowed";
 
 function PlaylistActions({ playlist, trigger }) {
   const { deletePlaylist } = useDeletePlaylist();
+  const { isFollowed, isLoading } = useIsFollowed(playlist.id);
 
   const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
   const [actionsAlertOpen, setActionsAlertOpen] = useState(false);
@@ -59,9 +61,9 @@ function PlaylistActions({ playlist, trigger }) {
                   <span className="mt-2 text-xs font-bold">Share</span>
                 </div>
 
-                <div className="flex flex-col items-center">
+                <div className={`flex flex-col items-center ${isLoading ? "opacity-20" : ""}`}>
                   <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white p-1">
-                    <PlaylistFollowButton playlistId={playlist.id} />
+                    <PlaylistFollowButton isFollowed={isFollowed} playlistId={playlist.id} />
                   </div>
                   <span className="mt-2 text-xs font-bold">Follow</span>
                 </div>

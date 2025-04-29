@@ -6,7 +6,7 @@ export const toggleFollow = async (playlistId) => {
   return response.data;
 };
 
-export const isFollowing = async (playlistId) => {
+export const isFollowed = async (playlistId) => {
   const response = await http.get(`/api/playlists/${playlistId}/is-following`);
   return response.data;
 };

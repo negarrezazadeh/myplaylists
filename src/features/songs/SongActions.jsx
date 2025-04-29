@@ -12,7 +12,6 @@ import { Button } from "@/ui/button";
 import CreatePlayListForm from "../playlist/CreatePlayListForm";
 import { Skeleton } from "@/ui/skeleton";
 import useRemoveFromPlaylist from "../playlist/useRemoveFromPlaylist";
-import { toast } from "sonner";
 import { DeleteSVG, EditSVG, RemoveListSVG, ShareSVG } from "@/ui/Icons";
 import FavoriteButton from "../favorites/FavoriteButton";
 
