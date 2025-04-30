@@ -11,16 +11,17 @@ import { NextSVG, PauseSVG, PlaySVG, PrevSVG } from "@/ui/Icons";
 function MiniPlayer() {
   const navigate = useNavigate();
 
-  const { currentSong, isLoading } = usePlayer();
+  const { currentSong, lastSong, isLoading } = usePlayer();
   const { playOrContinues, stop, next, prev, isPlaying } =
     usePlayerController();
   const isOffline = useNetworkStatus();
 
-  const isSongFromCloud = !!currentSong?.id;
+  const songToPlay = lastSong || currentSong;
+  const isSongFromCloud = !!songToPlay?.id;
 
   function handleClick() {
     // only local songs doesn't have id
-    if (!currentSong.id) {
+    if (!songToPlay.id) {
       toast.warning("Songs detail isn't available for local songs");
       return;
     }
@@ -30,10 +31,10 @@ function MiniPlayer() {
       return;
     }
 
-    navigate(`/songs/${currentSong.id}`);
+    navigate(`/songs/${songToPlay.id}`);
   }
 
-  if (!currentSong) return null;
+  if (!songToPlay) return null;
 
   return (
     <div
@@ -46,8 +47,8 @@ function MiniPlayer() {
         >
           <img
             className="h-full w-full object-cover"
-            src={currentSong.cover || noCoverLogo}
-            alt={currentSong.name}
+            src={songToPlay.cover || noCoverLogo}
+            alt={songToPlay.name}
           />
         </div>
         <div
@@ -55,10 +56,10 @@ function MiniPlayer() {
           className="flex cursor-pointer flex-1 flex-col px-5 h-full justify-center overflow-hidden"
         >
           <span className="truncate text-sm font-bold capitalize">
-            {currentSong?.name}
+            {songToPlay?.name}
           </span>
           <span className="truncate text-xs">
-            {currentSong?.artist}
+            {songToPlay?.artist}
           </span>
         </div>
 
@@ -83,7 +84,7 @@ function MiniPlayer() {
               />
             ) : (
               <PlaySVG
-                onClick={() => playOrContinues(currentSong)}
+                onClick={() => playOrContinues(songToPlay)}
                 size={15}
                 className="relative z-10 translate-x-[1px] cursor-pointer text-white"
               />

@@ -102,6 +102,9 @@ function PlayerControllerContextProvider({ children }) {
           },
         });
         setIsPlaying(true);
+
+        // update last song that played by user
+        localStorage.setItem("last-song", JSON.stringify(songToPlay));
       } catch (error) {
         toast.error(error.message,{
           duration: Infinity

@@ -14,26 +14,12 @@ import { getArtistSongs } from "@/services/apiArtist";
 
 const PlayerContext = createContext(null);
 
-const getInitialState = () => {
-  if (typeof window !== "undefined") {
-    const savedSong = localStorage.getItem("current-song");
-    const savedIndex = localStorage.getItem("current-index");
-    if (savedSong && savedIndex) {
-      return {
-        currentSong: JSON.parse(savedSong),
-        currentIndex: Number(savedIndex),
-        list: "songs",
-        audio: null,
-      };
-    }
-  }
-
-  return {
-    currentSong: null,
-    currentIndex: 0,
-    list: "songs",
-    audio: null,
-  };
+const initialState = {
+  currentSong: null,
+  currentIndex: 0,
+  lastSong: JSON.parse(localStorage.getItem("last-song")) || null,
+  list: "songs",
+  audio: null,
 };
 
 function reducer(state, action) {
@@ -48,6 +34,7 @@ function reducer(state, action) {
         ...state,
         currentSong: action.payload.currentSong,
         currentIndex: action.payload.currentIndex,
+        lastSong: action.payload.currentSong,
         audio: action.payload.audio,
       };
 
@@ -99,15 +86,15 @@ function reducer(state, action) {
 }
 
 function PlayerContextProvider({ children }) {
-  const [{ currentSong, currentIndex, audio, list, isLoading }, dispatch] =
-    useReducer(reducer, undefined, getInitialState);
+  const [
+    { currentSong, currentIndex, lastSong, audio, list, isLoading },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    if (currentSong) {
-      localStorage.setItem("current-song", JSON.stringify(currentSong));
-      localStorage.setItem("current-index", String(currentIndex));
-    }
-  }, [currentSong, currentIndex]);
+/*   useEffect(() => {
+    if (currentSong)
+      localStorage.setItem("last-song", JSON.stringify(currentSong));
+  }, [currentSong]); */
 
   // This data has already been fetched and cached
   const { data: songs = [] } = useQuery({
@@ -146,8 +133,9 @@ function PlayerContextProvider({ children }) {
       isLoading,
       currentIndex,
       songs,
+      lastSong,
     }),
-    [audio, currentSong, list, isLoading, currentIndex, songs],
+    [audio, currentSong, list, isLoading, currentIndex, songs, lastSong],
   );
 
   return (
