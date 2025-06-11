@@ -1,7 +1,7 @@
 import { Input } from "@/ui/input";
 import { useForm } from "react-hook-form";
 import { Button } from "@/ui/button";
-import { useUpdateProfile } from "@/features/profile/useUpdateProfile";
+import { useUpdateProfile } from "@/features/user/profile/useUpdateProfile";
 
 function EditProfileForm({ user }) {
   const { register, handleSubmit } = useForm({ defaultValues: user || {} });
