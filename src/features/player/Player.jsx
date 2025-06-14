@@ -10,6 +10,7 @@ import DownloadButton from "./DownloadButton";
 import { NextSVG, PrevSVG } from "@/ui/Icons";
 import PlayPauseButton from "./PlayPauseButton";
 import OneLineText from "@/ui/OneLineText";
+import { Link } from "react-router-dom";
 
 function Player({ song, tab }) {
   const { currentSong, dispatch, isLoading } = usePlayer();
@@ -41,23 +42,23 @@ function Player({ song, tab }) {
               <DownloadButton song={songToPlay} />
             </div>
 
-            <OneLineText className="max-w-28 absolute top-6 left-6 rounded-lg bg-dark/50 p-2 text-xs font-bold">
-              <span className="capitalize">{songToPlay.owner}</span>
+            <OneLineText className="absolute left-6 top-6 max-w-28 rounded-lg bg-dark/50 p-2 text-xs font-bold">
+              <Link to={`/profile/${songToPlay.owner_id}`}>
+                <p className="capitalize">{songToPlay.owner}</p>
+              </Link>
             </OneLineText>
           </div>
 
-          <div className="xl:col-span-8 xl:mt-3 overflow-hidden">
-            <h6 className="font-bold capitalize truncate">
-              {songToPlay.name}
-            </h6>
-            <span className="mb-14 mt-1 block h-6 text-slate-200 xl:mb-5 truncate">
+          <div className="overflow-hidden xl:col-span-8 xl:mt-3">
+            <h6 className="truncate font-bold capitalize">{songToPlay.name}</h6>
+            <span className="mb-14 mt-1 block h-6 truncate text-slate-200 xl:mb-5">
               {songToPlay.artist}
             </span>
 
             {songToPlay.lyrics && (
               <div
                 dir="auto"
-                className="whitespace-pre-line hidden max-h-[185px] overflow-auto leading-loose xl:block"
+                className="hidden max-h-[185px] overflow-auto whitespace-pre-line leading-loose xl:block"
               >
                 {songToPlay.lyrics}
               </div>
