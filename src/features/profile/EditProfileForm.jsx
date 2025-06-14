@@ -2,8 +2,20 @@ import { Input } from "@/ui/input";
 import { useForm } from "react-hook-form";
 import { Button } from "@/ui/button";
 import { useUpdateProfile } from "@/features/profile/useUpdateProfile";
+import { useState } from "react";
+import UploadInput from "@/ui/UploadInput";
+import { useUploadAvatarCover } from "./useUploadAvatarCover";
+import { useUploadBannerCover } from "./useUploadBannerCover";
 
 function EditProfileForm({ user }) {
+  const [avatarCoverProgress, setAvatarCoverProgress] = useState(0);
+  const [bannerCoverProgress, setBannerCoverProgress] = useState(0);
+
+  const { isPending: isPendingAvatarCover, updateAvatarCover } =
+    useUploadAvatarCover();
+  const { isPending: isPendingBannerCover, updateBannerCover } =
+    useUploadBannerCover();
+
   const { register, handleSubmit } = useForm({ defaultValues: user || {} });
 
   const { updateUser, isPending } = useUpdateProfile();
@@ -12,6 +24,23 @@ function EditProfileForm({ user }) {
 
     updateUser({ id: user.id, data });
   }
+
+  async function handleSelectFile(e, uploadMethod, setProgress) {
+    const files = e.target.files;
+    for (const key in files) {
+      if (files.hasOwnProperty(key)) {
+        const file = files[key];
+        uploadMethod(
+          { file, setProgress },
+          {
+            onError: () => setProgress(0),
+            onSuccess: () => setProgress(100),
+          },
+        );
+      }
+    }
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-5">
       <Input
@@ -30,6 +59,27 @@ function EditProfileForm({ user }) {
         placeholder="nickname"
         {...register("nickname")}
       />
+      <Input autoComplete="off" placeholder="bio" {...register("bio")} />
+
+      <div className="flex gap-5">
+        <UploadInput
+          label={isPendingAvatarCover ? "Uploading..." : "Avatar Cover"}
+          progress={avatarCoverProgress}
+          onSelectFile={(e) =>
+            handleSelectFile(e, updateAvatarCover, setAvatarCoverProgress)
+          }
+          disabled={isPendingAvatarCover}
+        />
+
+        <UploadInput
+          label={isPendingBannerCover ? "Uploading..." : "Banner Cover"}
+          progress={bannerCoverProgress}
+          onSelectFile={(e) =>
+            handleSelectFile(e, updateBannerCover, setBannerCoverProgress)
+          }
+          disabled={isPendingBannerCover}
+        />
+      </div>
 
       <div>
         <p className="mb-2 ps-1 text-xs text-dark-50">

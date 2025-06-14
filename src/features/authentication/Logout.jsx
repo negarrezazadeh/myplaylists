@@ -12,7 +12,7 @@ import {
 import { LogoutSvg } from "@/ui/Icons";
 import { useLogout } from "./useLogout";
 
-function Logout({ className = "", icoSize = "35"}) {
+function Logout({ className = "", icoSize = "35" }) {
   const { logout, isPending } = useLogout();
 
   const [logoutAlertOpen, setLogoutAlertOpen] = useState(false);
@@ -29,11 +29,8 @@ function Logout({ className = "", icoSize = "35"}) {
   }
   return (
     <>
-      <div
-        onClick={() => setLogoutAlertOpen(true)}
-        className={`${className}`}
-      >
-        <button >
+      <div onClick={() => setLogoutAlertOpen(true)} className={`${className}`}>
+        <button>
           <LogoutSvg size={icoSize} />
         </button>
       </div>

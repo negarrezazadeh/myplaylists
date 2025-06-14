@@ -18,7 +18,7 @@ import Playlist from "./pages/Playlist";
 import EditPlaylist from "./pages/EditPlaylist";
 import SharePlaylist from "./pages/SharePlaylist";
 import SongsBulkActions from "./pages/SongsBulkActions";
-import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 
 import Error from "./ui/Error";
 import Explore from "./pages/Explore";
@@ -33,6 +33,7 @@ import UpdateUser from "./pages/admin/UpdateUser";
 import AdminArtist from "./pages/admin/artist/Artists";
 import UpdateArtist from "./pages/admin/artist/UpdateArtist";
 import TelegramAuth from "./pages/TelegramAuth";
+import Profile from "./pages/Profile";
 
 /* 
 const TopLists = lazy(() => import("./pages/TopLists"));
@@ -66,7 +67,7 @@ function AppRoutes() {
         }
       >
         <Route path="/" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/top-playlists" element={<TopLists />} />
         <Route path="/top-songs" element={<TopSongs />} />
         <Route path="/songs/upload" element={<UploadSong />} />
@@ -80,6 +81,8 @@ function AppRoutes() {
         <Route path="songs-bulk-actions" element={<SongsBulkActions />} />
         <Route path="/artists/:artistName" element={<ArtistSongs />} />
         <Route path="/songs/:id" element={<Song />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:userId" element={<Profile />} />
       </Route>
 
       <Route element={<AppLayout />}>

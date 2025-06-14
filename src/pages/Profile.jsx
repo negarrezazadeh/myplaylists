@@ -1,20 +1,31 @@
 import { useAuth } from "@/context/AuthContext";
-import Logout from "@/features/authentication/Logout";
-import EditProfileForm from "@/features/profile/EditProfileForm";
+import ProfileInfo from "@/features/profile/ProfileInfo";
 import AppContentBox from "@/layouts/AppContentBox";
 import AppHeaderTitle from "@/layouts/AppHeaderTitle";
 import RightMotion from "@/layouts/RightMotion";
+import { SettingSVG } from "@/ui/Icons";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 
-function Profile() {
-  const { user } = useAuth();
+export default function Profile() {
+  const { userId: userIdParam } = useParams();
+  const { user, isLoading } = useAuth();
+
+  const userId = userIdParam || user.id;
+
+  const editPageLink =
+    !isLoading && user.id === +userId ? (
+      <Link to={`/edit-profile`}>
+        <SettingSVG size={30} />
+      </Link>
+    ) : null;
+
   return (
     <RightMotion>
-      <AppHeaderTitle endEl={<Logout icoSize="30" text="" />}>Profile</AppHeaderTitle>
+      <AppHeaderTitle endEl={editPageLink}>Profile</AppHeaderTitle>
       <AppContentBox>
-        <EditProfileForm user={user} />
+        <ProfileInfo userId={userId} />
       </AppContentBox>
     </RightMotion>
   );
 }
-
-export default Profile;
