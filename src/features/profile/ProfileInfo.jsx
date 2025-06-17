@@ -5,6 +5,7 @@ import PlaylistItem from "../playlist/PlaylistItem";
 import { Link } from "react-router-dom";
 import myplaylistsCover from "../../assets/img/no-cover-logo.png";
 import defaultBanner from "../../assets/img/defaultBanner.jpeg";
+import SongCard from "../songs/SongCard";
 
 export default function ProfileInfo({ userId }) {
   const { isLoading, profile } = useGetUserProfile(userId);
@@ -40,7 +41,17 @@ export default function ProfileInfo({ userId }) {
           </p>
         </div>
       </div>
-      <div className="mt-8 grid">
+
+      <div className="my-10">
+        <h4 className="pb-5 text-2xl font-bold">Last Songs</h4>
+        <div className="mp-carousel -me-5 flex gap-x-3 overflow-auto pb-1 pe-5">
+          {profile.latest_songs.map((song) => (
+            <SongCard key={song.id} song={song} />
+          ))}
+        </div>
+      </div>
+
+      <div className="grid">
         <h4 className="pb-5 text-2xl font-bold">Playlists</h4>
         <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
           {profile.latest_playlists.map((playlist) => (
