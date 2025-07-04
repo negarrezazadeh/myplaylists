@@ -15,7 +15,7 @@ function Song() {
   const { id } = useParams();
 
   const { song, isLoading, error } = useSong(id);
-  const { currentSong} = usePlayer();
+  const { currentSong } = usePlayer();
 
   const [tab, setTab] = useState("song");
 
@@ -29,7 +29,7 @@ function Song() {
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="margin-auto fixed right-0 top-0 z-50 h-[calc(100%-68px)] w-full max-w-[450px] bg-dark p-5 sm:mx-[calc((100%-450px)/2)] xl:mt-3 xl:me-3 xl:ms-0 xl:h-[calc(100%-114px)] xl:max-w-[calc(100%-264px)] xl:rounded-lg"
+      className="margin-auto fixed right-0 top-0 z-50 h-[calc(100%-68px)] w-full max-w-[450px] bg-dark p-5 sm:mx-[calc((100%-450px)/2)] xl:me-3 xl:ms-0 xl:mt-3 xl:h-[calc(100%-114px)] xl:max-w-[calc(100%-264px)] xl:rounded-lg"
     >
       <div className="mb-5 flex justify-between">
         <CircleDownSVG
