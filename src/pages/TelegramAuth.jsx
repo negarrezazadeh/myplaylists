@@ -3,12 +3,13 @@ import { useAuth } from "@/context/AuthContext";
 import { telegramAuth } from "@/services/apiAuth";
 import FullPageSpinner from "@/ui/FullPageSpinner";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 
 import AppContainer from "../layouts/AppContainer";
 
 function TelegramAuth() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const { isAuthenticated } = useAuth();
@@ -19,9 +20,16 @@ function TelegramAuth() {
   useEffect(() => {
     const forwardRequest = async () => {
       try {
+        // preventing error if telegram auth_link didn't pass data
+        if (!queryObject.hash) {
+          navigate("/login", { replace: true });
+          toast.error(
+            "Your account not supporting telegram login, Please try another way.",
+          );
+          return;
+        }
         await telegramAuth(queryObject);
         window.location.reload();
-        
       } catch (error) {
         toast.error(error.response.data.message);
       } finally {
@@ -29,7 +37,7 @@ function TelegramAuth() {
       }
     };
     forwardRequest();
-  }, [queryObject]);
+  }, [queryObject, navigate]);
 
   useEffect(() => {
     if (isAuthenticated) {

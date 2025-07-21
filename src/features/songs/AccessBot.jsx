@@ -34,7 +34,7 @@ function AccessBot() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <a href="https://t.me/Myplaylists_ir_Bot?start=askAccess">
+        <a href="https://t.me/Myplaylists_ir_Bot">
           Open TelegramBot
         </a>
       </Button>
