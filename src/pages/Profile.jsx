@@ -1,5 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
-import ProfileInfo from "@/features/profile/ProfileInfo";
+import UserProfile from "@/features/profile/Profile";
 import AppContentBox from "@/layouts/AppContentBox";
 import AppHeaderTitle from "@/layouts/AppHeaderTitle";
 import RightMotion from "@/layouts/RightMotion";
@@ -24,7 +24,7 @@ export default function Profile() {
     <RightMotion>
       <AppHeaderTitle endEl={editPageLink}>Profile</AppHeaderTitle>
       <AppContentBox>
-        <ProfileInfo userId={userId} />
+        <UserProfile userId={userId} />
       </AppContentBox>
     </RightMotion>
   );
