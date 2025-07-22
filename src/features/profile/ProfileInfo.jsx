@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import Subscribe from "../subscription/Subscribe";
 import useGetSubscribers from "../subscription/useGetSubscribers";
 import useGetSubscriptions from "../subscription/useGetSubscriptions";
+import { Link } from "react-router-dom";
 
 export default function ProfileInfo({ userId }) {
   const { isLoading, profile } = useGetUserProfile(userId);
@@ -28,13 +29,13 @@ export default function ProfileInfo({ userId }) {
       </div>
       {user.id === userId && (
         <div className="flex items-center gap-x-5">
-          <p className="text-sm text-purple-500">
-            {subscriptions.length} following
-          </p>
+          <Link to={"/subscriptions"} className="text-sm text-purple-500">
+            {subscriptions.length} subscriptions
+          </Link>
           <span className="text-gray-300">|</span>
-          <p className="text-sm text-purple-500">
-            {subscribers.length} followers
-          </p>
+          <Link to={"/subscribers"} className="text-sm text-purple-500">
+            {subscribers.length} subscribers
+          </Link>
         </div>
       )}
     </div>

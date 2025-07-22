@@ -14,7 +14,7 @@ export default function Subscribe({ userId }) {
         disabled={isPending}
         className="rounded-3xl border border-gray-400 px-3 py-1 text-xs text-gray-200 lg:text-sm"
       >
-        Subscribe
+        {subscribe ? "Subscribed" : "subscribe"}
       </button>
     </div>
   );

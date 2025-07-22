@@ -2,8 +2,7 @@ import React from "react";
 import useGetUserProfile from "./useGetUserProfile";
 import FullPageSpinner from "@/ui/FullPageSpinner";
 import PlaylistItem from "../playlist/PlaylistItem";
-import { Link } from "react-router-dom";
-import myplaylistsCover from "../../assets/img/no-cover-logo.png";
+import myPlaylistsCover from "../../assets/img/no-cover-logo.png";
 import defaultBanner from "../../assets/img/defaultBanner.jpeg";
 import SongCard from "../songs/SongCard";
 import ProfileInfo from "./ProfileInfo";
@@ -28,7 +27,7 @@ export default function Profile({ userId }) {
       {/* user section */}
       <div className="relative left-5 -mt-[115px] flex w-full items-center gap-x-3 md:-mt-[130px]">
         <img
-          src={!profile.avatar ? myplaylistsCover : profile.avatar}
+          src={!profile.avatar ? myPlaylistsCover : profile.avatar}
           alt="user"
           className="h-24 w-24 rounded-full ring-2 ring-gray-600 md:h-32 md:w-32"
         />
