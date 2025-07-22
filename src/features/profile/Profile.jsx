@@ -23,9 +23,6 @@ export default function Profile({ userId }) {
           className="h-full w-full rounded-b-2xl object-cover"
         />
         <div className="absolute inset-0 rounded-b-2xl bg-black/50 lg:rounded-br-none" />
-        <Link to="/edit-profile" className="absolute inset-0">
-          Add Banner
-        </Link>
       </div>
 
       {/* user section */}
@@ -37,7 +34,7 @@ export default function Profile({ userId }) {
         />
       </div>
 
-      <div className="border-b-2 border-black px-[-10px]">
+      <div className="border-b-2 border-black">
         <ProfileInfo userId={userId} />
       </div>
 
