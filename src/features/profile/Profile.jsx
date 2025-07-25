@@ -7,7 +7,7 @@ import defaultBanner from "../../assets/img/defaultBanner.jpeg";
 import SongCard from "../songs/SongCard";
 import ProfileInfo from "./ProfileInfo";
 
-export default function Profile({ userId }) {
+export default function Profile({ userId, userIdParam }) {
   const { isLoading, profile } = useGetUserProfile(userId);
 
   if (isLoading) return <FullPageSpinner />;
@@ -17,7 +17,7 @@ export default function Profile({ userId }) {
       {/* banner section */}
       <div className="relative -top-10 right-0 h-40 w-full md:h-56">
         <img
-          src={!profile.banner ? defaultBanner : profile.banner}
+          src={profile.banner ? profile.banner : defaultBanner}
           alt="user banner"
           className="h-full w-full rounded-b-2xl object-cover"
         />
@@ -27,14 +27,14 @@ export default function Profile({ userId }) {
       {/* user section */}
       <div className="relative left-5 -mt-[115px] flex w-full items-center gap-x-3 md:-mt-[130px]">
         <img
-          src={!profile.avatar ? myPlaylistsCover : profile.avatar}
+          src={profile.avatar ? profile.avatar : myPlaylistsCover}
           alt="user"
           className="h-24 w-24 rounded-full ring-2 ring-gray-600 md:h-32 md:w-32"
         />
       </div>
 
       <div className="border-b-2 border-black">
-        <ProfileInfo userId={userId} />
+        <ProfileInfo userId={userId} userIdParam={userIdParam} />
       </div>
 
       <div className="my-10">

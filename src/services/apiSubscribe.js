@@ -5,6 +5,11 @@ export const subscribe = async (id) => {
   return response.data;
 };
 
+export const isSubscribe = async (id) => {
+  const response = await http.get(`/api/is-subscribe/${id}`);
+  return response.data;
+};
+
 export const subscriptions = async () => {
   const response = await http.get(`/api/subscriptions`);
   return response.data;

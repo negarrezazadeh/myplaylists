@@ -24,7 +24,7 @@ export default function Profile() {
     <RightMotion>
       <AppHeaderTitle endEl={editPageLink}>Profile</AppHeaderTitle>
       <AppContentBox>
-        <UserProfile userId={userId} />
+        <UserProfile userId={userId} userIdParam={+userIdParam} />
       </AppContentBox>
     </RightMotion>
   );

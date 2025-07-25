@@ -6,7 +6,7 @@ import useGetSubscribers from "../subscription/useGetSubscribers";
 import useGetSubscriptions from "../subscription/useGetSubscriptions";
 import { Link } from "react-router-dom";
 
-export default function ProfileInfo({ userId }) {
+export default function ProfileInfo({ userId, userIdParam }) {
   const { isLoading, profile } = useGetUserProfile(userId);
   const { user } = useAuth();
 
@@ -20,11 +20,13 @@ export default function ProfileInfo({ userId }) {
 
   return (
     <div className="relative p-5">
-      {user.id !== userId && <Subscribe userId={userId} />}
+      {user.id !== userId && (
+        <Subscribe userId={userId} userIdParam={userIdParam} />
+      )}
       <div className="mb-3 flex w-full flex-col gap-y-1">
         <h4 className="text-2xl font-bold capitalize">{profile.name}</h4>
         <p className="line-clamp-3 break-words text-sm font-semibold text-gray-300 lg:w-full">
-          {!profile.bio ? "" : profile.bio}
+          {profile.bio ? profile.bio : ""}
         </p>
       </div>
       {user.id === userId && (

@@ -6,7 +6,7 @@ import RightMotion from "@/layouts/RightMotion";
 export default function Subscriptions() {
   return (
     <RightMotion>
-      <AppHeaderTitle>Subscribers</AppHeaderTitle>
+      <AppHeaderTitle>Subscriptions</AppHeaderTitle>
       <AppContentBox>
         <SubscriptionsList />
       </AppContentBox>

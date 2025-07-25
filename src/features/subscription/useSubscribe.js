@@ -1,13 +1,16 @@
 import { subscribe as subscribeApi } from "@/services/apiSubscribe";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const useSubscribe = () => {
+  const queryClient = useQueryClient();
   const { mutate: subscribe, isPending } = useMutation({
     mutationKey: ["subscribe-user"],
     mutationFn: (id) => subscribeApi(id),
     onSuccess: () => {
-      toast.success("You have successfully subscribed!");
+      queryClient.invalidateQueries({ queryKey: ["subscriptions"] });
+      queryClient.invalidateQueries({ queryKey: ["subscribers"] });
+      queryClient.invalidateQueries({ queryKey: ["isSubscribe"] });
     },
     onError: (error) => {
       toast.error("Subscription failed. Please try again later.");
