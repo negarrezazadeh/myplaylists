@@ -34,6 +34,8 @@ import AdminArtist from "./pages/admin/artist/Artists";
 import UpdateArtist from "./pages/admin/artist/UpdateArtist";
 import TelegramAuth from "./pages/TelegramAuth";
 import Profile from "./pages/Profile";
+import Subscribers from "./pages/Subscribers";
+import Subscriptions from "./pages/Subscriptions";
 
 /* 
 const TopLists = lazy(() => import("./pages/TopLists"));
@@ -83,6 +85,8 @@ function AppRoutes() {
         <Route path="/songs/:id" element={<Song />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/:userId" element={<Profile />} />
+        <Route path="/subscribers" element={<Subscribers />} />
+        <Route path="/subscriptions" element={<Subscriptions />} />
       </Route>
 
       <Route element={<AppLayout />}>

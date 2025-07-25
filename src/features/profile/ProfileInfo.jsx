@@ -1,66 +1,47 @@
-import React from "react";
-import useGetUserProfile from "./useGetUserProfile";
 import FullPageSpinner from "@/ui/FullPageSpinner";
-import PlaylistItem from "../playlist/PlaylistItem";
+import useGetUserProfile from "./useGetUserProfile";
+import { useAuth } from "@/context/AuthContext";
+import Subscribe from "../subscription/Subscribe";
+import useGetSubscribers from "../subscription/useGetSubscribers";
+import useGetSubscriptions from "../subscription/useGetSubscriptions";
 import { Link } from "react-router-dom";
-import myplaylistsCover from "../../assets/img/no-cover-logo.png";
-import defaultBanner from "../../assets/img/defaultBanner.jpeg";
-import SongCard from "../songs/SongCard";
 
-export default function ProfileInfo({ userId }) {
+export default function ProfileInfo({ userId, userIdParam }) {
   const { isLoading, profile } = useGetUserProfile(userId);
+  const { user } = useAuth();
 
-  if (isLoading) return <FullPageSpinner />;
+  const { subscribers = [], isLoading: isLoadingGetSubscribers } =
+    useGetSubscribers();
+  const { subscriptions = [], isLoading: isLoadingGetSubscriptions } =
+    useGetSubscriptions();
+
+  if (isLoading && isLoadingGetSubscribers && isLoadingGetSubscriptions)
+    return <FullPageSpinner />;
 
   return (
-    <div>
-      {/* banner section */}
-      <div className="relative -top-10 right-0 h-44 w-full md:h-64">
-        <img
-          src={!profile.banner ? defaultBanner : profile.banner}
-          alt="user banner"
-          className="h-full w-full rounded-b-2xl object-cover"
-        />
-        <div className="absolute inset-0 rounded-b-2xl bg-black/50 lg:rounded-br-none" />
-        <Link to="/edit-profile" className="absolute inset-0">
-          Add Banner
-        </Link>
-      </div>
-
-      {/* user section */}
-      <div className="relative left-5 -mt-[115px] flex w-full items-center gap-x-3 md:-mt-[130px]">
-        <img
-          src={!profile.avatar ? myplaylistsCover : profile.avatar}
-          alt="user"
-          className="h-24 w-24 rounded-full ring-2 ring-gray-600 md:h-32 md:w-32"
-        />
-        <div className="mb-3 flex w-52 flex-col gap-y-1 lg:mb-7 lg:w-full">
-          <h4 className="text-xl font-bold capitalize lg:text-2xl">
-            {profile.name}
-          </h4>
-          <p className="line-clamp-2 text-xs font-semibold text-gray-300 lg:w-full lg:text-sm">
-            {!profile.bio ? "" : profile.bio}
-          </p>
+    <div className="relative p-5">
+      {user.id !== userId && (
+        <div className="absolute right-2 top-0 lg:right-5">
+          <Subscribe userId={userId} userIdParam={userIdParam} />
         </div>
+      )}
+      <div className="mb-3 flex w-full flex-col gap-y-1">
+        <h4 className="text-2xl font-bold capitalize">{profile.name}</h4>
+        <p className="line-clamp-3 break-words text-sm font-semibold text-gray-300 lg:w-full">
+          {profile.bio ? profile.bio : ""}
+        </p>
       </div>
-
-      <div className="my-10">
-        <h4 className="pb-5 text-2xl font-bold">Latest Songs</h4>
-        <div className="mp-carousel -me-5 flex gap-x-3 overflow-auto pb-1 pe-5">
-          {profile.latest_songs.map((song) => (
-            <SongCard key={song.id} song={song} />
-          ))}
+      {user.id === userId && (
+        <div className="flex items-center gap-x-5">
+          <Link to={"/subscriptions"} className="text-sm text-purple-500">
+            {subscriptions.length} subscriptions
+          </Link>
+          <span className="text-gray-300">|</span>
+          <Link to={"/subscribers"} className="text-sm text-purple-500">
+            {subscribers.length} subscribers
+          </Link>
         </div>
-      </div>
-
-      <div className="grid">
-        <h4 className="pb-5 text-2xl font-bold">Playlists</h4>
-        <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
-          {profile.latest_playlists.map((playlist) => (
-            <PlaylistItem key={playlist.id} playlist={playlist} />
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 }
