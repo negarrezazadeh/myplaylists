@@ -3,7 +3,6 @@ import { AvatarSVG, CircleLeftSVG, UploadSVG } from "@/ui/Icons";
 import { Input } from "@/ui/input";
 import { MdOutlineShield } from "react-icons/md";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import headphone from "@/assets/img/headphone.png";
 
 function AppHeader() {
   const location = useLocation();

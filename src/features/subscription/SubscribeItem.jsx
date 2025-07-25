@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import myPlaylistsCover from "../../assets/img/no-cover-logo.png";
 
 export default function SubscribeItem({ sub }) {
   return (
-    <div className="flex w-full items-center gap-x-3 border-b border-black py-4">
+    <Link to={`/profile/${sub.id}`} className="flex w-full items-center gap-x-3 border-b border-black py-4">
       <img
         src={sub.avatar ? sub.avatar : myPlaylistsCover}
         alt="user-avatar"
@@ -14,6 +15,6 @@ export default function SubscribeItem({ sub }) {
           {sub.bio}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
