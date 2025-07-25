@@ -21,7 +21,9 @@ export default function ProfileInfo({ userId, userIdParam }) {
   return (
     <div className="relative p-5">
       {user.id !== userId && (
-        <Subscribe userId={userId} userIdParam={userIdParam} />
+        <div className="absolute right-2 top-0 lg:right-5">
+          <Subscribe userId={userId} userIdParam={userIdParam} />
+        </div>
       )}
       <div className="mb-3 flex w-full flex-col gap-y-1">
         <h4 className="text-2xl font-bold capitalize">{profile.name}</h4>

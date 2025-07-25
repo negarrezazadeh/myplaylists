@@ -1,6 +1,7 @@
 import { useSubscribe } from "./useSubscribe";
 import useIsSubscribe from "./useIsSubscribe";
 import FullPageSpinner from "@/ui/FullPageSpinner";
+import { Button } from "@/ui/button";
 
 export default function Subscribe({ userId, userIdParam }) {
   const { subscribe, isPending } = useSubscribe();
@@ -13,14 +14,16 @@ export default function Subscribe({ userId, userIdParam }) {
   };
 
   return (
-    <div className="absolute right-2 top-0 lg:right-5">
-      <button
-        onClick={handleSubscribe}
-        disabled={isPending}
-        className="rounded-3xl border border-gray-400 px-3 py-1 text-xs text-gray-200 lg:text-sm"
-      >
-        {isSubscribe ? "Unsubscribe" : "Subscribe"}
-      </button>
-    </div>
+    <Button
+      onClick={handleSubscribe}
+      disabled={isPending}
+      className={
+        isSubscribe
+          ? "bg-gray-700 text-white hover:bg-gray-600"
+          : "bg-purple-500 text-white hover:bg-purple-400"
+      }
+    >
+      {isSubscribe ? "Unsubscribe" : "Subscribe"}
+    </Button>
   );
 }
