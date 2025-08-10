@@ -6,6 +6,7 @@ import { useState } from "react";
 import UploadInput from "@/ui/UploadInput";
 import { useUploadAvatarCover } from "./useUploadAvatarCover";
 import { useUploadBannerCover } from "./useUploadBannerCover";
+import { PremiumSVG } from "@/ui/Icons";
 
 function EditProfileForm({ user }) {
   const [avatarCoverProgress, setAvatarCoverProgress] = useState(0);
@@ -92,6 +93,28 @@ function EditProfileForm({ user }) {
             className="rounded-l-none"
             placeholder="telegram username"
             {...register("telegram_username")}
+          />
+        </div>
+      </div>
+
+      <div>
+        <div className="mb-2 flex items-center gap-x-2">
+          <i className="text-purple-500">
+            <PremiumSVG size={35} />
+          </i>
+          <span>Only available for premium users</span>
+        </div>
+        <p className="mb-2 ps-1 text-xs text-dark-50">
+          Send song directly to your telegram channel
+        </p>
+        <div className={`flex items-center justify-center ${user.is_premium ? '': 'opacity-50'}`}>
+          <span className="rounded-l-lg bg-dark-900 px-2 py-1">@</span>
+          <Input
+            autoComplete="off"
+            className="rounded-l-none"
+            placeholder="channel name or ID"
+            disabled={!user.is_premium}
+            {...register("telegram_channel")}
           />
         </div>
       </div>

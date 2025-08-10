@@ -5,7 +5,8 @@ import { Button } from "@/ui/button";
 import { useUpdateUser } from "./useUpdateUser";
 
 function CreateUserForm({ user }) {
-  const { register, handleSubmit } = useForm({ defaultValues: user || {} });
+  const {avatar, banner, ...userDefault} = user || {} ;
+  const { register, handleSubmit } = useForm({ defaultValues: userDefault || {} });
   const { createUser, isPending } = useCreateUser();
   const { updateUser, isPending: isPendingUpdate } = useUpdateUser();
   function onSubmit(data) {
@@ -24,16 +25,12 @@ function CreateUserForm({ user }) {
         placeholder="name"
         {...register("name", { required: true })}
       />
-            <Input
+      <Input
         autocomplete="off"
         placeholder="nickname"
         {...register("nickname")}
       />
-      <Input
-        autocomplete="off"
-        placeholder="email"
-        {...register("email")}
-      />
+      <Input autocomplete="off" placeholder="email" {...register("email")} />
       {!user && (
         <Input
           autocomplete="off"
@@ -47,11 +44,15 @@ function CreateUserForm({ user }) {
         placeholder="telegram username"
         {...register("telegram_username")}
       />
-
       <Input
         autocomplete="off"
         placeholder="telegram id"
         {...register("telegram_id")}
+      />
+      <Input
+        autocomplete="off"
+        placeholder="telegram channel"
+        {...register("telegram_channel")}
       />
 
       <Button disabled={isPending || isPendingUpdate}>

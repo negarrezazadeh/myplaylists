@@ -78,3 +78,9 @@ export const getLatestSongs = async (id) => {
   return response.data;
 };
 
+export const sendSong = async (data) => {
+  if (!data.song_id) return;
+
+  const response = await http.post(`${API_BASE_URL}/api/songs/send-to`, data);
+  return response.data;
+};
