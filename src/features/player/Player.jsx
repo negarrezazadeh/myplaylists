@@ -11,6 +11,7 @@ import { NextSVG, PrevSVG } from "@/ui/Icons";
 import PlayPauseButton from "./PlayPauseButton";
 import OneLineText from "@/ui/OneLineText";
 import { Link } from "react-router-dom";
+import SendButton from "./SendButton";
 
 function Player({ song, tab }) {
   const { currentSong, dispatch, isLoading } = usePlayer();
@@ -40,6 +41,10 @@ function Player({ song, tab }) {
 
             <div className="absolute bottom-6 right-6 rounded-xl bg-dark/50 p-2">
               <DownloadButton song={songToPlay} />
+            </div>
+            
+            <div className="absolute bottom-6 left-6 rounded-xl bg-dark/50 p-2">
+              <SendButton song={songToPlay} />
             </div>
 
             <OneLineText className="absolute left-6 top-6 max-w-28 rounded-lg bg-dark/50 p-2 text-xs font-bold">
