@@ -1,9 +1,9 @@
 import FullPageSpinner from "@/ui/FullPageSpinner";
-import useGetSubscriptions from "./useGetSubscriptions";
 import SubscribeItem from "./SubscribeItem";
+import useGetSubscriptions from "./useGetSubscriptions";
 
-export default function SubscriptionsList() {
-  const { subscriptions, isLoading } = useGetSubscriptions();
+export default function SubscriptionsList({ userId }) {
+  const { subscriptions, isLoading } = useGetSubscriptions(userId);
 
   if (isLoading) return <FullPageSpinner />;
 

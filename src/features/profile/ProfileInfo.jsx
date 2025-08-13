@@ -2,20 +2,22 @@ import FullPageSpinner from "@/ui/FullPageSpinner";
 import useGetUserProfile from "./useGetUserProfile";
 import { useAuth } from "@/context/AuthContext";
 import Subscribe from "../subscription/Subscribe";
+import { Link } from "react-router-dom";
 import useGetSubscribers from "../subscription/useGetSubscribers";
 import useGetSubscriptions from "../subscription/useGetSubscriptions";
-import { Link } from "react-router-dom";
 
 export default function ProfileInfo({ userId, userIdParam }) {
   const { isLoading, profile } = useGetUserProfile(userId);
   const { user } = useAuth();
 
-  const { subscribers = [], isLoading: isLoadingGetSubscribers } =
-    useGetSubscribers();
-  const { subscriptions = [], isLoading: isLoadingGetSubscriptions } =
-    useGetSubscriptions();
+  const specificUser = userIdParam || userId;
 
-  if (isLoading && isLoadingGetSubscribers && isLoadingGetSubscriptions)
+  const { subscribers = [], isLoading: isLoadingSubscribers } =
+    useGetSubscribers(specificUser);
+  const { subscriptions = [], isLoading: isLoadingSubscriptions } =
+    useGetSubscriptions(specificUser);
+
+  if (isLoading && isLoadingSubscribers && isLoadingSubscriptions)
     return <FullPageSpinner />;
 
   return (
@@ -33,17 +35,22 @@ export default function ProfileInfo({ userId, userIdParam }) {
           {profile.bio ? profile.bio : ""}
         </p>
       </div>
-      {user.id === userId && (
-        <div className="flex items-center gap-x-5">
-          <Link to={"/subscriptions"} className="text-sm text-purple-500">
-            {subscriptions.length} subscriptions
-          </Link>
-          <span className="text-gray-300">|</span>
-          <Link to={"/subscribers"} className="text-sm text-purple-500">
-            {subscribers.length} subscribers
-          </Link>
-        </div>
-      )}
+
+      <div className="flex items-center gap-x-5">
+        <Link
+          to={`/subscriptions/${specificUser}`}
+          className="text-sm text-purple-500"
+        >
+          {subscriptions.length} subscriptions
+        </Link>
+        <span className="text-gray-300">|</span>
+        <Link
+          to={`/subscribers/${specificUser}`}
+          className="text-sm text-purple-500"
+        >
+          {subscribers.length} subscribers
+        </Link>
+      </div>
     </div>
   );
 }

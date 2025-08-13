@@ -10,12 +10,12 @@ export const isSubscribe = async (id) => {
   return response.data;
 };
 
-export const subscriptions = async () => {
-  const response = await http.get(`/api/subscriptions`);
+export const subscriptions = async (id) => {
+  const response = await http.get(`/api/subscriptions/${id}`);
   return response.data;
 };
 
-export const subscribers = async () => {
-  const response = await http.get(`/api/subscribers`);
+export const subscribers = async (id) => {
+  const response = await http.get(`/api/subscribers/${id}`);
   return response.data;
 };
