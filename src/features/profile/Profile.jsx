@@ -34,7 +34,7 @@ export default function Profile({ userId, userIdParam }) {
       </div>
 
       <div className="border-b-2 border-black">
-        <ProfileInfo userId={userId} userIdParam={userIdParam} />
+        <ProfileInfo userId={+userId} userIdParam={userIdParam} />
       </div>
 
       <div className="my-10">
