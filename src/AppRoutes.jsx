@@ -85,8 +85,8 @@ function AppRoutes() {
         <Route path="/songs/:id" element={<Song />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="/subscribers" element={<Subscribers />} />
-        <Route path="/subscriptions" element={<Subscriptions />} />
+        <Route path="/subscribers/:userId" element={<Subscribers />} />
+        <Route path="/subscriptions/:userId" element={<Subscriptions />} />
       </Route>
 
       <Route element={<AppLayout />}>
