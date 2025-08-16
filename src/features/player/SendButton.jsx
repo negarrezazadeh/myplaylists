@@ -71,9 +71,19 @@ function SendButton({ song }) {
         <hr />
         <div
           className="cursor-pointer"
-          onClick={() => handleSend(song.id, "text")}
+          onClick={() => handleSend(song.id, "lyrics")}
         >
-          <p className="text-sm font-bold">Telegram channel (as Message)</p>
+          <p className="text-sm font-bold">Telegram channel (with Lyrics)</p>
+          <p className="text-xs text-muted-foreground">
+            Send song and lyrics in two separate message
+          </p>
+        </div>
+        <hr />
+        <div
+          className="cursor-pointer"
+          onClick={() => handleSend(song.id, "banner")}
+        >
+          <p className="text-sm font-bold">Telegram channel (as Banner)</p>
           <p className="text-xs text-muted-foreground">
             Directly send all song detail as message with download button
           </p>
@@ -81,7 +91,7 @@ function SendButton({ song }) {
         <hr />
         <div className="cursor-not-allowed opacity-50">
           <p className="text-sm">
-            My telegram group &nbsp;
+            Telegram group &nbsp;
             <small>(not available yet!)</small>
           </p>
         </div>

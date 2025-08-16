@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import myPlaylistsCover from "../../assets/img/no-cover-logo.png";
 
 export default function SubscribeItem({ sub }) {

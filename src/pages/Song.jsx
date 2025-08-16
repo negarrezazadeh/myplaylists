@@ -2,7 +2,6 @@ import Player from "@/features/player/Player";
 import { useSong } from "@/features/songs/useSong";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import FullPageSpinner from "@/ui/FullPageSpinner";
 import { useState } from "react";
 import { CircleDownSVG } from "@/ui/Icons";
 import Error from "@/ui/Error";
