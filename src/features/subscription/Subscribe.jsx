@@ -12,7 +12,7 @@ export default function Subscribe({ userId, isSubscribed }) {
     <Button
       onClick={handleSubscribe}
       disabled={isPending}
-      className="border border-purple-400 bg-transparent text-purple-400 hover:bg-transparent"
+      className="border border-purple-400 bg-transparent px-3 py-1 text-xs text-purple-400 hover:bg-transparent xl:px-4 xl:text-sm"
     >
       {isSubscribed ? "Unsubscribe" : "Subscribe"}
     </Button>
